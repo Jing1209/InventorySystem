@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -15,6 +16,9 @@ class ItemController extends Controller
     public function index()
     {
         //
+        $categories = Category::orderBy('id','desc')->paginate(0);
+        $items = Item::orderBy('id','desc')->paginate(5);
+        return view('Item.index')->with(compact('items'))->with(compact('categories'));
     }
 
     /**
@@ -25,6 +29,8 @@ class ItemController extends Controller
     public function create()
     {
         //
+        $categories = Category::orderBy('id','desc')->paginate(0);
+        return view('Item.create')->with(compact('categories'));
     }
 
     /**
@@ -36,6 +42,12 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         //
+        // $request ->validate([
+
+        // ]);
+        Item::create($request->post());
+
+        return redirect()->route('items.index')->with('success','Item has been created successfully.');
     }
 
     /**
