@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/dashboard') }}">
-                    <img style="width: 52px; height: 52px;" src="https://www.asset-project.org/var/asset_proj/storage/images/asset-project/consortium/partners/itc-cambodia/34380-1-eng-GB/itc-cambodia.jpg" alt="">
+                    <img style="width: 2rem; height: 2rem;" src="https://www.asset-project.org/var/asset_proj/storage/images/asset-project/consortium/partners/itc-cambodia/34380-1-eng-GB/itc-cambodia.jpg" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
