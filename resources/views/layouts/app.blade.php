@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
+    <link rel="icon" href="https://itc.edu.kh/wp-content/uploads/2021/02/logoitc.png" />
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -21,7 +22,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/dashboard') }}">
-                    <img style="width: 2rem; height: 2rem;" src="https://www.asset-project.org/var/asset_proj/storage/images/asset-project/consortium/partners/itc-cambodia/34380-1-eng-GB/itc-cambodia.jpg" alt="">
+                    <img style="width: 2.2rem; height: 2.2rem;" src="https://itc.edu.kh/wp-content/uploads/2021/02/logoitc.png" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
