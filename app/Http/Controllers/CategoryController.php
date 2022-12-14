@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+// use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -15,6 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        $categories = Category::orderBy('id','desc')->paginate(5);
+        return view('Category.index', compact('categories'));
     }
 
     /**
@@ -25,6 +28,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        return view('Category.create');
     }
 
     /**
@@ -36,6 +40,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'category' => 'required',
+            // 'quantity' => 'required',
+           
+        ]);
+        
+        Category::create($request->post());
+
+        return redirect()->route('categories.index')->with('success','Category has been created successfully.');
     }
 
     /**
