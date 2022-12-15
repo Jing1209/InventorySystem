@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
@@ -16,9 +17,10 @@ class ItemController extends Controller
     public function index()
     {
         //
-        $categories = Category::orderBy('id','desc')->paginate(0);
-        $items = Item::orderBy('id','desc')->paginate(5);
-        return view('Item.index')->with(compact('items'))->with(compact('categories'));
+        // $categories = Category::orderBy('id','desc')->paginate(0);
+        // $items = Item::orderBy('id','desc')->paginate(5);
+        $items = DB::table('items')->join('categories','items.category_id','=','categories.id')->select('items.id','items.title','items.price','items.status','categories.category')->get();
+        return view('Item.index')->with(compact('items'));
     }
 
     /**
@@ -70,6 +72,9 @@ class ItemController extends Controller
     public function edit(Item $item)
     {
         //
+        // $items = DB::table('items')->join('categories','items.category_id','=','categories.id')->select('items.id','items.title','items.price','items.status','categories.category')->get();
+        $categories = Category::orderBy('id','desc')->paginate(0);
+        return view('Item.edit')->with(compact('item'))->with(compact('categories'));
     }
 
     /**
@@ -82,6 +87,9 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         //
+        $item->fill($request->post())->save();
+
+        return redirect()->route('items.index')->with('success','Item Has Been updated successfully');
     }
 
     /**
@@ -93,5 +101,7 @@ class ItemController extends Controller
     public function destroy(Item $item)
     {
         //
+        $item->delete();
+        return redirect()->route('items.index')->with('success','Item Has Been removed successfully');
     }
 }

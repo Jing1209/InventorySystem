@@ -46,12 +46,12 @@
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->title }}</td>
-                        <td>{{ $item->category_id }}</td>                     
+                        <td>{{ $item->category }}</td>                     
                         <td>{{ $item->price}}</td>
                         <td>{{ $item->status }}</td>
                         <td>
                             <form action="{{ route('items.destroy',$item->id) }}" method="Post">
-                                {{-- <a class="btn btn-primary" href="{{ route('items.edit',$items->id) }}">Edit</a> --}}
+                                <a class="btn btn-primary" href="{{ route('items.edit',$item->id) }}">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
