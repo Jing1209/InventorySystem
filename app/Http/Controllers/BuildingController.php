@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BuildingResource;
 use App\Models\Building;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 
 class BuildingController extends Controller
@@ -14,7 +16,7 @@ class BuildingController extends Controller
      */
     public function index()
     {
-        //
+       return BuildingResource::collection(Building::all());
     }
 
     /**
@@ -24,7 +26,7 @@ class BuildingController extends Controller
      */
     public function create()
     {
-        //
+     
     }
 
     /**
@@ -35,7 +37,12 @@ class BuildingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=> 'required|unique:buildings|max:255',
+        ]);
+        Building::create($request->post());
+        return "Successful created Building";
+        
     }
 
     /**
@@ -46,7 +53,7 @@ class BuildingController extends Controller
      */
     public function show(Building $building)
     {
-        //
+        return new BuildingResource($building);
     }
 
     /**
@@ -69,7 +76,12 @@ class BuildingController extends Controller
      */
     public function update(Request $request, Building $building)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        
+        $building->fill($request->post()) -> save();
+        return "Update succeffully";
     }
 
     /**
@@ -80,6 +92,7 @@ class BuildingController extends Controller
      */
     public function destroy(Building $building)
     {
-        //
+        $building->delete();
+        return "Delete successfully";
     }
 }

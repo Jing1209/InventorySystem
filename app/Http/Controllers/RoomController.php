@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Resources\RoomResource;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        //
+        return RoomResource::collection(Room::all());
     }
 
     /**
@@ -35,7 +35,12 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=> 'required|unique:rooms|max:255',
+            'building_id'=>'required',
+        ]);
+        Room::create($request->post());
+        return "Successful created";
     }
 
     /**
@@ -46,7 +51,7 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-        //
+        return new RoomResource($room);
     }
 
     /**
@@ -69,7 +74,13 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'building_id' => 'required'
+        ]);
+        
+        $room->fill($request->post()) -> save();
+        return "Update succeffully";
     }
 
     /**
@@ -80,6 +91,7 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        //
+        $room->delete();
+        return "Delete successfully";
     }
 }

@@ -1,0 +1,53 @@
+GET http://127.0.0.1:8000/api/building
+
+###
+GET http://127.0.0.1:8000/api/building/5
+
+###
+POST http://127.0.0.1:8000/api/building
+Content-Type: application/json
+
+{
+    "name": "Building-23q34"
+}
+
+###
+PUT http://127.0.0.1:8000/api/building/4
+Content-Type: application/json
+
+{
+    "name": "Building-23qs234df4"
+}
+
+###
+DELETE http://127.0.0.1:8000/api/building/10
+
+
+
+
+###
+GET http://127.0.0.1:8000/api/room
+
+###
+GET http://127.0.0.1:8000/api/room/3
+
+###
+POST http://127.0.0.1:8000/api/room
+Content-Type: application/json
+
+{
+    "name": "room1",
+    "building_id": 10
+}
+
+###
+PUT http://127.0.0.1:8000/api/room/1
+Content-Type: application/json
+
+{
+    "name": "room-23qs234df4",
+    "building_id": 10
+}
+
+###
+DELETE http://127.0.0.1:8000/api/room/1
