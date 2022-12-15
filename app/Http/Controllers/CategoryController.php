@@ -71,6 +71,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         //
+        return view('Category.edit',compact('category'));
     }
 
     /**
@@ -83,6 +84,12 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
+        $request->validate([
+            'category'=>'required'
+        ]);
+        $category->fill($request->post())->save();
+
+        return redirect()->route('categories.index')->with('success','Category Has Been updated successfully');
     }
 
     /**
@@ -94,5 +101,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+        $category->delete();
+        return redirect()->route('categories.index')->with('success','Category Has Been removed successfully');
+        
     }
 }
