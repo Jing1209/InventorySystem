@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Building;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BuildingController extends Controller
 {
@@ -14,7 +15,8 @@ class BuildingController extends Controller
      */
     public function index()
     {
-        //
+        $buildings = Building::orderBy('id','desc')->paginate(5);
+        return view('Building.index', compact('buildings'));
     }
 
     /**
@@ -24,7 +26,7 @@ class BuildingController extends Controller
      */
     public function create()
     {
-        //
+        return view('Building.create');
     }
 
     /**
@@ -35,7 +37,12 @@ class BuildingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'building'=> 'required|unique:buildings|max:255',
+        ]);
+        Building::create($request->post());
+        return redirect()->route('buildings.index')->with('success','Building has been created successfully.');
+        
     }
 
     /**
@@ -46,7 +53,7 @@ class BuildingController extends Controller
      */
     public function show(Building $building)
     {
-        //
+      
     }
 
     /**
@@ -57,7 +64,7 @@ class BuildingController extends Controller
      */
     public function edit(Building $building)
     {
-        //
+        return view('Building.edit',compact('building'));
     }
 
     /**
@@ -69,7 +76,12 @@ class BuildingController extends Controller
      */
     public function update(Request $request, Building $building)
     {
-        //
+        $request->validate([
+            'building' => 'required',
+        ]);
+        
+        $building->fill($request->post()) -> save();
+        return redirect()->route('buildings.index')->with('success','Building Has Been updated successfully');
     }
 
     /**
@@ -80,6 +92,7 @@ class BuildingController extends Controller
      */
     public function destroy(Building $building)
     {
-        //
+        $building->delete();
+        return redirect()->route('buildings.index')->with('success','Building Has Been removed successfully');
     }
 }
