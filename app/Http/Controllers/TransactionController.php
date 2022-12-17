@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Room;
+use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -15,6 +18,13 @@ class TransactionController extends Controller
     public function index()
     {
         //
+        $transactions = DB::table('transactions')
+                    ->join('items','transactions.item_id','=','items.id')
+                    ->join('users','transactions.user_id','=','users.id')
+                    ->join('rooms','transactions.room_id','=','rooms.id')
+                    ->select('transactions.id','items.title','items.status','users.name','rooms.building_id','rooms.name')
+                    ->get();
+        return view('Transaction.index',compact('transactions'));
     }
 
     /**
@@ -25,6 +35,12 @@ class TransactionController extends Controller
     public function create()
     {
         //
+        $rooms = DB::table('rooms')
+                    ->join('buildings','rooms.building_id','=','buildings.id')
+                    ->select('buildings.building','rooms.name','rooms.id')
+                    ->get();
+        $items = Item::orderBy('id','desc')->paginate(0);
+        return view('Transaction.create')->with(compact('rooms'))->with(compact('items'));
     }
 
     /**
@@ -36,6 +52,13 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         //
+        // $request->validate([
+        //     'item_id'=>'required',
+        //     'room_id'=>'required',
+
+        // ]);
+        Transaction::create($request->post());
+        return redirect()->route('transactions.index');
     }
 
     /**
@@ -58,6 +81,12 @@ class TransactionController extends Controller
     public function edit(Transaction $transaction)
     {
         //
+        $rooms = DB::table('rooms')
+                    ->join('buildings','rooms.building_id','=','buildings.id')
+                    ->select('buildings.building','rooms.name','rooms.id')
+                    ->get();
+        $items = Item::orderBy('id','desc')->paginate(0);
+        return view('Transaction.edit')->with(compact('transaction'))->with(compact('rooms'))->with(compact('items'));
     }
 
     /**
@@ -70,6 +99,9 @@ class TransactionController extends Controller
     public function update(Request $request, Transaction $transaction)
     {
         //
+        $transaction->fill($request->post())->save();
+
+        return redirect()->route('transactions.index')->with('success','Transaction Has Been updated successfully');
     }
 
     /**
@@ -81,5 +113,7 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+        $transaction->delete();
+        return redirect()->route('transactions.index')->with('success','Transaction Has Been removed successfully');
     }
 }
