@@ -2,24 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Laravel 9 CRUD Tutorial Example</title>
+    <title>Inventory Room List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
 </head>
 <body>
     <div class="pull-right mb-2">
-        <a class="btn btn-success" href="{{ url('dashboard') }}"> Home</a>
+        <a class="btn btn-success" href="{{ url('home') }}"> Home</a>
     </div>
-    {{-- @foreach($categories as $cate)
-            <p>{{$cate->id}}</p>
-        @endforeach --}}
     <div class="container mt-2">
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Laravel 9 CRUD Example Tutorial</h2>
+                    <h2>Inventory Room List</h2>
                 </div>
                 <div class="pull-right mb-2">
-                    <a class="btn btn-success" href="{{ route('items.create') }}"> Create Item</a>
+                    <a class="btn btn-success" href="{{ route('rooms.create') }}"> Create Item</a>
                 </div>
             </div>
         </div>
@@ -33,25 +30,21 @@
             <thead>
                 <tr>
                     <th>S.No</th>
-                    <th>Item</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Status</th>
+                    <th>Room title</th>
+                    <th>Building</th>
                     <th width="280px">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($items as $item)
+                @foreach ($rooms as $room)
                     
                     <tr>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->title }}</td>
-                        <td>{{ $item->category }}</td>                     
-                        <td>{{ $item->price}}</td>
-                        <td>{{ $item->status }}</td>
+                        <td>{{ $room->id }}</td>
+                        <td>{{ $room->name }}</td>
+                        <td>{{ $room->building }}</td>                     
                         <td>
-                            <form action="{{ route('items.destroy',$item->id) }}" method="Post">
-                                <a class="btn btn-primary" href="{{ route('items.edit',$item->id) }}">Edit</a>
+                            <form action="{{ route('rooms.destroy',$room->id) }}" method="Post">
+                                <a class="btn btn-primary" href="{{ route('rooms.edit',$room->id) }}">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>

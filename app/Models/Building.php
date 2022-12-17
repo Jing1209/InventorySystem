@@ -11,7 +11,7 @@ class Building extends Model
 
     protected $table = "buildings";
 
-    protected $fillable = ['name'];
+    protected $fillable = ['building'];
 
     public function rooms(){
         return $this->hasMany(Room::class);
