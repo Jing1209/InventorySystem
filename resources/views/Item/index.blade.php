@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="pull-right mb-2">
-        <a class="btn btn-success" href="{{ url('home') }}"> Home</a>
+        <a class="btn btn-success" href="{{ url('dashboard') }}"> Home</a>
     </div>
     {{-- @foreach($categories as $cate)
             <p>{{$cate->id}}</p>
