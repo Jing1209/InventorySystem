@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Resources\RoomResource;
+
+use App\Models\Building;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
 {
@@ -14,7 +16,9 @@ class RoomController extends Controller
      */
     public function index()
     {
-        return RoomResource::collection(Room::all());
+        $rooms = DB::table('rooms')->join('buildings','rooms.building_id','=','buildings.id')->select('rooms.id','rooms.name','rooms.building_id', 'buildings.building')->get();
+        return view('Room.index')->with(compact('rooms'));
+        
     }
 
     /**
@@ -24,7 +28,8 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        $buildings = Building::orderBy('id','desc')->paginate(0);
+        return view('Room.create')->with(compact('buildings'));
     }
 
     /**
@@ -35,12 +40,8 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'=> 'required|unique:rooms|max:255',
-            'building_id'=>'required',
-        ]);
         Room::create($request->post());
-        return "Successful created";
+        return redirect()->route('rooms.index')->with('success','Room has been created successfully.');
     }
 
     /**
@@ -51,7 +52,7 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-        return new RoomResource($room);
+        // return new RoomResource($room);
     }
 
     /**
@@ -62,7 +63,8 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
-        //
+        $buildings = Building::orderBy('id','desc')->paginate(0);
+        return view('Room.edit')->with(compact('room'))->with(compact('buildings'));
     }
 
     /**
@@ -74,13 +76,9 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        $request->validate([
-            'name' => 'required',
-            'building_id' => 'required'
-        ]);
-        
-        $room->fill($request->post()) -> save();
-        return "Update succeffully";
+        $room->fill($request->post())->save();
+
+        return redirect()->route('rooms.index')->with('success','Room Has Been updated successfully');
     }
 
     /**
@@ -92,6 +90,6 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         $room->delete();
-        return "Delete successfully";
+        return redirect()->route('rooms.index')->with('success','Room Has Been removed successfully');
     }
 }
