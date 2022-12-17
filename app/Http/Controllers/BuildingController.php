@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\BuildingResource;
 use App\Models\Building;
-use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BuildingController extends Controller
 {
@@ -16,7 +15,8 @@ class BuildingController extends Controller
      */
     public function index()
     {
-       return BuildingResource::collection(Building::all());
+        $buildings = Building::orderBy('id','desc')->paginate(5);
+        return view('Building.index', compact('buildings'));
     }
 
     /**
@@ -26,7 +26,7 @@ class BuildingController extends Controller
      */
     public function create()
     {
-     
+        return view('Building.create');
     }
 
     /**
@@ -38,10 +38,10 @@ class BuildingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=> 'required|unique:buildings|max:255',
+            'building'=> 'required|unique:buildings|max:255',
         ]);
         Building::create($request->post());
-        return "Successful created Building";
+        return redirect()->route('buildings.index')->with('success','Building has been created successfully.');
         
     }
 
@@ -53,7 +53,7 @@ class BuildingController extends Controller
      */
     public function show(Building $building)
     {
-        return new BuildingResource($building);
+      
     }
 
     /**
@@ -64,7 +64,7 @@ class BuildingController extends Controller
      */
     public function edit(Building $building)
     {
-        //
+        return view('Building.edit',compact('building'));
     }
 
     /**
@@ -77,11 +77,11 @@ class BuildingController extends Controller
     public function update(Request $request, Building $building)
     {
         $request->validate([
-            'name' => 'required',
+            'building' => 'required',
         ]);
         
         $building->fill($request->post()) -> save();
-        return "Update succeffully";
+        return redirect()->route('buildings.index')->with('success','Building Has Been updated successfully');
     }
 
     /**
@@ -93,6 +93,6 @@ class BuildingController extends Controller
     public function destroy(Building $building)
     {
         $building->delete();
-        return "Delete successfully";
+        return redirect()->route('buildings.index')->with('success','Building Has Been removed successfully');
     }
 }
