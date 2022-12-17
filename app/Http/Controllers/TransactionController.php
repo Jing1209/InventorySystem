@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -15,6 +16,13 @@ class TransactionController extends Controller
     public function index()
     {
         //
+        $transactions = DB::table('transactions')
+                    ->join('items','transactions.item_id','=','items.id')
+                    ->join('users','transactions.user_id','=','users.id')
+                    ->join('rooms','transactions.room_id','=','rooms.id')
+                    ->select('transactions.id','items.title','items.status','users.name','rooms.building_id','rooms.name')
+                    ->get();
+        return view('Transaction.index',compact('transactions'));
     }
 
     /**
