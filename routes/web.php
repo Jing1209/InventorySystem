@@ -13,18 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 Route::resource('categories',App\Http\Controllers\CategoryController::class);
 Route::resource('items',App\Http\Controllers\ItemController::class);
-
 Route::resource('transactions',App\Http\Controllers\TransactionController::class);
-
 Route::resource('buildings', App\Http\Controllers\BuildingController::class);
 Route::resource('rooms', App\Http\Controllers\RoomController::class);
+
 

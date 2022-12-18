@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Add Company Form - Laravel 9 CRUD</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-
-<body>
+@extends('layouts.app')
+@section('title', 'Transaction')
+@section('content')
     <div class="pull-right mb-2">
         <a class="btn btn-success" href="{{ url('home') }}"> Home</a>
     </div>
@@ -65,6 +58,4 @@
             </div>
         </form>
     </div>
-</body>
-
-</html>
+@endsection

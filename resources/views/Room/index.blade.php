@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Inventory Room List</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
-</head>
-<body>
-    <div class="pull-right mb-2">
+@extends('layouts.app')
+@section('title')
+Room
+@endsection
+
+@section('content')
+<div class="pull-right mb-2">
         <a class="btn btn-success" href="{{ url('home') }}"> Home</a>
     </div>
     <div class="container mt-2">
@@ -56,5 +54,4 @@
         </table>
    
     </div>
-</body>
-</html>
+@endsection
