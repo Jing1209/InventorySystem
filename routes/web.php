@@ -21,5 +21,7 @@ Route::resource('items',App\Http\Controllers\ItemController::class);
 Route::resource('transactions',App\Http\Controllers\TransactionController::class);
 Route::resource('buildings', App\Http\Controllers\BuildingController::class);
 Route::resource('rooms', App\Http\Controllers\RoomController::class);
+Route::resource('inventory',App\Http\Controllers\InventoryController::class);
+Route::resource('setting',App\Http\Controllers\SettingController::class);
 
 
