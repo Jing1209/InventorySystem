@@ -29,37 +29,37 @@
         </div>
         <ul class="nav-links ">
             <li>
-                <a href="#">
+                <a href="/dashboard">
                     <i class="bx bx-grid-alt"></i>
                     <span class="link_name">Dashboard</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Dashboard</a></li>
+                    <li><a class="link_name" href="/dashboard">Dashboard</a></li>
                 </ul>
             </li>
             <li>
                 <div class="iocn-link">
-                    <a href="#">
+                    <a href="/inventory">
                         <i class='bx bxs-folder-minus'></i>
                         <span class="link_name">Inventories</span>
                     </a>
                     <i class="bx bxs-chevron-down arrow"></i>
                 </div>
                 <ul class="sub-menu">
-                    <li><a class="link_name" href="#">Inventories</a></li>
-                    <li><a href="#">Category</a></li>
-                    <li><a href="#">Item</a></li>
-                    <li><a href="#">Transaction</a></li>
-                    <li><a href="#">Building</a></li>
+                    <li><a class="link_name" href="/inventory">Inventories</a></li>
+                    <li><a href="/categories">Category</a></li>
+                    <li><a href="/items">Item</a></li>
+                    <li><a href="/transactions">Transaction</a></li>
+                    <li><a href="/buildings">Building</a></li>
                 </ul>
             </li>
             <li>
-                <a href="#">
+                <a href="/setting">
                     <i class='bx bx-cog'></i>
                     <span class="link_name">Setting</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Setting</a></li>
+                    <li><a class="link_name" href="/setting">Setting</a></li>
                 </ul>
             </li>
             <li>
