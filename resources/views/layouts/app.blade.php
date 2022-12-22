@@ -160,7 +160,7 @@
                 </div>
             </nav>
         </div>
-        <div class="bg-white m-3 rounded p-3">
+        <div class="mx-3 my-2 mh-75 rounded" style="height: 100vh;">
             @yield('content')
         </div>
     </section>
