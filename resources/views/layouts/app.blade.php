@@ -17,7 +17,6 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
 </head>
@@ -51,6 +50,7 @@
                     <li><a href="/items">Item</a></li>
                     <li><a href="/transactions">Transaction</a></li>
                     <li><a href="/buildings">Building</a></li>
+                    <li><a href="/rooms">Room</a></li>
                 </ul>
             </li>
             <li>
