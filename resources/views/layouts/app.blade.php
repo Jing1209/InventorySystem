@@ -29,7 +29,7 @@
         <ul class="nav-links ">
             <li>
                 <a href="/dashboard">
-                    <i class="bx bx-grid-alt"></i>
+                    <i class='bx bxs-dashboard'></i>
                     <span class="link_name">Dashboard</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -37,6 +37,42 @@
                 </ul>
             </li>
             <li>
+                <a href="/categories">
+                    <i class='bx bx-category'></i>
+                    <span class="link_name">Categories</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/categories">Category</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/items">
+                    <i class='bx bxs-folder-minus'></i>
+                    <span class="link_name">Items</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/items">Items</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/transactions">
+                    <i class='bx bx-transfer'></i>
+                    <span class="link_name">Transaction</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/transactions">Transaction</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/buildings">
+                    <i class='bx bxs-buildings'></i>
+                    <span class="link_name">Building</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/buildings">Building</a></li>
+                </ul>
+            </li>
+            <!-- <li>
                 <div class="iocn-link">
                     <a href="/inventory">
                         <i class='bx bxs-folder-minus'></i>
@@ -52,7 +88,7 @@
                     <li><a href="/buildings">Building</a></li>
                     <li><a href="/rooms">Room</a></li>
                 </ul>
-            </li>
+            </li> -->
             <li>
                 <a href="/setting">
                     <i class='bx bx-cog'></i>
@@ -124,7 +160,7 @@
                 </div>
             </nav>
         </div>
-        <div class="bg-white m-3 rounded p-3">
+        <div class="mx-3 my-2 mh-75 rounded" style="height: 100vh;">
             @yield('content')
         </div>
     </section>
