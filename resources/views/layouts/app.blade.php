@@ -73,6 +73,24 @@
                     <li><a class="link_name" href="/buildings">Building</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="/rooms">
+                    <i class='bx bxs-buildings'></i>
+                    <span class="link_name">Room</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/rooms">Room</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/employees">
+                    <i class='bx bxs-buildings'></i>
+                    <span class="link_name">Employee</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/employees">Employee</a></li>
+                </ul>
+            </li>
             <!-- <li>
                 <div class="iocn-link">
                     <a href="/inventory">

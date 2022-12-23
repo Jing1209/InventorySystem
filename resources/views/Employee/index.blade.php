@@ -1,9 +1,15 @@
 @extends('layouts.app')
-@section('title', 'Transaction')
+@section('title')
+Item
+@endsection
+
 @section('content')
 <div class="pull-right mb-2">
-    <a class="btn btn-success" href="{{ url('home') }}"> Home</a>
+    <a class="btn btn-success" href="{{ url('dashboard') }}"> Home</a>
 </div>
+{{-- @foreach($categories as $cate)
+            <p>{{$cate->id}}</p>
+@endforeach --}}
 <div class="container mt-2">
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -11,7 +17,7 @@
                 <h2>Laravel 9 CRUD Example Tutorial</h2>
             </div>
             <div class="pull-right mb-2">
-                <a class="btn btn-success" href="{{ route('transactions.create') }}"> Create Category</a>
+                <a class="btn btn-success" href="{{ route('employees.create') }}"> Create Item</a>
             </div>
         </div>
     </div>
@@ -20,26 +26,32 @@
         <p>{{ $message }}</p>
     </div>
     @endif
+
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>S.No</th>
-                <th>Item</th>
-                <th>Room</th>
-                <th>Borrowed by</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Phone Number</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($transactions as $category)
+            @foreach ($employees as $item)
+
             <tr>
-                <td>{{ $category->id }}</td>
-                <td>{{ $category->title }}</td>
-                <td>{{ $category->building_id }}-{{$category->name}}</td>
-                <td>{{$category->firstname}} {{$category->lastname}}</td>
+                <td>{{ $item->id }}</td>
+                <td>{{ $item->firstname }}</td>
+                <td>{{ $item->lastname }}</td>
+                <td>{{ $item->gender}}</td>
+                <td>{{ $item->email }}</td>
+                <td>{{ $item->phone_number }}</td>
                 <td>
-                    <form action="{{ route('transactions.destroy',$category->id) }}" method="Post">
-                        <a class="btn btn-primary" href="{{ route('transactions.edit',$category->id) }}">Edit</a>
+                    <form action="{{ route('employees.destroy',$item->id) }}" method="Post">
+                        <a class="btn btn-primary" href="{{ route('employees.edit',$item->id) }}">Edit</a>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>

@@ -46,9 +46,14 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>User:</strong>
-                        <select name="user_id" id="">
-                            <option value="1">Ponleur</option>
-                        </select>
+                        
+                            <select name="employee_id" >
+                                @foreach ($employees as $employee)
+                                <option value="{{$employee->id}}">{{$employee->firstname}} {{$employee->lastname}}</option>
+                                @endforeach
+                            </select>  
+                        
+                        
                     </div>
                 </div>
                
