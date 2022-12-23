@@ -35,6 +35,7 @@ Item
                 <th>Category</th>
                 <th>Price</th>
                 <th>Status</th>
+                <th>Sponsor</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
@@ -47,6 +48,7 @@ Item
                 <td>{{ $item->category }}</td>
                 <td>{{ $item->price}}</td>
                 <td>{{ $item->status }}</td>
+                <td>{{ $item->name }}</td>
                 <td>
                     <form action="{{ route('items.destroy',$item->id) }}" method="Post">
                         <a class="btn btn-primary" href="{{ route('items.edit',$item->id) }}">Edit</a>

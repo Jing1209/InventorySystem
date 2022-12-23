@@ -23,7 +23,7 @@ class TransactionController extends Controller
                     ->join('items','transactions.item_id','=','items.id')
                     ->join('employees','transactions.employee_id','=','employees.id')
                     ->join('rooms','transactions.room_id','=','rooms.id')
-                    ->select('transactions.id','items.title','items.status','employees.firstname','employees.lastname','rooms.building_id','rooms.name')
+                    ->select('transactions.id','transactions.created_at','items.title','items.status','employees.firstname','employees.lastname','rooms.building_id','rooms.name')
                     ->get();
         return view('Transaction.index',compact('transactions'));
     }

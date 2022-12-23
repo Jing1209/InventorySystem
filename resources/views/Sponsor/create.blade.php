@@ -23,7 +23,7 @@
                 <form action="{{ route('sponsor.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label">Building Title</label>
+                        <label class="form-label">Title</label>
                         <input type="text" class="form-control" name="name">
                         @error('name')
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>

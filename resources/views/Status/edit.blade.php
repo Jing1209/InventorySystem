@@ -8,7 +8,7 @@
                     <h2>Edit Buildings</h2>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('buildings.index') }}" enctype="multipart/form-data">
+                    <a class="btn btn-primary" href="{{ route('status.index') }}" enctype="multipart/form-data">
                         Back</a>
                 </div>
             </div>
@@ -23,16 +23,16 @@
                 <img src="" alt="">
             </div>
             <div>
-                <form action="{{ route('buildings.update',$building->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('status.update',$status->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>Building Title:</strong>
-                                <input type="text" name="building" value="{{ $building->building }}" class="form-control"
-                                    placeholder="Building Title">
-                                @error('building')
+                                <strong>Title:</strong>
+                                <input type="text" name="status" value="{{ $status->status }}" class="form-control"
+                                    placeholder="Title">
+                                @error('name')
                                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                 @enderror
                             </div>

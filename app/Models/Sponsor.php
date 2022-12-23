@@ -10,7 +10,7 @@ class Sponsor extends Model
     use HasFactory;
 
     protected $table = "sponsors";
-    protected $fillable ='name';
+    protected $fillable =['name'];
 
     public function items(){
         return $this->belongsTo(Item::class);

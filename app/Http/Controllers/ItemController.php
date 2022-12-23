@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\Category;
+use App\Models\Status;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +21,12 @@ class ItemController extends Controller
         //
         // $categories = Category::orderBy('id','desc')->paginate(0);
         // $items = Item::orderBy('id','desc')->paginate(5);
-        $items = DB::table('items')->join('categories','items.category_id','=','categories.id')->select('items.id','items.title','items.price','items.status','categories.category')->get();
+        $items = DB::table('items')
+                ->join('categories','items.category_id','=','categories.id')
+                ->join('statuses','items.status','=','statuses.id')
+                ->join('sponsors','items.sponsored','=','sponsors.id')
+                ->select('items.id','items.title','items.price','statuses.status','sponsors.name','categories.category')
+                ->get();
         return view('Item.index')->with(compact('items'));
     }
 
@@ -32,7 +39,9 @@ class ItemController extends Controller
     {
         //
         $categories = Category::orderBy('id','desc')->paginate(0);
-        return view('Item.create')->with(compact('categories'));
+        $status = Status::orderBy('id','desc')->paginate(0);
+        $sponsor = Sponsor::orderBy('id','desc')->paginate(0);
+        return view('Item.create')->with(compact('categories'))->with(compact('status'))->with(compact('sponsor'));
     }
 
     /**
@@ -77,7 +86,9 @@ class ItemController extends Controller
         //
         // $items = DB::table('items')->join('categories','items.category_id','=','categories.id')->select('items.id','items.title','items.price','items.status','categories.category')->get();
         $categories = Category::orderBy('id','desc')->paginate(0);
-        return view('Item.edit')->with(compact('item'))->with(compact('categories'));
+        $status = Status::orderBy('id','desc')->paginate(0);
+        $sponsor = Sponsor::orderBy('id','desc')->paginate(0);
+        return view('Item.edit')->with(compact('categories'))->with(compact('status'))->with(compact('sponsor'))->with(compact('item'));
     }
 
     /**

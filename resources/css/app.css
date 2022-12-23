@@ -76,6 +76,9 @@
     background: #5570F1;
     border-radius: 10px 0 0 10px;
     margin: 0 0 0 10px;
+}
+
+.sidebar .nav-links li:hover i {
     color: #fff;
 }
 
@@ -138,7 +141,7 @@
 }
 
 .sidebar .nav-links li .sub-menu a {
-    color: #11101d;
+    color: #fff;
     font-size: 15px;
     padding: 5px 0;
     white-space: nowrap;
@@ -259,7 +262,7 @@
 
 .home-section {
     position: relative;
-    background: #e4e9f7;
+    background:#e4e9f7;
     height: 100vh;
     left: 260px;
     width: calc(100% - 260px);

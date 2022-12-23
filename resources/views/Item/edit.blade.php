@@ -52,7 +52,19 @@ Item
                     <div class="form-group">
                         <strong>Status:</strong>
                         <select name="status" id="">
-                            <option value="Clean">Clean</option>
+                            @foreach ($status as $cate )
+                                <option value={{$cate->id}}>{{$cate->status}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Sponsor:</strong>
+                        <select name="sponsored" id="">
+                            @foreach ($sponsor as $cate )
+                                <option value={{$cate->id}}>{{$cate->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
