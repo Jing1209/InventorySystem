@@ -17,7 +17,6 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
 </head>
@@ -75,7 +74,7 @@
             </li>
             <li>
                 <a href="/rooms">
-                    <i class='bx bxs-buildings'></i>
+                    <i class='bx bx-building'></i>
                     <span class="link_name">Room</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -84,11 +83,29 @@
             </li>
             <li>
                 <a href="/employees">
-                    <i class='bx bxs-buildings'></i>
+                    <i class='bx bx-building'></i>
                     <span class="link_name">Employee</span>
                 </a>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="/employees">Employee</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/sponsor">
+                    <i class='bx bx-building'></i>
+                    <span class="link_name">Sponsor</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/sponsor">Sponsor</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/status">
+                    <i class='bx bx-building'></i>
+                    <span class="link_name">Status</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/status">Status</a></li>
                 </ul>
             </li>
             <!-- <li>
@@ -105,6 +122,7 @@
                     <li><a href="/items">Item</a></li>
                     <li><a href="/transactions">Transaction</a></li>
                     <li><a href="/buildings">Building</a></li>
+                    <li><a href="/rooms">Room</a></li>
                 </ul>
             </li> -->
             <li>

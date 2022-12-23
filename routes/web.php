@@ -24,5 +24,7 @@ Route::resource('rooms', App\Http\Controllers\RoomController::class);
 Route::resource('inventory',App\Http\Controllers\InventoryController::class);
 Route::resource('setting',App\Http\Controllers\SettingController::class);
 Route::resource('employees',App\Http\Controllers\EmployeeController::class);
+Route::resource('status',App\Http\Controllers\StatusController::class);
+Route::resource('sponsor',App\Http\Controllers\SponsorController::class);
 
 

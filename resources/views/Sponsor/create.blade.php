@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title', 'Building')
+@section('title', 'Sponsor')
 @section('content')
 <div class="bg-light">
     <div class="container d-flex flex-row align-items-end justify-content-center mb-3 p-3 bg-light">
         <div class="pull-right" style="margin-right: -70px">
-            <a class="btn btn-primary" href="{{ route('buildings.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('sponsor.index') }}"> Back</a>
         </div>
         <div>
             <div>
@@ -12,7 +12,7 @@
             </div>
            
             <div class="d-flex justify-content-center mt-3">
-                <h2>Add New Building</h2>
+                <h2>Add New Sponsor</h2>
             </div>
             <div class="">
                 @if(session('status'))
@@ -20,12 +20,12 @@
                     {{ session('status') }}
                 </div>
                 @endif
-                <form action="{{ route('buildings.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('sponsor.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Building Title</label>
-                        <input type="text" class="form-control" name="building">
-                        @error('building')
+                        <input type="text" class="form-control" name="name">
+                        @error('name')
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                         <div class="mt-3">

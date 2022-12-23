@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->float('price');
-            $table->string('status'); 
+            $table->foreignId('status')->references('id')->on('statuses');
+            $table->foreignId('sponsored')->references('id')->on('sponsors'); 
             $table->timestamps();
         });
     }

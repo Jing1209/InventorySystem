@@ -50,6 +50,14 @@ Item
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
+                        <strong>Status:</strong>
+                        <select name="status" id="">
+                            <option value="Clean">Clean</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
                         <strong>Price:</strong>
                         <input type="number" name="price" value="{{ $item->price }}" class="form-control"
                             placeholder="Price">

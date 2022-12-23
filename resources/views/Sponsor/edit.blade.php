@@ -1,14 +1,14 @@
 @extends('layouts.app')
-@section('title', 'Building')
+@section('title', 'Sponsor')
 @section('content')
     <div class="container mt-2">
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Edit Buildings</h2>
+                    <h2>Edit Sponsors</h2>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('buildings.index') }}" enctype="multipart/form-data">
+                    <a class="btn btn-primary" href="{{ route('sponsor.index') }}" enctype="multipart/form-data">
                         Back</a>
                 </div>
             </div>
@@ -23,15 +23,15 @@
                 <img src="" alt="">
             </div>
             <div>
-                <form action="{{ route('buildings.update',$building->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('sponsor.update',$sponsor->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>Building Title:</strong>
-                                <input type="text" name="building" value="{{ $building->building }}" class="form-control"
-                                    placeholder="Building Title">
+                                <strong>Title:</strong>
+                                <input type="text" name="name" value="{{ $sponsor->name }}" class="form-control"
+                                    placeholder="Title">
                                 @error('building')
                                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                 @enderror

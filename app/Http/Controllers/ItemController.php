@@ -48,6 +48,9 @@ class ItemController extends Controller
 
         // ]);
         Item::create($request->post());
+        $quantity = Category::find($request->category_id);
+        $quantity->quantity+=1;
+        $quantity->save();
 
         return redirect()->route('items.index')->with('success','Item has been created successfully.');
     }

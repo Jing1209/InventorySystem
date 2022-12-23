@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Building')
+@section('title', 'Sponsor')
 @section('content')
 <div class="row my-3">
     <div class="container pull-left">
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="d-flex mb-3 justify-content-end">
-        <a class="btn btn-primary" href="{{ route('buildings.create') }}">Add New</a>
+        <a class="btn btn-primary" href="{{ route('sponsor.create') }}">Add New</a>
     </div>
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
@@ -26,12 +26,12 @@
         <thead>
             <tr class="table-primary">
                 <th>S.No</th>
-                <th>Building Title</th>
+                <th>Title</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($buildings as $building)
+            @foreach ($sponsors as $building)
             <tr>
                 <td>{{ $building->id }}</td>
                 <td>{{ $building->building }}</td>
