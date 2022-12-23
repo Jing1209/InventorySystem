@@ -82,12 +82,30 @@
                 </ul>
             </li>
             <li>
-                <a href="/rooms">
+                <a href="/employees">
                     <i class='bx bx-building'></i>
-                    <span class="link_name">Room</span>
+                    <span class="link_name">Employee</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="/rooms">Room</a></li>
+                    <li><a class="link_name" href="/employees">Employee</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/sponsor">
+                    <i class='bx bx-building'></i>
+                    <span class="link_name">Sponsor</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/sponsor">Sponsor</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/status">
+                    <i class='bx bx-building'></i>
+                    <span class="link_name">Status</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/status">Status</a></li>
                 </ul>
             </li>
             <!-- <li>

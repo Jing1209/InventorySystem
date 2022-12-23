@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use App\Models\Room;
 use App\Models\Item;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,9 +21,9 @@ class TransactionController extends Controller
         //
         $transactions = DB::table('transactions')
                     ->join('items','transactions.item_id','=','items.id')
-                    ->join('users','transactions.user_id','=','users.id')
+                    ->join('employees','transactions.employee_id','=','employees.id')
                     ->join('rooms','transactions.room_id','=','rooms.id')
-                    ->select('transactions.id','items.title','items.status','users.name','rooms.building_id','rooms.name')
+                    ->select('transactions.id','transactions.created_at','items.title','items.status','employees.firstname','employees.lastname','rooms.building_id','rooms.name')
                     ->get();
         return view('Transaction.index',compact('transactions'));
     }
@@ -40,7 +41,8 @@ class TransactionController extends Controller
                     ->select('buildings.building','rooms.name','rooms.id')
                     ->get();
         $items = Item::orderBy('id','desc')->paginate(0);
-        return view('Transaction.create')->with(compact('rooms'))->with(compact('items'));
+        $employees = Employee::orderBy('id','desc')->paginate(0);
+        return view('Transaction.create')->with(compact('rooms'))->with(compact('items'))->with(compact('employees'));
     }
 
     /**
@@ -52,11 +54,12 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         //
-        // $request->validate([
-        //     'item_id'=>'required',
-        //     'room_id'=>'required',
+        $request->validate([
+            'item_id'=>'required',
+            'room_id'=>'required',
+            'employee_id'=>'required',
 
-        // ]);
+        ]);
         Transaction::create($request->post());
         return redirect()->route('transactions.index');
     }

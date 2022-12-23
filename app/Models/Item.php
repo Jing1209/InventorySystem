@@ -11,7 +11,7 @@ class Item extends Model
 
     protected $table = "items";
 
-    protected $fillable = ['category_id','title','price','status','description'];
+    protected $fillable = ['category_id','title','price','status','description','sponsored'];
 
     public function categories(){
         return $this->belongsTo(Category::class);
@@ -19,6 +19,12 @@ class Item extends Model
 
     public function transactions(){
         return $this->hasOne(Transaction::class);
+    }
+    public function statuses(){
+        return $this->hasMany(Status::class);
+    }
+    public function sponsors(){
+        return $this->hasMany(Sponsor::class);
     }
 
 }

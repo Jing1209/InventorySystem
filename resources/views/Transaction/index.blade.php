@@ -48,6 +48,7 @@
                     <th>Item</th>
                     <th>Room</th>
                     <th>Borrowed by</th>
+                    <th>Borrowed date</th>
                     <th width="280px">Action</th>
                 </tr>
             </thead>
@@ -57,7 +58,8 @@
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->title }}</td>
                     <td>{{ $category->building_id }}-{{$category->name}}</td>
-                    <td>{{$category->name}}</td>
+                    <td>{{$category->firstname}} {{$category->lastname}}</td>
+                    <td>{{$category->created_at}}</td>
                     <td>
                         <form action="{{ route('transactions.destroy',$category->id) }}" method="Post">
                             <a class="btn btn-primary" href="{{ route('transactions.edit',$category->id) }}">Edit</a>

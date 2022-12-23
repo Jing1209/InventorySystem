@@ -20,7 +20,7 @@ return new class extends Migration
             // $table->string('room_id');
             $table->foreignId('room_id')->references('id')->on('rooms');
             // $table->string('user_id');
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('employee_id')->references('id')->on('employees');
             $table->timestamps();
         });
     }
