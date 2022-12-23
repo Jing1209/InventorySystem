@@ -17,7 +17,6 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
 </head>
@@ -73,6 +72,15 @@
                     <li><a class="link_name" href="/buildings">Building</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="/rooms">
+                    <i class='bx bx-building'></i>
+                    <span class="link_name">Room</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/rooms">Room</a></li>
+                </ul>
+            </li>
             <!-- <li>
                 <div class="iocn-link">
                     <a href="/inventory">
@@ -87,6 +95,7 @@
                     <li><a href="/items">Item</a></li>
                     <li><a href="/transactions">Transaction</a></li>
                     <li><a href="/buildings">Building</a></li>
+                    <li><a href="/rooms">Room</a></li>
                 </ul>
             </li> -->
             <li>
