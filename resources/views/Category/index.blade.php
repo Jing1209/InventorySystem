@@ -5,14 +5,6 @@ Category
 
 @section('content')
 
-<div class="d-flex justify-content-between mb-2">
-    <div class="d-flex justify-content-center align-items-center"><h5>Category Summary</h5></div>
-    <div class="bg-primary px-4 py-1 rounded-5 d-flex justify-conten-between">
-         <i class='bx bx-plus'></i>  
-         <a class="text-white" href="{{ route('categories.create') }}"> Create Category</a>
-    </div>
-</div>
-
 <div class="bg-white p-3">
     <div class="pull-right">
         <a class="btn btn-success" href="{{ url('dashboard') }}"> Home</a>
