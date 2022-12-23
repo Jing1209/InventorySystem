@@ -72,6 +72,15 @@
                     <li><a class="link_name" href="/buildings">Building</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="/rooms">
+                    <i class='bx bx-building'></i>
+                    <span class="link_name">Room</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/rooms">Room</a></li>
+                </ul>
+            </li>
             <!-- <li>
                 <div class="iocn-link">
                     <a href="/inventory">
