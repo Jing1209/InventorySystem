@@ -58,19 +58,28 @@
             <li>
                 <a href="/transactions">
                     <i class='bx bx-transfer'></i>
-                    <span class="link_name">Transaction</span>
+                    <span class="link_name">Transactions</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="/transactions">Transaction</a></li>
+                    <li><a class="link_name" href="/transactions">Transactions</a></li>
                 </ul>
             </li>
             <li>
                 <a href="/buildings">
-                    <i class='bx bxs-buildings'></i>
-                    <span class="link_name">Building</span>
+                    <i class='bx bx-building'></i>
+                    <span class="link_name">Buildings</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="/buildings">Building</a></li>
+                    <li><a class="link_name" href="/buildings">Buildings</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/rooms">
+                    <i class='bx bx-building-house'></i>
+                    <span class="link_name">Rooms</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/buildings">Rooms</a></li>
                 </ul>
             </li>
             <!-- <li>
