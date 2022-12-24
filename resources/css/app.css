@@ -76,22 +76,16 @@
     background: #5570F1;
     border-radius: 10px 0 0 10px;
     margin: 0 0 0 10px;
+    color: #fff;
+}
+
+.sidebar .nav-links li:hover .link_name {
+    color: #fff;
 }
 
 .sidebar .nav-links li:hover i {
     color: #fff;
 }
-
-.sidebar .nav-links li .iocn-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.sidebar.close .nav-links li .iocn-link {
-    display: block;
-}
-
 .sidebar .nav-links li i {
     height: 50px;
     min-width: 78px;
@@ -261,7 +255,7 @@
 }
 
 .home-section {
-    position: relative;
+    position: absolute;
     background:#e4e9f7;
     height: 100vh;
     left: 260px;
