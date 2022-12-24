@@ -83,7 +83,7 @@
             </li>
             <li>
                 <a href="/employees">
-                    <i class='bx bx-building'></i>
+                    <i class='bx bxs-user-account'></i>
                     <span class="link_name">Employee</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -92,7 +92,7 @@
             </li>
             <li>
                 <a href="/sponsor">
-                    <i class='bx bx-building'></i>
+                    <i class='bx bx-user-plus'></i>
                     <span class="link_name">Sponsor</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -101,7 +101,7 @@
             </li>
             <li>
                 <a href="/status">
-                    <i class='bx bx-building'></i>
+                    <i class='bx bxs-star-half'></i>
                     <span class="link_name">Status</span>
                 </a>
                 <ul class="sub-menu blank">
