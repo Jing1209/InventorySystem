@@ -17,7 +17,7 @@ Item
                 <h2>Laravel 9 CRUD Example Tutorial</h2>
             </div>
             <div class="pull-right mb-2">
-                <a class="btn btn-success" href="{{ route('items.create') }}"> Create Item</a>
+                <a class="btn btn-success" href="{{ route('employees.create') }}"> Create Item</a>
             </div>
         </div>
     </div>
@@ -31,27 +31,27 @@ Item
         <thead>
             <tr>
                 <th>S.No</th>
-                <th>Item</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Status</th>
-                <th>Sponsor</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Phone Number</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($items as $item)
+            @foreach ($employees as $item)
 
             <tr>
                 <td>{{ $item->id }}</td>
-                <td>{{ $item->title }}</td>
-                <td>{{ $item->category }}</td>
-                <td>{{ $item->price}}</td>
-                <td>{{ $item->status }}</td>
-                <td>{{ $item->name }}</td>
+                <td>{{ $item->firstname }}</td>
+                <td>{{ $item->lastname }}</td>
+                <td>{{ $item->gender}}</td>
+                <td>{{ $item->email }}</td>
+                <td>{{ $item->phone_number }}</td>
                 <td>
-                    <form action="{{ route('items.destroy',$item->id) }}" method="Post">
-                        <a class="btn btn-primary" href="{{ route('items.edit',$item->id) }}">Edit</a>
+                    <form action="{{ route('employees.destroy',$item->id) }}" method="Post">
+                        <a class="btn btn-primary" href="{{ route('employees.edit',$item->id) }}">Edit</a>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>

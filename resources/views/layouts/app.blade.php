@@ -65,7 +65,7 @@
             </li>
             <li>
                 <a href="/buildings">
-                    <i class='bx bx-building-house'></i>
+                    <i class='bx bx-building'></i>
                     <span class="link_name">Buildings</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -74,13 +74,57 @@
             </li>
             <li>
                 <a href="/rooms">
-                    <i class='bx bx-building'></i>
+                    <i class='bx bx-building-house'></i>
                     <span class="link_name">Rooms</span>
                 </a>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="/buildings">Rooms</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="/employees">
+                    <i class='bx bx-building'></i>
+                    <span class="link_name">Employee</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/employees">Employee</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/sponsor">
+                    <i class='bx bx-building'></i>
+                    <span class="link_name">Sponsor</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/sponsor">Sponsor</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/status">
+                    <i class='bx bx-building'></i>
+                    <span class="link_name">Status</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="/status">Status</a></li>
+                </ul>
+            </li>
+            <!-- <li>
+                <div class="iocn-link">
+                    <a href="/inventory">
+                        <i class='bx bxs-folder-minus'></i>
+                        <span class="link_name">Inventories</span>
+                    </a>
+                    <i class="bx bxs-chevron-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="/inventory">Inventories</a></li>
+                    <li><a href="/categories">Category</a></li>
+                    <li><a href="/items">Item</a></li>
+                    <li><a href="/transactions">Transaction</a></li>
+                    <li><a href="/buildings">Building</a></li>
+                    <li><a href="/rooms">Room</a></li>
+                </ul>
+            </li> -->
             <li>
                 <a href="/setting">
                     <i class='bx bx-cog'></i>
@@ -100,20 +144,57 @@
         </ul>
     </div>
     <section class="home-section">
-        <div class="navbar d-flex justify-content-between w-100 navbar-expand-md navbar-light bg-white shadow-sm p-0 position-fixed overflow-hidden">
-            <div class="home-content">
-                <i class="bx bx-menu"></i>
-                <span class="text">Inventory Management </span>
-            </div>
-            <div >
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/profile">
-                            {{ Auth::user()->name }}
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <div id="app">
+            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm p-0">
+                <div class="home-content">
+                    <i class="bx bx-menu"></i>
+                    <span class="text">Inventory Management </span>
+                </div>
+                <div class="me-3 collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav me-auto">
+
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                        @if (Route::has('login'))
+                        <li class="nav-item">
+                            <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
+                        </li>
+                        @endif
+
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> -->
+                        </li>
+                        @endif
+                        @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('login') }}">
+                                    {{ __('Profile') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                        @endguest
+                    </ul>
+                </div>
+            </nav>
         </div>
         <div class="mx-3 my-2 mh-75 rounded" style="height: 100vh;">
             @yield('content')

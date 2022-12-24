@@ -13,7 +13,7 @@ class Transaction extends Model
 
     protected $fillable = [
         'item_id',
-        'user_id',
+        'employee_id',
         'room_id',
     ];
 
@@ -25,8 +25,8 @@ class Transaction extends Model
         return $this->belongsTo(Room::class);
     }
 
-    public function users(){
-        return $this->belongsTo(User::class);
+    public function employees(){
+        return $this->belongsTo(Employee::class);
     }
 
 }
