@@ -134,16 +134,22 @@
                     <li><a class="link_name" href="/setting">Setting</a></li>
                 </ul>
             </li>
-            <li>
-                <a class="mb-4 fixed-bottom" href="{{ route('logout') }}" onclick="event.preventDefault();
+            <li style="position: absolute; bottom:0% ; margin-bottom: 10px; width: calc(100% - 10px);">
+                <div>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                       document.getElementById('logout-form').submit();">
-                    <i style="font-size: 20px;" class="bx bx-log-out"></i>
-                    <span class="link_name">Logout</span>
-                </a>
+                        <i style="font-size: 20px;" class="bx bx-log-out"></i>
+                        <span class="link_name">Logout</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                      document.getElementById('logout-form').submit();">Logout</a></li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>
-    <section class="home-section">
+    <div class="home-section">
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm p-0">
                 <div class="home-content">
@@ -196,24 +202,26 @@
                 </div>
             </nav>
         </div>
-        <div class="mx-3 my-2 mh-75 rounded" style="height: 100vh;">
-            @yield('content')
+        <div class="mx-3 mt-2 rounded">
+            <div style="height: 100%; position: relative;">
+                @yield('content')
+            </div>
         </div>
-    </section>
-    <script>
-        let arrow = document.querySelectorAll(".arrow");
-        for (var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e) => {
-                let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
-                arrowParent.classList.toggle("showMenu");
+        </div>
+        <script>
+            let arrow = document.querySelectorAll(".arrow");
+            for (var i = 0; i < arrow.length; i++) {
+                arrow[i].addEventListener("click", (e) => {
+                    let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+                    arrowParent.classList.toggle("showMenu");
+                });
+            }
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".bx-menu");
+            sidebarBtn.addEventListener("click", () => {
+                sidebar.classList.toggle("close");
             });
-        }
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".bx-menu");
-        sidebarBtn.addEventListener("click", () => {
-            sidebar.classList.toggle("close");
-        });
-    </script>
+        </script>
 </body>
 
 </html>

@@ -74,8 +74,8 @@
 
 .sidebar .nav-links li:hover {
     background: #5570F1;
-    border-radius: 10px 0 0 10px;
-    margin: 0 0 0 10px;
+    /* border-radius: 10px 0 0 10px; */
+    /* margin: 0 0 0 10px; */
     color: #fff;
 }
 
@@ -257,7 +257,6 @@
 .home-section {
     position: absolute;
     background:#e4e9f7;
-    height: 100vh;
     left: 260px;
     width: calc(100% - 260px);
     transition: all 0.5s ease;
@@ -267,6 +266,7 @@
     left: 78px;
     width: calc(100% - 78px);
 }
+
 
 .home-section .home-content {
     height: 60px;
