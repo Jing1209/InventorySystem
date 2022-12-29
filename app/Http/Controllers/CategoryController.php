@@ -13,10 +13,17 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $categories = Category::orderBy('id','desc')->paginate(5);
+        $categories = Category::where([
+            ['category','!=',Null],
+            [function($query) use ($request){
+                if($term = $request->term){
+                    $query->orWhere('category','LIKE','%'.$term.'%')->get();
+                }
+            }]
+        ])->orderBy('id','desc')->paginate(5);
         return view('Category.index', compact('categories'));
     }
 

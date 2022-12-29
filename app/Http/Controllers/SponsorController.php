@@ -12,10 +12,17 @@ class SponsorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $sponsors = Sponsor::orderBy('id','desc')->paginate(5);
+        $sponsors = Sponsor::where([
+            ['name','!=',Null],
+            [function($query) use ($request){
+                if($term = $request->term){
+                    $query->orWhere('name','LIKE','%'.$term.'%')->get();
+                }
+            }]
+        ])->orderBy('id','desc')->paginate(5);
         return view('Sponsor.index', compact('sponsors'));
     }
 
