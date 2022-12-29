@@ -133,7 +133,7 @@
         </ul>
     </div>
     <div class="home-section">
-        <div id="app">
+        <div class="app">
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm p-0">
                 <div class="home-content">
                     <i class="bx bx-menu"></i>
@@ -185,24 +185,24 @@
                 </div>
             </nav>
         </div>
-        <div class="mx-3 mt-2 rounded">
-                @yield('content')
+        <div class="mx-3 rounded">
+            @yield('content')
         </div>
-        </div>
-        <script>
-            let arrow = document.querySelectorAll(".arrow");
-            for (var i = 0; i < arrow.length; i++) {
-                arrow[i].addEventListener("click", (e) => {
-                    let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
-                    arrowParent.classList.toggle("showMenu");
-                });
-            }
-            let sidebar = document.querySelector(".sidebar");
-            let sidebarBtn = document.querySelector(".bx-menu");
-            sidebarBtn.addEventListener("click", () => {
-                sidebar.classList.toggle("close");
+    </div>
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e) => {
+                let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+                arrowParent.classList.toggle("showMenu");
             });
-        </script>
+        }
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bx-menu");
+        sidebarBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
+    </script>
 </body>
 
 </html>

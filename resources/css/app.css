@@ -169,7 +169,7 @@
     left: 260px;
     width: calc(100% - 260px);
     transition: all 0.5s ease;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .sidebar.close~.home-section {
@@ -199,6 +199,20 @@
     font-weight: 500;
     margin: 0 10px;
 }
+.sidebar~.home-section .app {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    width: 100%; 
+    left: 260px;
+}
+.sidebar.close~.home-section .app {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    width: 100%; 
+    left: 78px;
+}
 
 @media (max-width: 400px) {
     .sidebar.close .nav-links li .sub-menu {
@@ -224,3 +238,5 @@
         left: 0;
     }
 }
+
+
