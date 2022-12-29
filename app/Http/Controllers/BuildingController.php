@@ -13,9 +13,17 @@ class BuildingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $buildings = Building::orderBy('id','desc')->paginate(5);
+        // $buildings = Building::orderBy('id','desc')->paginate(5);
+        $buildings = Building::where([
+            ['building','!=',Null],
+            [function($query) use ($request){
+                if($term = $request->term){
+                    $query->orWhere('building','LIKE','%'.$term.'%')->get();
+                }
+            }]
+        ])->orderBy('id','desc')->paginate(5);
         return view('Building.index', compact('buildings'));
     }
 
