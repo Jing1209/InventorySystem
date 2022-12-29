@@ -108,23 +108,6 @@
                     <li><a class="link_name" href="/status">Status</a></li>
                 </ul>
             </li>
-            <!-- <li>
-                <div class="iocn-link">
-                    <a href="/inventory">
-                        <i class='bx bxs-folder-minus'></i>
-                        <span class="link_name">Inventories</span>
-                    </a>
-                    <i class="bx bxs-chevron-down arrow"></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a class="link_name" href="/inventory">Inventories</a></li>
-                    <li><a href="/categories">Category</a></li>
-                    <li><a href="/items">Item</a></li>
-                    <li><a href="/transactions">Transaction</a></li>
-                    <li><a href="/buildings">Building</a></li>
-                    <li><a href="/rooms">Room</a></li>
-                </ul>
-            </li> -->
             <li>
                 <a href="/setting">
                     <i class='bx bx-cog'></i>
@@ -134,7 +117,7 @@
                     <li><a class="link_name" href="/setting">Setting</a></li>
                 </ul>
             </li>
-            <li style="position: absolute; bottom:0% ; margin-bottom: 10px; width: calc(100% - 10px);">
+            <li style="position: absolute; bottom:0% ; margin-bottom: 10px; width: calc(100% - 1px);">
                 <div>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                       document.getElementById('logout-form').submit();">
@@ -203,9 +186,7 @@
             </nav>
         </div>
         <div class="mx-3 mt-2 rounded">
-            <div style="height: 100%; position: relative;">
                 @yield('content')
-            </div>
         </div>
         </div>
         <script>
