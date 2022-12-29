@@ -12,10 +12,17 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $employees = Employee::orderby("id","desc")->paginate(5);
+        $employees = Employee::where([
+            ['lastname','!=',Null],
+            [function($query) use ($request){
+                if($term = $request->term){
+                    $query->orWhere('lastname','LIKE','%'.$term.'%')->get();
+                }
+            }]
+        ])->orderBy('id','desc')->paginate(5);
         return view('Employee.index',compact('employees'));
     }
 

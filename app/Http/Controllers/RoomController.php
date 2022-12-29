@@ -14,10 +14,21 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $rooms = DB::table('rooms')->join('buildings','rooms.building_id','=','buildings.id')->select('rooms.id','rooms.name','rooms.building_id', 'buildings.building')->get();
+        // $rooms = DB::table('rooms')->join('buildings','rooms.building_id','=','buildings.id')->select('rooms.id','rooms.name','rooms.building_id', 'buildings.building')->get();
+        $rooms =Room::where([
+            ['name','!=',Null],
+            [function($query) use ($request){
+                if($term = $request->term){
+                    $query->join('buildings','rooms.building_id','=','buildings.id')
+                        ->select('rooms.id','rooms.name','rooms.building_id', 'buildings.building')
+                        ->orWhere('name','LIKE','%'.$term.'%')->get();
+                }
+            }]
+        ])->orderBy('id','desc')->paginate(5);
         return view('Room.index')->with(compact('rooms'));
+
         
     }
 

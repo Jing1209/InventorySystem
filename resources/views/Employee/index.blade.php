@@ -27,6 +27,31 @@ Item
     </div>
     @endif
 
+    {{-- search bar --}}
+    <div class="mx-auto pull-right">
+        <div class="">
+            <form action="{{ route('employees.index') }}" method="GET" role="search">
+
+                <div class="input-group">
+                    <span class="input-group-btn mr-5 mt-1">
+                        <button class="btn btn-info" type="submit" title="Search projects">
+                            <span class="fas fa-search"></span>
+                        </button>
+                    </span>
+                    <input type="text" class="form-control mr-2" name="term" placeholder="Search projects"
+                        id="term">
+                    <a href="{{ route('employees.index') }}" class=" mt-1">
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button" title="Refresh page">
+                                <span class="fas fa-sync-alt"></span>
+                            </button>
+                        </span>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -62,5 +87,8 @@ Item
         </tbody>
     </table>
 
+</div>
+<div class="d-flex justify-content-center">
+    {!! $employees->links() !!}
 </div>
 @endsection

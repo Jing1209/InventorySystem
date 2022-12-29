@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Category;
+use App\Models\Employee;
+use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     /**
@@ -23,6 +25,19 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        // return view('dashboard');
+        $users = Category::select('quantity','category')
+                    // ->whereYear('created_at', date('d'))
+                    // ->groupBy('category')
+                    ->pluck('quantity','category');
+                    // ->get();
+ 
+        $labels = $users->keys();
+        $data = $users->values();
+        // dd($users);
+        
+       
+              
+        return view('dashboard')->with(compact('labels','data'));
     }
 }
