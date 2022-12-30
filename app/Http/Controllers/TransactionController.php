@@ -23,6 +23,7 @@ class TransactionController extends Controller
                     ->join('items','transactions.item_id','=','items.id')
                     ->join('employees','transactions.employee_id','=','employees.id')
                     ->join('rooms','transactions.room_id','=','rooms.id')
+                    // ->join('buildings','rooms.buidling_id','=','buldings.id')
                     ->select('transactions.id','transactions.created_at','items.title','items.status','employees.firstname','employees.lastname','rooms.building_id','rooms.name')
                     ->paginate(10);
         return view('Transaction.index',compact('transactions'));
