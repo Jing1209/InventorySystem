@@ -108,23 +108,6 @@
                     <li><a class="link_name" href="/status">Status</a></li>
                 </ul>
             </li>
-            <!-- <li>
-                <div class="iocn-link">
-                    <a href="/inventory">
-                        <i class='bx bxs-folder-minus'></i>
-                        <span class="link_name">Inventories</span>
-                    </a>
-                    <i class="bx bxs-chevron-down arrow"></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a class="link_name" href="/inventory">Inventories</a></li>
-                    <li><a href="/categories">Category</a></li>
-                    <li><a href="/items">Item</a></li>
-                    <li><a href="/transactions">Transaction</a></li>
-                    <li><a href="/buildings">Building</a></li>
-                    <li><a href="/rooms">Room</a></li>
-                </ul>
-            </li> -->
             <li>
                 <a href="/setting">
                     <i class='bx bx-cog'></i>
@@ -134,17 +117,23 @@
                     <li><a class="link_name" href="/setting">Setting</a></li>
                 </ul>
             </li>
-            <li>
-                <a class="mb-4 fixed-bottom" href="{{ route('logout') }}" onclick="event.preventDefault();
+            <li style="position: absolute; bottom:0% ; margin-bottom: 10px; width: calc(100% - 1px);">
+                <div>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                       document.getElementById('logout-form').submit();">
-                    <i style="font-size: 20px;" class="bx bx-log-out"></i>
-                    <span class="link_name">Logout</span>
-                </a>
+                        <i style="font-size: 20px;" class="bx bx-log-out"></i>
+                        <span class="link_name">Logout</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                      document.getElementById('logout-form').submit();">Logout</a></li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>
-    <section class="home-section">
-        <div id="app">
+    <div class="home-section">
+        <div class="app">
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm p-0">
                 <div class="home-content">
                     <i class="bx bx-menu"></i>
@@ -196,10 +185,10 @@
                 </div>
             </nav>
         </div>
-        <div class="mx-3 my-2 mh-75 rounded" style="height: 100vh;">
+        <div class="mx-3 rounded">
             @yield('content')
         </div>
-    </section>
+    </div>
     <script>
         let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {
