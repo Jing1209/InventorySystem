@@ -19,7 +19,9 @@ class EmployeeController extends Controller
             ['lastname','!=',Null],
             [function($query) use ($request){
                 if($term = $request->term){
-                    $query->orWhere('lastname','LIKE','%'.$term.'%')->get();
+                    $query->orWhere('lastname','LIKE','%'.$term.'%')
+                    ->orWhere('firstname','like','%'.$term.'%')
+                    ->get();
                 }
             }]
         ])->orderBy('id','desc')->paginate(5);
