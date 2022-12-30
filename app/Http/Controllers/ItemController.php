@@ -21,28 +21,19 @@ class ItemController extends Controller
         //
         // $categories = Category::orderBy('id','desc')->paginate(0);
         // $items = Item::orderBy('id','desc')->paginate(5);
-        // $items = DB::table('items')
-        //         ->join('categories','items.category_id','=','categories.id')
-        //         ->join('statuses','items.status','=','statuses.id')
-        //         ->join('sponsors','items.sponsored','=','sponsors.id')
-        //         ->select('items.id','items.title','items.price','statuses.status','sponsors.name','categories.category')
-        //         ->get();
+        $items = DB::table('items')
+                ->join('categories','items.category_id','=','categories.id')
+                ->join('statuses','items.status','=','statuses.id')
+                ->join('sponsors','items.sponsored','=','sponsors.id')
+                ->where(function($query)use($request){
+                    if($term =$request->term){
+                        $query->orWhere('items.title','like','%'.$term.'%')
+                            ->orWhere('categories.category','like','%'.$term.'%');
+                    }
+                })
+                ->select('items.id','items.title','items.price','statuses.status','sponsors.name','categories.category')
+                ->orderBy('id','desc')->paginate(5);
 
-        $items=Item::where([
-            ['title','!=',Null],
-            [function($query) use ($request){
-                if($term = $request->term){
-                    // $query->orWhere('building','LIKE','%'.$term.'%')->get();
-                    $query->join('categories','items.category_id','=','categories.id')
-                            ->join('statuses','items.status','=','statuses.id')
-                            ->join('sponsors','items.sponsored','=','sponsors.id')
-                            ->orWhere('title','LIKE','%'.$term.'%')
-                            ->select('items.id','items.title','items.price','statuses.status','sponsors.name','categories.category')
-                            ->get();
-
-                }
-            }]
-        ])->orderBy('id','desc')->paginate(5);
         return view('Item.index')->with(compact('items'));
     }
 
