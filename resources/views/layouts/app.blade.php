@@ -190,7 +190,7 @@
                 </div>
             </nav>
         </div>
-        <div class="mx-3 mt-2 rounded">
+        <div style="background: #e4e9f7;" class="mx-3 rounded">
             @yield('content')
         </div>
     </div>

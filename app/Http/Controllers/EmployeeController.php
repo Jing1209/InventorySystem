@@ -24,7 +24,7 @@ class EmployeeController extends Controller
                     ->get();
                 }
             }]
-        ])->orderBy('id','desc')->paginate(5);
+        ])->orderBy('id','desc')->paginate(10);
         return view('Employee.index',compact('employees'));
     }
 
