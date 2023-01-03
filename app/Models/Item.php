@@ -26,5 +26,8 @@ class Item extends Model
     public function sponsors(){
         return $this->hasMany(Sponsor::class);
     }
+    public function image(){
+        return $this->hasMany(ImageItem::class);
+    }
 
 }
