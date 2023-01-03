@@ -56,6 +56,7 @@ Item
         <thead>
             <tr>
                 <th>S.No</th>
+                {{-- <th>Image</th> --}}
                 <th>Item</th>
                 <th>Category</th>
                 <th>Price</th>
@@ -69,6 +70,7 @@ Item
 
             <tr>
                 <td>{{ $item->id }}</td>
+                {{-- <td>{{url('public/Image/'.$item->url)}}</td> --}}
                 <td>{{ $item->title }}</td>
                 <td>{{ $item->category }}</td>
                 <td>{{ $item->price}}</td>
