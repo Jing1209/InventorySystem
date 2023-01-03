@@ -21,4 +21,7 @@ class Employee extends Model
     public function transactions(){
         return $this->hasOne(Transaction::class);
     }
+    public function image(){
+        return $this->hasMany(EmployeeImage::class);
+    }
 }

@@ -80,6 +80,13 @@ Item
                 </select>
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                {{-- <strong>Sponsor by:</strong> --}}
+                <label>Choose Images</label>
+                <input type="file"  name="images" >
+            </div>
+        </div>
         <button type="submit" class="btn btn-primary ml-3">Submit</button>
 </div>
 </form>
