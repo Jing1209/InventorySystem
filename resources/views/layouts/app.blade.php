@@ -19,6 +19,11 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
+    <style>
+        body {
+            background: #e4e9f7;
+        }
+    </style>
 </head>
 
 <body>
@@ -83,7 +88,7 @@
             </li>
             <li>
                 <a href="/employees">
-                    <i class='bx bxs-user-account'></i>
+                    <i class='bx bx-user-plus'></i>
                     <span class="link_name">Employee</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -92,7 +97,7 @@
             </li>
             <li>
                 <a href="/sponsor">
-                    <i class='bx bx-user-plus'></i>
+                    <i class='bx bxs-user-account'></i>
                     <span class="link_name">Sponsor</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -185,7 +190,7 @@
                 </div>
             </nav>
         </div>
-        <div class="mx-3 rounded">
+        <div style="background: #e4e9f7;" class="mx-3 rounded">
             @yield('content')
         </div>
     </div>
