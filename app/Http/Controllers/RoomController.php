@@ -27,8 +27,8 @@ class RoomController extends Controller
                 })
                 ->orderBy('id','desc')->paginate(5);
         
-   
-        return view('Room.index')->with(compact('rooms'));
+                $buildings = Building::orderBy('id','desc')->paginate(0);
+        return view('Room.index')->with(compact('rooms'))->with(compact('buildings'));
 
         
     }
@@ -89,7 +89,6 @@ class RoomController extends Controller
     public function update(Request $request, Room $room)
     {
         $room->fill($request->post())->save();
-
         return redirect()->route('rooms.index')->with('success','Room Has Been updated successfully');
     }
 
