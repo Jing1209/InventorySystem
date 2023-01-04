@@ -8,6 +8,7 @@ use App\Models\Status;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\ItemImage;
 
 class ItemController extends Controller
 {
@@ -25,6 +26,7 @@ class ItemController extends Controller
                 ->join('categories','items.category_id','=','categories.id')
                 ->join('statuses','items.status','=','statuses.id')
                 ->join('sponsors','items.sponsored','=','sponsors.id')
+                // ->join('itemimages','itemimages.item_id','=','item.id')
                 ->where(function($query)use($request){
                     if($term =$request->term){
                         $query->orWhere('items.title','like','%'.$term.'%')
@@ -63,10 +65,31 @@ class ItemController extends Controller
         // $request ->validate([
 
         // ]);
-        Item::create($request->post());
+        // Item::create($request->post());
+        $item = new Item();
+        $item['title'] = $request->title;
+        $item['description'] = $request->description;
+        $item['price'] = $request->price;
+        $item['status'] = $request->status;
+        $item['category_id'] = $request->category_id;
+        $item['sponsored'] = $request->sponsored;
+        $item->save();
+
         $quantity = Category::find($request->category_id);
         $quantity->quantity+=1;
         $quantity->save();
+        
+        $data = new ItemImage();
+
+        if($request->file('images')){
+            $file= $request->file('images');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
+            $data['url']= $filename;
+        }
+        $data['item_id'] = $item->id;
+        $data->save();
+
 
         return redirect()->route('items.index')->with('success','Item has been created successfully.');
     }

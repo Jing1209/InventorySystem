@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Models\EmployeeImage;
 
 class EmployeeController extends Controller
 {
@@ -24,7 +25,7 @@ class EmployeeController extends Controller
                     ->get();
                 }
             }]
-        ])->orderBy('id','desc')->paginate(5);
+        ])->orderBy('id','desc')->paginate(10);
         return view('Employee.index',compact('employees'));
     }
 
@@ -48,7 +49,28 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         //
-        Employee::create($request->post());
+        // Employee::create($request->post()); 
+        $employee = new Employee();
+        $employee['firstname'] = $request->firstname;
+        $employee['lastname'] = $request->lastname;
+        $employee['gender'] = $request->gender;
+        $employee['email'] = $request->email;
+        $employee['phone_number'] = $request->phone_number;
+
+        $employee->save();
+
+
+        $data = new EmployeeImage();
+
+        if($request->file('images')){
+            $file= $request->file('images');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
+            $data['url']= $filename;
+        }
+        $data['employee_id'] = $employee->id;
+        $data->save();
+
         return redirect()->route('employees.index')->with('success','Employee created successfully');
     }
 
