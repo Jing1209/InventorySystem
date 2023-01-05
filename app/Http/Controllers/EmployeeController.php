@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\EmployeeImage;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -26,7 +27,8 @@ class EmployeeController extends Controller
                 }
             }]
         ])->orderBy('id','desc')->paginate(10);
-        return view('Employee.index',compact('employees'));
+        $count=DB::table('employees')->count();
+        return view('Employee.index')->with(compact('employees'))->with(compact('count'));
     }
 
     /**
@@ -94,7 +96,11 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         //
-        return view('Employee.edit',compact('employee'));
+        $image = DB::table('employees')
+                ->join('employeeimages','employees.id','=','employeeimages.employee_id')
+                ->select('employeeimages.url')
+                ->where('employeeimages.employee_id','=',$employee->id)->get();
+        return view('Employee.edit')->with(compact('employee'))->with(compact('image'));
     }
 
     /**

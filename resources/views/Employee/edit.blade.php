@@ -62,6 +62,10 @@ Employee
                     <input type="number" name="phone_number" class="form-control" placeholder="Phone number" value="{{$employee->phone_number}}">
                 </div>
             </div>
+                @foreach ($image as $image1)
+                    {{-- {{$image->url}} --}}
+                    <img src="{{ url('public/Image/'.$image1->url) }}" alt="">
+                @endforeach
                 <button type="submit" class="btn btn-primary ml-3">Submit</button>
             </div>
         </form>

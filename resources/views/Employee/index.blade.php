@@ -7,7 +7,7 @@
         <div class="mx-3 my-3">
             All Employees
             <div>
-                234
+                {{$count}}
             </div>
         </div>
     </div>
