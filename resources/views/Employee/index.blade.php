@@ -46,22 +46,22 @@
     </div>
     @endif
     <div class="m-3">
-        <table class="table table-borderless table-hover">
-            <thead class="border-bottom">
-                <tr>
-                    <th class="col">S.No</th>
-                    <th class="col">Name</th>
-                    <th class="col">Gender</th>
-                    <th class="col">Email</th>
-                    <th class="col">Phone Number</th>
-                    <th class="col" style="width: 200px;">Action</th>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr class="table-primary">
+                    <th scope="col">S.No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col" style="width: 200px;">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($employees as $item)
                 <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->firstname }} {{ $item->lastname }}</td>
+                    <td scope="row">{{ $item->id }}</td>
+                    <td >{{ $item->firstname }} {{ $item->lastname }}</td>
                     <td>{{ $item->gender}}</td>
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->phone_number }}</td>
