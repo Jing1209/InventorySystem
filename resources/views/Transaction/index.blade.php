@@ -36,33 +36,33 @@
         </div>
     </div>
 </div>
-<div class="bg-white p3 rounded">
-    <div class="container mt-2">
+<div class="bg-white rounded">
+    <div class= "mt-2">
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
         @endif
-        <table class="table table-borderless table-hover">
+        <table class="table table-striped table-hover">
             <thead class="border-bottom">
-                <tr>
-                    <th>S.No</th>
+                <tr class="table-primary">
+                    <th style="text-align: center;">S.No</th>
                     <th>Item</th>
                     <th>Room</th>
                     <th>Borrowed by</th>
                     <th>Borrowed date</th>
-                    <th width="280px">Action</th>
+                    <th scope="col" style="width: 200px; text-align: center;">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($transactions as $category)
                 <tr>
-                    <td>{{ $category->id }}</td>
+                    <td style="text-align: center;">{{ $category->id }}</td>
                     <td>{{ $category->title }}</td>
                     <td>{{ $category->building_id }}-{{$category->name}}</td>
                     <td>{{$category->firstname}} {{$category->lastname}}</td>
                     <td>{{$category->created_at}}</td>
-                    <td>
+                    <td style="text-align: center;">
                         <form action="{{ route('transactions.destroy',$category->id) }}" method="Post">
                             <a class="btn btn-primary" href="{{ route('transactions.edit',$category->id) }}">Edit</a>
                             @csrf
