@@ -114,11 +114,16 @@ class ItemController extends Controller
     public function edit(Item $item)
     {
         //
-        // $items = DB::table('items')->join('categories','items.category_id','=','categories.id')->select('items.id','items.title','items.price','items.status','categories.category')->get();
+        $items = DB::table('items')
+                ->join('itemimages','items.id','=','itemimages.item_id')
+                ->select('items.id','items.title','items.price','items.status','itemimages.url')
+                ->where('items.id','=',$item->id)
+                ->get();
+        
         $categories = Category::orderBy('id','desc')->paginate(0);
         $status = Status::orderBy('id','desc')->paginate(0);
         $sponsor = Sponsor::orderBy('id','desc')->paginate(0);
-        return view('Item.edit')->with(compact('categories'))->with(compact('status'))->with(compact('sponsor'))->with(compact('item'));
+        return view('Item.edit')->with(compact('categories'))->with(compact('status'))->with(compact('sponsor'))->with(compact('item'))->with(compact('items'));
     }
 
     /**
