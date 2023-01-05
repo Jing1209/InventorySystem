@@ -27,14 +27,16 @@
                     </span>
                 </div>
             </form>
-            <a class="me-5 text-white text-decoration-none" href="{{ route('categories.create') }}">
+            <!-- <a class="me-5 text-white text-decoration-none" href="{{ route('categories.create') }}">
                 <div class="bg-primary cursor-pointer px-4 py-1 rounded-3 d-flex justify-conten-between">
                     <div class="me-2 d-flex align-items-center">
                         <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
                     </div>
                     <span>Create Category</span>
                 </div>
-            </a>
+            </a> -->
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addnewCategory"><i class="bx bx-plus-circle me-2"></i>Add New</button> -->
+            <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addnewCategory"><i class="bx bx-plus-circle me-2"></i>Add New</button>
         </div>
     </div>
 </div>
@@ -68,11 +70,40 @@
                     <td>{{ $category->quantity }}</td>
                     <td>
                         <form action="{{ route('categories.destroy',$category->id) }}" method="Post">
-                            <a class="btn btn-primary" href="{{ route('categories.edit',$category->id) }}">Edit</a>
+                            <!-- <a class="btn btn-primary" href="{{ route('categories.edit',$category->id) }}">Edit</a> -->
+                            <!-- <a href="#editCategory{{$category->id}}" data-bs-toggle="modal" class="btn btn-primary">Edit</a> -->
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#editCategory{{$category->id}}" class="btn btn-primary">Edit</button>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                        <div class="modal fade" id="editCategory{{$category->id}}" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editCategoryModalLabel">Edit Catogory</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('categories.update',$category->id) }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row p-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">Cateory Title</label>
+                                                <input type="text" name="category" value="{{ $category->category }}" class="form-control" placeholder="Category Title">
+                                                @error('category')
+                                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bx bx-log-out-circle"></i> Cancel</button>
+                                            <button type="submit" class="btn btn-primary ml-3"><i class="bx bx-save"></i>Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
@@ -83,4 +114,39 @@
 <div class="d-flex justify-content-center">
     {!! $categories->links() !!}
 </div>
+
+<!-- Add new category -->
+<div class="modal fade" id="addnewCategory" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="categoryModalLabel">Add New Category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Category Title</label>
+                        <input type="text" class="form-control" name="category">
+                        @error('category')
+                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bx bx-log-out-circle"></i> Cancel</button>
+                        <button type="submit" class="btn btn-primary"><i class="bx bx-save"></i> Save</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit category -->
+
+
 @endsection
