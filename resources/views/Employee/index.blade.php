@@ -45,39 +45,36 @@
         <p>{{ $message }}</p>
     </div>
     @endif
-    <div class="m-3">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr class="table-primary">
-                    <th scope="col">S.No</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone Number</th>
-                    <th scope="col" style="width: 200px;">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($employees as $item)
-                <tr>
-                    <td scope="row">{{ $item->id }}</td>
-                    <td >{{ $item->firstname }} {{ $item->lastname }}</td>
-                    <td>{{ $item->gender}}</td>
-                    <td>{{ $item->email }}</td>
-                    <td>{{ $item->phone_number }}</td>
-                    <td>
-                        <form action="{{ route('employees.destroy',$item->id) }}" method="Post">
-                            <a class="btn btn-primary" href="{{ route('employees.edit',$item->id) }}">Edit</a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col" style="text-align: center;">S.No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col" style="width: 200px; text-align: center;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($employees as $item)
+            <tr>
+                <td scope="row" style="text-align: center;">{{ $item->id }}</td>
+                <td>{{ $item->firstname }} {{ $item->lastname }}</td>
+                <td>{{ $item->gender}}</td>
+                <td>{{ $item->email }}</td>
+                <td>{{ $item->phone_number }}</td>
+                <td style="text-align: center;">
+                    <form action="{{ route('employees.destroy',$item->id) }}" method="Post">
+                        <a class="btn btn-primary" href="{{ route('employees.edit',$item->id) }}">Edit</a>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
 </div>
 <div class="d-flex justify-content-center">
     {!! $employees->links() !!}
