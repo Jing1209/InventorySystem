@@ -27,36 +27,21 @@
                     </span>
                 </div>
             </form>
-            <!-- <a class="me-5 text-white text-decoration-none" href="{{ route('categories.create') }}">
-                <div class="bg-primary cursor-pointer px-4 py-1 rounded-3 d-flex justify-conten-between">
-                    <div class="me-2 d-flex align-items-center">
-                        <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
-                    </div>
-                    <span>Create Category</span>
-                </div>
-            </a> -->
-            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addnewCategory"><i class="bx bx-plus-circle me-2"></i>Add New</button> -->
-            <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addnewCategory"><i class="bx bx-plus-circle me-2"></i>Add New</button>
+            <button type="button" class="btn btn-primary me-5" data-bs-toggle="modal" data-bs-target="#addnewCategory"><i class="bx bx-plus-circle me-2"></i>Add New</button>
         </div>
     </div>
 </div>
 <div class="mt-1 rounded bg-white">
-    <div class="row">
-    </div>
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
     </div>
     @endif
-    <div class="m-3">
-        <table class="table table-borderless table-hover">
+    <div>
+        <table class="table table-striped table-hover">
             <thead class="border-bottom">
-                <tr>
-                    <!-- <th scope="col">S.No</th>
-                    <th scope="col">Category Name</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Action</th> -->
-                    <th class="col">S.No</th>
+                <tr class="table-primary">
+                    <th class="col" style="text-align: center;">S.No</th>
                     <th class="col">Category Name</th>
                     <th class="col">Quantity</th>
                     <th class="col" style="width: 200px;">Action</th>
@@ -65,7 +50,7 @@
             <tbody>
                 @foreach ($categories as $category)
                 <tr>
-                    <td>{{ $category->id }}</td>
+                    <td style="text-align: center;">{{ $category->id }}</td>
                     <td>{{ $category->category }}</td>
                     <td>{{ $category->quantity }}</td>
                     <td>
@@ -77,6 +62,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                        <!-- Edit category -->
                         <div class="modal fade" id="editCategory{{$category->id}}" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -144,9 +130,5 @@
         </div>
     </div>
 </div>
-
-
-<!-- Edit category -->
-
 
 @endsection
