@@ -96,7 +96,11 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         //
-        return view('Employee.edit',compact('employee'));
+        $image = DB::table('employees')
+                ->join('employeeimages','employees.id','=','employeeimages.employee_id')
+                ->select('employeeimages.url')
+                ->where('employeeimages.employee_id','=',$employee->id)->get();
+        return view('Employee.edit')->with(compact('employee'))->with(compact('image'));
     }
 
     /**
