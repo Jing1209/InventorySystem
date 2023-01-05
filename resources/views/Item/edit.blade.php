@@ -25,16 +25,16 @@ Item
             @csrf
             @method('PUT')
             <div class="row">
-                {{-- <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Company Name:</strong>
-                        <input type="text" name="name" value="{{ $category->category }}" class="form-control"
-                            placeholder="Company name">
+                        <strong>Title:</strong>
+                        <input type="text" name="title" value="{{ $item->title }}" class="form-control"
+                            placeholder="Title">
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                     </div>
-                </div> --}}
+                </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Category:</strong>
@@ -68,6 +68,7 @@ Item
                         </select>
                     </div>
                 </div>
+                
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Price:</strong>
@@ -78,6 +79,12 @@ Item
                         @enderror --}}
                     </div>
                 </div>
+                @foreach ($items as $image)
+                    {{-- {{$image->url}} --}}
+                    <img src="{{ url('public/Image/'.$image->url) }}" alt="">
+                @endforeach
+                
+                
                 <button type="submit" class="btn btn-primary ml-3">Submit</button>
             </div>
         </form>

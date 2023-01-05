@@ -31,7 +31,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Building:</strong>
-                    <select name="building" id="">
+                    <select name="building_id" id="">
                         @foreach ($buildings as $build )
                         <option value={{$build->id}}>{{$build->building}}</option>
                         @endforeach
