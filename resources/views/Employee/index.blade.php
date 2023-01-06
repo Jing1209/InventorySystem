@@ -3,11 +3,11 @@
 @section('content')
 <div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;background: #e4e9f7;" class="d-flex justify-content-between my-3">
     <div class="w-25 d-flex justify-content-start text-white bg-primary rounded-2 me-2">
-        <a class="text-white " href="{{ url('dashboard') }}"> <i class='bx bx-home-alt p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i></a>
+        <div class="text-white"> <i class='bx bxs-group p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i></div>
         <div class="mx-3 my-3">
             All Employees
             <div>
-                {{$count}}
+                {{$count}} 
             </div>
         </div>
     </div>
