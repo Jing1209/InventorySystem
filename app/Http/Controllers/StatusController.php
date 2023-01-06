@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StatusController extends Controller
 {
@@ -16,7 +17,8 @@ class StatusController extends Controller
     {
         //
         $statuses = Status::orderBy('id','desc')->paginate(5);
-        return view('Status.index', compact('statuses'));
+        $countStatus=DB::table('statuses')->count();
+        return view('Status.index')->with(compact('statuses'))->with(compact('countStatus'));
     }
 
     /**
