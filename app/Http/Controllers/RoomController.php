@@ -26,11 +26,9 @@ class RoomController extends Controller
                     }
                 })
                 ->orderBy('id','desc')->paginate(5);
-        
-                $buildings = Building::orderBy('id','desc')->paginate(0);
-        return view('Room.index')->with(compact('rooms'))->with(compact('buildings'));
-
-        
+        $countRoom=DB::table('rooms')->count();       
+        $buildings = Building::orderBy('id','desc')->paginate(0);
+        return view('Room.index')->with(compact('rooms'))->with(compact('buildings'))->with(compact('countRoom'));
     }
 
     /**
