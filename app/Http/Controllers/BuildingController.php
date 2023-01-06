@@ -24,7 +24,8 @@ class BuildingController extends Controller
                 }
             }]
         ])->orderBy('id','desc')->paginate(5);
-        return view('Building.index', compact('buildings'));
+        $countBuilding=DB::table('buildings')->count();
+        return view('Building.index')->with(compact('buildings'))->with(compact('countBuilding'));
     }
 
     /**

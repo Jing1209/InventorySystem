@@ -1,51 +1,43 @@
 @extends('layouts.app')
 @section('title', 'Building')
 @section('content')
-<div class="row my-3">
-    <div class="container pull-left">
-        <h2>Inventory Status</h2>
-    </div>
-    <div class="d-flex flex-row-reverse my-3">
-        <div class="container p-3 bg-light rounded-2">
-            <p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" style="fill: rgb(21, 59, 182);transform: ;msFilter:;"><path d="M12 10c3.976 0 8-1.374 8-4s-4.024-4-8-4-8 1.374-8 4 4.024 4 8 4z"></path><path d="M4 10c0 2.626 4.024 4 8 4s8-1.374 8-4V8c0 2.626-4.024 4-8 4s-8-1.374-8-4v2z"></path><path d="M4 14c0 2.626 4.024 4 8 4s8-1.374 8-4v-2c0 2.626-4.024 4-8 4s-8-1.374-8-4v2z"></path><path d="M4 18c0 2.626 4.024 4 8 4s8-1.374 8-4v-2c0 2.626-4.024 4-8 4s-8-1.374-8-4v2z"></path></svg>
-                Status Borrow
-            </p>
-            <ul>
-                <li>Instock</li>
-                <li>Borrow</li>
-                <li>Suggest to have</li>
-            </ul>
-           
-        </div>
-        <div class="container p-3 bg-light me-3 rounded-2">
-            <p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" style="fill: rgb(217, 31, 14);transform: ;msFilter:;"><path d="m6.516 14.323-1.49 6.452a.998.998 0 0 0 1.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 0 0-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 0 0-1.822 0L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 0 0 .832-.586L12 5.43l1.799 3.981a.998.998 0 0 0 .832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 0 0-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 0 0-.276-.94l-3.038-2.962 4.09-.326z"></path></svg>
-                Status Item
-            </p>
-            <ul>
-                <li>Good</li>
-                <li>Medium</li>
-                <li>Usable</li>
-                <li>Broken</li>
-            </ul>
+<div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;background: #e4e9f7;" class="d-flex justify-content-between my-3">
+    <div class="w-25 d-flex justify-content-start text-white bg-primary rounded-2 me-2">
+        <div class="mx-3 my-3">
+            Total Status
+            <div>
+                {{$countStatus}}
+            </div>
         </div>
     </div>
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
+    <div class=" w-75 d-flex align-items-center text-white bg-white rounded-2 me-2">
+        <div class="d-flex w-100 justify-content-between">
+            {{-- search bar --}}
+            <form class="ms-5 w-50" action="{{ route('status.index') }}" method="GET" role="search">
+                <div class="d-flex justify-content-start">
+                    <div class="input-group">
+                        <input type="text" class="form-control mr-2 w-100 ps-3" name="term" placeholder="Search Status" id="term">
+                    </div>
+                    <span class="input-group-btn ms-2">
+                        <button class="btn btn-primary d-flex align-items-center h-100" type="submit" title="Search Status">
+                            <i style=" font-size: 18px;" class='bx bx-search'></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+            <div class="me-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addnewStatus"><i class="bx bx-plus-circle me-2"></i>Add New</button>
+            </div>
+        </div>
     </div>
-    @endif
-    <div class="d-flex mb-3 justify-content-end">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addnewStatus"><i class="bx bx-plus-circle me-2"></i>Add New</button>
-    </div>
-    <div>
-        <table class="table table-striped">
+</div>
+<div>
+    <table class="table table-striped table-hover">
         <thead>
             <tr class="table-primary">
-                <th>S.No</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th scope="col">S.No</th>
+                <th scope="col">Status</th>
+                <th scope="col" style="width: 200px; text-align: center;">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -55,13 +47,13 @@
                 <td>{{ $status->status }}</td>
                 <td>
                     <form action="{{ route('status.destroy',$status->id) }}" method="Post">
-                        <a href="#editStatus{{$status->id}}" data-bs-toggle="modal" class="btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style="fill: rgb(37, 178, 51);transform: ;msFilter:;"><path d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"></path></svg>
+                        <a href="#editStatus{{$status->id}}" data-bs-toggle="modal" class="btn btn-primary">
+                           Edit
                         </a> 
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style="fill: rgb(212, 7, 7);transform: ;msFilter:;"><path d="M15 2H9c-1.103 0-2 .897-2 2v2H3v2h2v12c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V8h2V6h-4V4c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm8 16H7V8h10v12z"></path></svg>
+                        <button type="submit" class="btn btn-danger">
+                            Delete
                         </button>
                     </form>
                     {{-- {{ Edit pop up}} --}}
@@ -97,9 +89,9 @@
             </tr>
             @endforeach
         </tbody>
-    </table></div>
-    
+    </table>
 </div>
+
 <div class="d-flex justify-content-center">
     {!! $statuses->links() !!}
 </div>
