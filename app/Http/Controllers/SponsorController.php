@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SponsorController extends Controller
 {
@@ -23,7 +24,8 @@ class SponsorController extends Controller
                 }
             }]
         ])->orderBy('id','desc')->paginate(5);
-        return view('Sponsor.index', compact('sponsors'));
+        $countSponsor=DB::table('sponsors')->count();
+        return view('Sponsor.index')->with(compact('sponsors'))->with(compact('countSponsor'));
     }
 
     /**
