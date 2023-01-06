@@ -32,86 +32,69 @@ Item
         <div class="mx-3 my-2 text-danger">
             Low Stock Items
             <div class="text-black">
-                234 
+                234
             </div>
         </div>
     </div>
 </div>
-<div class="pull-right mb-2">
-    <a class="btn btn-success" href="{{ url('dashboard') }}"> Home</a>
+{{-- search bar --}}
+<div class="">
+    <form class="ms-5 w-50" action="{{ route('items.index') }}" method="GET" role="search">
+        <div class="d-flex justify-content-start">
+            <div class="input-group">
+                <input type="text" class="form-control mr-2 w-100 ps-3" name="term" placeholder="Search Item" id="term">
+            </div>
+            <span class="input-group-btn ms-2">
+                <button class="btn btn-primary d-flex align-items-center h-100" type="submit" title="Search Item">
+                    <i style=" font-size: 18px;" class='bx bx-search'></i>
+                </button>
+            </span>
+        </div>
+    </form>
 </div>
-{{-- @foreach($categories as $cate)
-            <p>{{$cate->id}}</p>
-@endforeach --}}
-<div class="container mt-2">
+
+<div class="mt-1 rounded bg-white">
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
     </div>
     @endif
 
-    {{-- search bar --}}
-    <div class="mx-auto pull-right">
-        <div class="">
-            <form action="{{ route('items.index') }}" method="GET" role="search">
-
-                <div class="input-group">
-                    <span class="input-group-btn mr-5 mt-1">
-                        <button class="btn btn-info" type="submit" title="Search projects">
-                            <span class="fas fa-search"></span>
-                        </button>
-                    </span>
-                    <input type="text" class="form-control mr-2" name="term" placeholder="Search projects"
-                        id="term">
-                    <a href="{{ route('items.index') }}" class=" mt-1">
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger" type="button" title="Refresh page">
-                                <span class="fas fa-sync-alt"></span>
-                            </button>
-                        </span>
-                    </a>
-                </div>
-            </form>
-        </div>
+    <div>
+        <table class="table table-striped table-hover">
+            <thead class="border-bottom">
+                <tr class="table-primary">
+                    <th class="col" style="text-align: center;">S.No</th>
+                    <th class="col">Item</th>
+                    <th class="col">Category</th>
+                    <th class="col">Price</th>
+                    <th class="col">Status</th>
+                    <th class="col">Sponsor</th>
+                    <th scope="col" style="width: 200px; text-align: center;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($items as $item)
+                <tr>
+                    <td style="text-align: center;">{{ $item->id }}</td>
+                    <td>{{ $item->title }}</td>
+                    <td>{{ $item->category }}</td>
+                    <td>{{ $item->price}}</td>
+                    <td>{{ $item->status }}</td>
+                    <td>{{ $item->name }}</td>
+                    <td style="text-align: center;">
+                        <form action="{{ route('items.destroy',$item->id) }}" method="Post">
+                            <a class="btn btn-primary" href="{{ route('items.edit',$item->id) }}">Edit</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>S.No</th>
-                {{-- <th>Image</th> --}}
-                <th>Item</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Status</th>
-                <th>Sponsor</th>
-                <th width="280px">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($items as $item)
-
-            <tr>
-                <td>{{ $item->id }}</td>
-                {{-- <td>{{url('public/Image/'.$item->url)}}</td> --}}
-                <td>{{ $item->title }}</td>
-                <td>{{ $item->category }}</td>
-                <td>{{ $item->price}}</td>
-                <td>{{ $item->status }}</td>
-                <td>{{ $item->name }}</td>
-                <td>
-                    <form action="{{ route('items.destroy',$item->id) }}" method="Post">
-                        <a class="btn btn-primary" href="{{ route('items.edit',$item->id) }}">Edit</a>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-
 </div>
 <div class="d-flex justify-content-center">
     {!! $items->links() !!}
