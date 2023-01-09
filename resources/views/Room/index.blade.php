@@ -51,17 +51,34 @@
                     <td>{{ $room->id }}</td>
                     <td>{{ $room->name }}</td>
                     <td>{{ $room->building }}</td>  
-                    <td>
-                        <form action="{{ route('rooms.destroy',$room->id) }}" method="Post">
-                            <a href="#editRoom{{$room->id}}" data-bs-toggle="modal" class="btn btn-primary">
-                               Edit
-                            </a> 
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">
-                               Delete
-                            </button>
-                        </form>
+                    <td style="text-align: center;">
+                        <a href="#editRoom{{$room->id}}" data-bs-toggle="modal" class="btn btn-primary">
+                            Edit
+                         </a> 
+                         <a href="#deleteClarify{{$room->id}}" data-bs-toggle="modal" class="btn btn-danger">
+                            Delete
+                        </a> 
+                         {{-- Comfirm Delete Room  --}}
+                        <div class="modal fade" id="deleteClarify{{$room->id}}" tabindex="-1" aria-labelledby="deleteBuildingModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="deleteBuildingModalLabel">Confirm Message</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{ route('rooms.destroy',$room->id) }}" method="Post">
+                                   
+                                    @csrf
+                                    @method('DELETE')
+                                    <div class="p-3">Are you sure you want to delete this room?</div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
                         {{-- {{ Edit Room pop up}} --}}
                         <div class="modal fade" id="editRoom{{$room->id}}" tabindex="-1" aria-labelledby="editRoomModalLabel" aria-hidden="true">
                             <div class="modal-dialog">

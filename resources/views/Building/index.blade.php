@@ -47,25 +47,31 @@
             <tr>
                 <td>{{ $building->id }}</td>
                 <td>{{ $building->building }}</td>
-                <td>
-                    <form action="{{ route('buildings.destroy',$building->id) }}" method="Post">
-<<<<<<< HEAD
-                        <a href="#editBuilding{{$building->id}}" data-bs-toggle="modal" class="btn btn-primary">Edit</a> 
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">
-                           Delete
-=======
-                        <a href="#editBuilding{{$building->id}}" data-bs-toggle="modal" class="btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style="fill: rgb(37, 178, 51);"><path d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"></path></svg>
-                        </a> 
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style="fill: rgb(212, 7, 7);"><path d="M15 2H9c-1.103 0-2 .897-2 2v2H3v2h2v12c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V8h2V6h-4V4c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm8 16H7V8h10v12z"></path></svg>
->>>>>>> c312d6778bd0307791b2b9758d2124b9bf07f811
-                        </button>
-                    </form>
+                <td style="text-align: center;">
+                    <a href="#editBuilding{{$building->id}}" data-bs-toggle="modal" class="btn btn-primary">Edit</a>
+                    <a href="#deleteClarify{{$building->id}}" data-bs-toggle="modal" class="btn btn-danger">Delete</a> 
+
+                    {{-- Comfirm Delete Building  --}}
+                    <div class="modal fade" id="deleteClarify{{$building->id}}" tabindex="-1" aria-labelledby="deleteBuildingModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="deleteBuildingModalLabel">Confirm Message</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{ route('buildings.destroy',$building->id) }}" method="Post">
+                                @csrf
+                                @method('DELETE')
+                                <div class="p-3">Are you sure you want to delete this building?</div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                  </div>
+                            </form>
+                           
+                          </div>
+                        </div>
+                    </div>
                     {{-- {{ Edit pop up}} --}}
                     <div class="modal fade" id="editBuilding{{$building->id}}" tabindex="-1" aria-labelledby="editBuildingModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
