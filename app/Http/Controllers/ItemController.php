@@ -116,14 +116,17 @@ class ItemController extends Controller
         //
         $items = DB::table('items')
                 ->join('itemimages','items.id','=','itemimages.item_id')
-                ->select('items.id','items.title','items.price','items.status','itemimages.url')
+                ->select('items.id','items.title','items.price','items.status')
                 ->where('items.id','=',$item->id)
                 ->get();
-        
+        $image = DB::table('items')
+                ->join('itemimages','items.id','=','itemimages.item_id')
+                ->select('itemimages.url')
+                ->where('itemimages.item_id','=',$item->id)->get();
         $categories = Category::orderBy('id','desc')->paginate(0);
         $status = Status::orderBy('id','desc')->paginate(0);
         $sponsor = Sponsor::orderBy('id','desc')->paginate(0);
-        return view('Item.edit')->with(compact('categories'))->with(compact('status'))->with(compact('sponsor'))->with(compact('item'))->with(compact('items'));
+        return view('Item.edit')->with(compact('categories'))->with(compact('status'))->with(compact('sponsor'))->with(compact('item'))->with(compact('items'))->with(compact('image'));
     }
 
     /**
@@ -150,6 +153,8 @@ class ItemController extends Controller
     public function destroy(Item $item)
     {
         //
+        // dd($item->id);
+        $deleteImage = DB::table('itemimages')->where('item_id','=',$item->id)->delete();
         $item->delete();
         return redirect()->route('items.index')->with('success','Item Has Been removed successfully');
     }

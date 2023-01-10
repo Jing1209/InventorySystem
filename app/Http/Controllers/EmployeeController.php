@@ -128,6 +128,7 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         //
+        $deleteImage = DB::table('employeeimages')->where('employee_id','=',$employee->id)->delete();
         $employee->delete();
         return redirect()->route('employees.index')->with('success','Employee Has Been removed successfully');
     }

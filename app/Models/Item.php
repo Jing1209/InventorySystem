@@ -11,7 +11,7 @@ class Item extends Model
 
     protected $table = "items";
 
-    protected $fillable = ['category_id','title','price','status','description','sponsored'];
+    protected $fillable = ['category_id','title','price','status','description','sponsored','item_id'];
 
     public function categories(){
         return $this->belongsTo(Category::class);
@@ -28,6 +28,19 @@ class Item extends Model
     }
     public function image(){
         return $this->hasMany(ImageItem::class);
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        // auto-sets values on creation
+        static::creating(function ($query) {
+            $query->item_id= NULL;
+        });
+
+        // self::creating(function ($model) {
+        //     $model->uuid = IdGenerator::generate(['table' => 'categories', 'length' => 10, 'prefix' =>'Cate-']);
+        // });
     }
 
 }

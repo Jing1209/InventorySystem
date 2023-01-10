@@ -49,17 +49,32 @@
             <tr>
                 <td>{{ $sponsor->id }}</td>
                 <td>{{ $sponsor->name}}</td>
-                <td>
-                    <form action="{{ route('sponsor.destroy',$sponsor->id) }}" method="Post">
-                        <a href="#editSponsor{{$sponsor->id}}" data-bs-toggle="modal" class="btn btn-primary">
-                           Edit
-                        </a> 
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">
-                            Delete
-                        </button>
-                    </form>
+                <td style="text-align: center;">
+                    <a href="#editSponsor{{$sponsor->id}}" data-bs-toggle="modal" class="btn btn-primary">Edit</a> 
+                    <a href="#deleteClarify{{$sponsor->id}}" data-bs-toggle="modal" class="btn btn-danger">Delete</a> 
+                   
+                    {{-- Comfirm Delete Building  --}}
+                    <div class="modal fade" id="deleteClarify{{$sponsor->id}}" tabindex="-1" aria-labelledby="deleteBuildingModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="deleteBuildingModalLabel">Confirm Message</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{ route('sponsor.destroy',$sponsor->id) }}" method="Post">
+                        
+                                @csrf
+                                @method('DELETE')
+                                <div class="p-3">Are you sure you want to delete this Sponsor?</div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                  </div>
+                            </form>
+                           
+                          </div>
+                        </div>
+                    </div>
                      {{-- {{ Edit pop up}} --}}
                      <div class="modal fade" id="editSponsor{{$sponsor->id}}" tabindex="-1" aria-labelledby="editSponsorModalLabel" aria-hidden="true">
                         <div class="modal-dialog">

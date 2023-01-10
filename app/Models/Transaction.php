@@ -28,5 +28,8 @@ class Transaction extends Model
     public function employees(){
         return $this->belongsTo(Employee::class);
     }
+    public function statuses(){
+        return $this->hasMany(Status::class);
+    }
 
 }
