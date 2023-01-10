@@ -45,17 +45,34 @@
             <tr>
                 <td>{{ $status->id }}</td>
                 <td>{{ $status->status }}</td>
-                <td>
-                    <form action="{{ route('status.destroy',$status->id) }}" method="Post">
-                        <a href="#editStatus{{$status->id}}" data-bs-toggle="modal" class="btn btn-primary">
-                           Edit
-                        </a> 
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">
-                            Delete
-                        </button>
-                    </form>
+                <td style="text-align: center;">
+                    <a href="#editStatus{{$status->id}}" data-bs-toggle="modal" class="btn btn-primary">
+                        Edit
+                     </a> 
+                     <a href="#deleteClarify{{$status->id}}" data-bs-toggle="modal" class="btn btn-danger">Delete</a> 
+            
+                     {{-- Comfirm Delete Building  --}}
+                     <div class="modal fade" id="deleteClarify{{$status->id}}" tabindex="-1" aria-labelledby="deleteBuildingModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="deleteBuildingModalLabel">Confirm Message</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{ route('status.destroy',$status->id) }}" method="Post">
+                        
+                                @csrf
+                                @method('DELETE')
+                                <div class="p-3">Are you sure you want to delete this Status?</div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </div>
+                            </form>
+                           
+                          </div>
+                        </div>
+                    </div>
                     {{-- {{ Edit pop up}} --}}
                     <div class="modal fade" id="editStatus{{$status->id}}" tabindex="-1" aria-labelledby="editStatus" aria-hidden="true">
                         <div class="modal-dialog">
