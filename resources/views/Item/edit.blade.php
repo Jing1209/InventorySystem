@@ -5,88 +5,100 @@ Item
 
 @section('content')
 <div class="container mt-2">
-        <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-left">
-                    <h2>Edit Company</h2>
-                </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('items.index') }}" enctype="multipart/form-data">
-                        Back</a>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <h2>Edit Item Inventory</h2>
         </div>
-        @if(session('status'))
-        <div class="alert alert-success mb-1 mt-1">
-            {{ session('status') }}
-        </div>
-        @endif
+    </div>
+    @if(session('status'))
+    <div class="alert alert-success mb-1 mt-1">
+        {{ session('status') }}
+    </div>
+    @endif
+    <div class="mt-3">
         <form action="{{ route('items.update',$item->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Title:</strong>
-                        <input type="text" name="title" value="{{ $item->title }}" class="form-control"
-                            placeholder="Title">
-                        @error('name')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
+            <div class="row mb-5">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group mb-3">
+                        <strong>Item Name:</strong>
+                        <input type="text" name="title" class="form-control" placeholder="Item" value="{{$item->title}}">
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Category:</strong>
-                        <select name="category_id" id="">
-                            @foreach ($categories as $cate )
+                    <div class="form-group mb-3">
+                        <strong>Description:</strong>
+                        <input type="text" name="description" class="form-control" placeholder="Description" value="{{$item->description}}">
+                    </div>
+                    <div class="d-flex row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex flex-column mb-3">
+                           
+                            <strong>Price:</strong>
+                            <input type="text" name="price" class="form-control" placeholder="Price" value="{{$item->price}}">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex flex-column mb-3">
+                            <strong>Status:</strong>
+                            <select name="status"  class="p-2 rounded-2">
+                                @foreach ($status as $stat )
+                                    <option value={{$stat->id}}>{{$stat->status}}</option>
+                                @endforeach
+                                
+                            </select>
+                        </div>
+                    </div>
+                   
+                    <div class="d-flex row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex flex-column mb-3">
+                            <strong>Category:</strong>
+                            <select name="category_id" class="p-2 rounded-2">
+                                @foreach ($categories as $cate )
                                 <option value={{$cate->id}}>{{$cate->category}}</option>
-                            @endforeach
-                        </select>
-                        {{-- @error('email')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror --}}
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex flex-column mb-3">
+                            <strong>Sponsor by:</strong>
+                            <select name="sponsored" class="p-2 rounded-2">
+                                @foreach ($sponsor as $spon )
+                                    <option class="" value={{$spon->id}}>{{$spon->name}}</option>
+                                @endforeach
+                                
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Status:</strong>
-                        <select name="status" id="">
-                            @foreach ($status as $cate )
-                                <option value={{$cate->id}}>{{$cate->status}}</option>
-                            @endforeach
-                        </select>
+                <div class="d-flex justify-content-center col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex justify-content-center mt-3">
+                            <input type="file" name="images" id="actual-btn" onchange="loadFile(event)" hidden>
+                            <label style="cursor: pointer;" class="btn btn-outline-primary" for="actual-btn">Choose File</label>
+                            <span id="file-chosen" class="py-2 ps-2">No file chosen</span>
+                        </div>
+                        <div class="mt-2">
+                            @foreach ($image as $image1)
+                            {{-- {{$image->url}} --}}
+                            <img id="output" width="340" height="210" src="{{ url('public/Image/'.$image1->url) }}" alt="">
+                             @endforeach
+                            
+                        </div>
+                        <div class="d-flex justify-content-end mt-3 mb-5">
+                            <a class="btn btn-danger" href="{{ route('items.index') }}" enctype="multipart/form-data">
+                                Back
+                            </a>
+                            <button type="submit" class="btn btn-success ms-2">Submit</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Sponsor:</strong>
-                        <select name="sponsored" id="">
-                            @foreach ($sponsor as $cate )
-                                <option value={{$cate->id}}>{{$cate->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Price:</strong>
-                        <input type="number" name="price" value="{{ $item->price }}" class="form-control"
-                            placeholder="Price">
-                        {{-- @error('address')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror --}}
-                    </div>
-                </div>
-                @foreach ($items as $image)
-                    {{-- {{$image->url}} --}}
-                    <img src="{{ url('public/Image/'.$image->url) }}" alt="">
-                @endforeach
-                
-                
-                <button type="submit" class="btn btn-primary ml-3">Submit</button>
             </div>
         </form>
     </div>
+      
+    </div>
+    {{-- <script type="text/javascript">
+        var fileChosen = document.getElementById('file-chosen');
+        var loadFile = function(event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            fileChosen.textContent = event.target.files[0].name
+        };
+    </script> --}}
 @endsection
