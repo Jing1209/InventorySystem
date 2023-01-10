@@ -19,14 +19,21 @@ class TransactionController extends Controller
     public function index()
     {
         //
+        $rooms = DB::table('rooms')
+            ->join('buildings', 'rooms.building_id', '=', 'buildings.id')
+            ->select('buildings.building', 'rooms.name', 'rooms.id')
+            ->get();
+        $items = Item::orderBy('id', 'desc')->paginate(0);
+        $employees = Employee::orderBy('id', 'desc')->paginate(0);
+
         $transactions = DB::table('transactions')
-                    ->join('items','transactions.item_id','=','items.id')
-                    ->join('employees','transactions.employee_id','=','employees.id')
-                    ->join('rooms','transactions.room_id','=','rooms.id')
-                    // ->join('buildings','rooms.buidling_id','=','buldings.id')
-                    ->select('transactions.id','transactions.created_at','items.title','items.status','employees.firstname','employees.lastname','rooms.building_id','rooms.name')
-                    ->paginate(10);
-        return view('Transaction.index',compact('transactions'));
+            ->join('items', 'transactions.item_id', '=', 'items.id')
+            ->join('employees', 'transactions.employee_id', '=', 'employees.id')
+            ->join('rooms', 'transactions.room_id', '=', 'rooms.id')
+            // ->join('buildings','rooms.buidling_id','=','buldings.id')
+            ->select('transactions.id', 'transactions.created_at', 'items.title', 'items.status', 'employees.firstname', 'employees.lastname', 'rooms.building_id', 'rooms.name')
+            ->paginate(10);
+        return view('Transaction.index')->with(compact('transactions'))->with(compact('rooms'))->with(compact('items'))->with(compact('employees'));
     }
 
     /**
@@ -38,11 +45,11 @@ class TransactionController extends Controller
     {
         //
         $rooms = DB::table('rooms')
-                    ->join('buildings','rooms.building_id','=','buildings.id')
-                    ->select('buildings.building','rooms.name','rooms.id')
-                    ->get();
-        $items = Item::orderBy('id','desc')->paginate(0);
-        $employees = Employee::orderBy('id','desc')->paginate(0);
+            ->join('buildings', 'rooms.building_id', '=', 'buildings.id')
+            ->select('buildings.building', 'rooms.name', 'rooms.id')
+            ->get();
+        $items = Item::orderBy('id', 'desc')->paginate(0);
+        $employees = Employee::orderBy('id', 'desc')->paginate(0);
         return view('Transaction.create')->with(compact('rooms'))->with(compact('items'))->with(compact('employees'));
     }
 
@@ -55,10 +62,11 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         //
+
         $request->validate([
-            'item_id'=>'required',
-            'room_id'=>'required',
-            'employee_id'=>'required',
+            'item_id' => 'required',
+            'room_id' => 'required',
+            'employee_id' => 'required',
 
         ]);
         Transaction::create($request->post());
@@ -86,10 +94,10 @@ class TransactionController extends Controller
     {
         //
         $rooms = DB::table('rooms')
-                    ->join('buildings','rooms.building_id','=','buildings.id')
-                    ->select('buildings.building','rooms.name','rooms.id')
-                    ->get();
-        $items = Item::orderBy('id','desc')->paginate(0);
+            ->join('buildings', 'rooms.building_id', '=', 'buildings.id')
+            ->select('buildings.building', 'rooms.name', 'rooms.id')
+            ->get();
+        $items = Item::orderBy('id', 'desc')->paginate(0);
         return view('Transaction.edit')->with(compact('transaction'))->with(compact('rooms'))->with(compact('items'));
     }
 
@@ -105,7 +113,7 @@ class TransactionController extends Controller
         //
         $transaction->fill($request->post())->save();
 
-        return redirect()->route('transactions.index')->with('success','Transaction Has Been updated successfully');
+        return redirect()->route('transactions.index')->with('success', 'Transaction Has Been updated successfully');
     }
 
     /**
@@ -118,6 +126,6 @@ class TransactionController extends Controller
     {
         //
         $transaction->delete();
-        return redirect()->route('transactions.index')->with('success','Transaction Has Been removed successfully');
+        return redirect()->route('transactions.index')->with('success', 'Transaction Has Been removed successfully');
     }
 }

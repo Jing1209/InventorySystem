@@ -38,7 +38,6 @@ Employee
                         <option value="Female">Female</option>
                         <option value="Male">Male</option>
                     </select>
-
                 </div>
                 <div class="mb-2">
                     <div class="form-group">
@@ -52,20 +51,20 @@ Employee
                         <input type="number" name="phone_number" class="form-control" placeholder="087 xxxxxx32">
                     </div>
                 </div>
-                <div class="my-3">
-                    <a class="btn btn-secondary" href="{{ route('employees.index') }}"> Back</a>
+                <div class="my-3 d-flex flex-row-reverse">
                     <button type="submit" class="btn btn-primary ms-2"><i class="bx bx-save pe-1"></i>Save</button>
+                    <a class="btn btn-secondary" href="{{ route('employees.index') }}"> Back</a>
                 </div>
             </div>
         </div>
         <div class="d-flex flex-column me-5">
-            <div style="margin-top: 100px;">
+            <div style="margin-top: 100px;" class="border text-center">
                 <img id="output" width="400" height="300" src="{{ asset('images/user.png') }}" />
             </div>
             <div class="d-flex my-3">
                 <input type="file" name="images" id="actual-btn" onchange="loadFile(event)" hidden>
                 <label style="cursor: pointer;" class="bg-success text-white p-2 rounded text-center" for="actual-btn">Choose File</label>
-                <span id="file-chosen" class="py-2 ps-2">No file chosen</span>
+                <div id="file-chosen" class="py-2 ps-2" style="width: 400px;">No file chosen</div>
             </div>
         </div>
     </form>
