@@ -15,4 +15,7 @@ class Status extends Model
     public function items(){
         return $this->belongsTo(Item::class);
     }
+    public function transaction(){
+        return $this->belongsTo(Transaction::class);
+    }
 }

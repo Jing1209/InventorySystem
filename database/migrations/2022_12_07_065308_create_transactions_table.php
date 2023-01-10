@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('room_id')->references('id')->on('rooms');
             // $table->string('user_id');
             $table->foreignId('employee_id')->references('id')->on('employees');
+            $table->foreignId('status')->references('id')->on('statuses');
             $table->timestamps();
         });
     }

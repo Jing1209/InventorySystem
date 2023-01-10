@@ -153,6 +153,8 @@ class ItemController extends Controller
     public function destroy(Item $item)
     {
         //
+        // dd($item->id);
+        $deleteImage = DB::table('itemimages')->where('item_id','=',$item->id)->delete();
         $item->delete();
         return redirect()->route('items.index')->with('success','Item Has Been removed successfully');
     }
