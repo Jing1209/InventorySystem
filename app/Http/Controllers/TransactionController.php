@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\Room;
+use App\Model\Status;
 use App\Models\Item;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -23,8 +24,8 @@ class TransactionController extends Controller
                     ->join('items','transactions.item_id','=','items.id')
                     ->join('employees','transactions.employee_id','=','employees.id')
                     ->join('rooms','transactions.room_id','=','rooms.id')
-                    // ->join('buildings','rooms.buidling_id','=','buldings.id')
-                    ->select('transactions.id','transactions.created_at','items.title','items.status','employees.firstname','employees.lastname','rooms.building_id','rooms.name')
+                    ->join('statuses','transactions.status','=','statuses.id')
+                    ->select('transactions.id','transactions.created_at','items.title','items.status','employees.firstname','employees.lastname','rooms.building_id','rooms.name','statuses.status')
                     ->paginate(10);
         return view('Transaction.index',compact('transactions'));
     }
@@ -43,7 +44,8 @@ class TransactionController extends Controller
                     ->get();
         $items = Item::orderBy('id','desc')->paginate(0);
         $employees = Employee::orderBy('id','desc')->paginate(0);
-        return view('Transaction.create')->with(compact('rooms'))->with(compact('items'))->with(compact('employees'));
+        $status = Status::orderBy('id','desc')->paginate(0);
+        return view('Transaction.create')->with(compact('rooms'))->with(compact('items'))->with(compact('employees'))->with(compact('status'));
     }
 
     /**

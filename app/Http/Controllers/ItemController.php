@@ -73,6 +73,7 @@ class ItemController extends Controller
         $item['status'] = $request->status;
         $item['category_id'] = $request->category_id;
         $item['sponsored'] = $request->sponsored;
+        $item['item_id'] = $request->item_id;
         $item->save();
 
         $quantity = Category::find($request->category_id);
@@ -139,7 +140,11 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         //
+       
         $item->fill($request->post())->save();
+
+        $image = ItemImage::where('item_id','=',$item->id);
+        dd($image);
 
         return redirect()->route('items.index')->with('success','Item Has Been updated successfully');
     }

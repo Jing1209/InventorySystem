@@ -63,7 +63,15 @@ Item
                             </select>
                         </div>
                     </div>
+                    <div class="d-flex row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex flex-column mb-3">
+                            <strong>Item ID:</strong>
+                            <input type="text" name="item_id" class="form-control" placeholder="ID">
+                        </div>
+                    </div>
                 </div>
+
+                
                 <div class="d-flex justify-content-center col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <div class="d-flex flex-column">
                         <div class="d-flex justify-content-center mt-3">

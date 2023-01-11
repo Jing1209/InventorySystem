@@ -65,6 +65,7 @@ Item
             <thead class="border-bottom">
                 <tr class="table-primary">
                     <th class="col" style="text-align: center;">S.No</th>
+                    <th class="col">ID</th>
                     <th class="col">Item</th>
                     <th class="col">Category</th>
                     <th class="col">Price</th>
@@ -77,6 +78,7 @@ Item
                 @foreach ($items as $item)
                 <tr>
                     <td style="text-align: center;">{{ $item->id }}</td>
+                    <td>asda</td>
                     <td>{{ $item->title }}</td>
                     <td>{{ $item->category }}</td>
                     <td>{{ $item->price}}</td>
