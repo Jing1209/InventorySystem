@@ -33,10 +33,23 @@ class ItemController extends Controller
                             ->orWhere('categories.category','like','%'.$term.'%');
                     }
                 })
-                ->select('items.id','items.title','items.price','statuses.status','sponsors.name','categories.category')
+                ->select('items.id','items.title','items.price','statuses.status','sponsors.name','categories.category','items.item_id')
                 ->orderBy('id','desc')->paginate(5);
+        $countBad = DB::table('items')
+                ->join('statuses','items.status','=','statuses.id')
+                ->where('statuses','like','%Bad%')->count();
+        $countGood = DB::table('items')
+                ->join('statuses','items.status','=','statuses.id')
+                ->where('statuses','like','%Good%')->count();
+        $countMedium = DB::table('items')
+                ->join('statuses','items.status','=','statuses.id')
+                ->where('statuses','like','%Medium%')->count();
+        $countBroken = DB::table('items')
+                ->join('statuses','items.status','=','statuses.id')
+                ->where('statuses','like','%Broken%')->count();
+        // dd($countBad);
 
-        return view('Item.index')->with(compact('items'));
+        return view('Item.index')->with(compact('items'))->with(compact('countBad'))->with(compact('countGood'))->with(compact('countMedium'))->with(compact('countBroken'));
     }
 
     /**
@@ -144,7 +157,7 @@ class ItemController extends Controller
         $item->fill($request->post())->save();
 
         $image = ItemImage::where('item_id','=',$item->id);
-        dd($image);
+        // dd($image);
 
         return redirect()->route('items.index')->with('success','Item Has Been updated successfully');
     }

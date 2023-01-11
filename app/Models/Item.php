@@ -29,18 +29,18 @@ class Item extends Model
     public function image(){
         return $this->hasMany(ImageItem::class);
     }
-    protected static function boot()
-    {
-        parent::boot();
+    // protected static function boot()
+    // {
+    //     parent::boot();
 
-        // auto-sets values on creation
-        static::creating(function ($query) {
-            $query->item_id= NULL;
-        });
+    //     // auto-sets values on creation
+    //     static::creating(function ($query) {
+    //         $query->item_id= NULL;
+    //     });
 
-        // self::creating(function ($model) {
-        //     $model->uuid = IdGenerator::generate(['table' => 'categories', 'length' => 10, 'prefix' =>'Cate-']);
-        // });
-    }
+    //     // self::creating(function ($model) {
+    //     //     $model->uuid = IdGenerator::generate(['table' => 'categories', 'length' => 10, 'prefix' =>'Cate-']);
+    //     // });
+    // }
 
 }

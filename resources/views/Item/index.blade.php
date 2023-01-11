@@ -21,18 +21,36 @@ Item
     <div class="w-50 text-white bg-primary rounded-2 me-2">
         <i class='bx bxs-folder-open p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
         <div class="mx-3 my-2">
-            All Items
+            Good
             <div>
-                234
+                {{$countGood}}
+            </div>
+        </div>
+    </div>
+    <div class="w-50 text-white bg-primary rounded-2 me-2">
+        <i class='bx bxs-folder-open p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
+        <div class="mx-3 my-2">
+            Bad
+            <div>
+                {{$countBad}}
+            </div>
+        </div>
+    </div>
+    <div class="w-50 text-white bg-primary rounded-2 me-2">
+        <i class='bx bxs-folder-open p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
+        <div class="mx-3 my-2">
+            Medium
+            <div>
+                {{$countMedium}}
             </div>
         </div>
     </div>
     <div class="w-50 bg-white rounded-2">
         <i class='bx bx-color-fill p-2 m-3 rounded-2' style="background-color: rgba(255, 204, 145, 0.16); font-size: 18px;"></i>
         <div class="mx-3 my-2 text-danger">
-            Low Stock Items
+            Broken
             <div class="text-black">
-                234
+                {{$countBroken}}
             </div>
         </div>
     </div>
@@ -49,7 +67,15 @@ Item
                     <i style=" font-size: 18px;" class='bx bx-search'></i>
                 </button>
             </span>
+            <select class="form-select ms-2" aria-label="Default select example" name='term'>
+                <option selected>Status</option>
+                <option value="1">Good</option>
+                <option value="2">Medium</option>
+                <option value="3">Bad</option>
+                <option value="4">Broken</option>
+              </select>
         </div>
+        
     </form>
 </div>
 
@@ -78,7 +104,7 @@ Item
                 @foreach ($items as $item)
                 <tr>
                     <td style="text-align: center;">{{ $item->id }}</td>
-                    <td>asda</td>
+                    <td>{{$item->item_id}}</td>
                     <td>{{ $item->title }}</td>
                     <td>{{ $item->category }}</td>
                     <td>{{ $item->price}}</td>
@@ -89,7 +115,30 @@ Item
                             <a class="btn btn-primary" href="{{ route('items.edit',$item->id) }}">Edit</a>
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <a href="#deleteClarify{{$item->id}}" data-bs-toggle="modal" class="btn btn-danger">
+                                Delete
+                            </a> 
+                             {{-- Comfirm Delete Room  --}}
+                            <div class="modal fade" id="deleteClarify{{$item->id}}" tabindex="-1" aria-labelledby="deleteBuildingModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteBuildingModalLabel">Confirm Message</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('items.destroy',$item->id) }}" method="Post">
+                                       
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="p-3">Are you sure you want to delete this item?</div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
                         </form>
                     </td>
                 </tr>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\Room;
-use App\Model\Status;
+use App\Models\Status;
 use App\Models\Item;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -20,6 +20,13 @@ class TransactionController extends Controller
     public function index()
     {
         //
+        $rooms = DB::table('rooms')
+            ->join('buildings', 'rooms.building_id', '=', 'buildings.id')
+            ->select('buildings.building', 'rooms.name', 'rooms.id')
+            ->get();
+        $items = Item::orderBy('id', 'desc')->paginate(0);
+        $employees = Employee::orderBy('id', 'desc')->paginate(0);
+
         $transactions = DB::table('transactions')
                     ->join('items','transactions.item_id','=','items.id')
                     ->join('employees','transactions.employee_id','=','employees.id')
@@ -27,7 +34,14 @@ class TransactionController extends Controller
                     ->join('statuses','transactions.status','=','statuses.id')
                     ->select('transactions.id','transactions.created_at','items.title','items.status','employees.firstname','employees.lastname','rooms.building_id','rooms.name','statuses.status')
                     ->paginate(10);
-        return view('Transaction.index',compact('transactions'));
+        $statuses = Status::orderBy('id','desc')->paginate(0);
+        $countBorrow = DB::table('transactions')
+                    ->join('statuses','transactions.status','=','statuses.id')
+                    ->where('statuses.status','like','Borrow')->count();
+        $countReturn = DB::table('transactions')
+                    ->join('statuses','transactions.status','=','statuses.id')
+                    ->where('statuses.status','like','Return')->count();
+        return view('Transaction.index')->with(compact('transactions'))->with(compact('rooms'))->with(compact('items'))->with(compact('employees'))->with(compact('statuses'))->with(compact('countBorrow'))->with(compact('countReturn'));
     }
 
     /**
@@ -57,10 +71,12 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request);
         $request->validate([
-            'item_id'=>'required',
-            'room_id'=>'required',
-            'employee_id'=>'required',
+            'item_id' => 'required',
+            'room_id' => 'required',
+            'employee_id' => 'required',
+            'status'=>'required'
 
         ]);
         Transaction::create($request->post());
@@ -88,10 +104,11 @@ class TransactionController extends Controller
     {
         //
         $rooms = DB::table('rooms')
-                    ->join('buildings','rooms.building_id','=','buildings.id')
-                    ->select('buildings.building','rooms.name','rooms.id')
-                    ->get();
-        $items = Item::orderBy('id','desc')->paginate(0);
+            ->join('buildings', 'rooms.building_id', '=', 'buildings.id')
+            ->select('buildings.building', 'rooms.name', 'rooms.id')
+            ->get();
+        $items = Item::orderBy('id', 'desc')->paginate(0);
+        // dd($items);
         return view('Transaction.edit')->with(compact('transaction'))->with(compact('rooms'))->with(compact('items'));
     }
 
@@ -107,7 +124,7 @@ class TransactionController extends Controller
         //
         $transaction->fill($request->post())->save();
 
-        return redirect()->route('transactions.index')->with('success','Transaction Has Been updated successfully');
+        return redirect()->route('transactions.index')->with('success', 'Transaction Has Been updated successfully');
     }
 
     /**
@@ -120,6 +137,6 @@ class TransactionController extends Controller
     {
         //
         $transaction->delete();
-        return redirect()->route('transactions.index')->with('success','Transaction Has Been removed successfully');
+        return redirect()->route('transactions.index')->with('success', 'Transaction Has Been removed successfully');
     }
 }
