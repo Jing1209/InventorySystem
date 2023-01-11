@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             // $table->string('category_id');
-            $table->stting('item_id')->nullable(true);
+            $table->string('item_id')->nullable(true);
             $table->foreignId('category_id')->references('id')->on('categories');
             $table->string('title');
             $table->text('description');
