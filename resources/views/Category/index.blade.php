@@ -33,8 +33,11 @@
 </div>
 <div class="mt-1 rounded bg-white">
     @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" >
+        <span>{{ $message }}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     @endif
     <div>
@@ -54,7 +57,7 @@
                     <td>{{ $category->category }}</td>
                     <td>{{ $category->quantity }}</td>
                     <td style="text-align: center;">
-                        <a href="#editBuilding{{$category->id}}" data-bs-toggle="modal" class="btn btn-primary">Edit</a>
+                        <a href="#editCategory{{$category->id}}" data-bs-toggle="modal" class="btn btn-primary">Edit</a>
                         <a href="#deleteClarify{{$category->id}}" data-bs-toggle="modal" class="btn btn-danger">Delete</a> 
                         
                          {{-- Comfirm Delete Building  --}}

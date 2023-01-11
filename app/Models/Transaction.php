@@ -15,6 +15,7 @@ class Transaction extends Model
         'item_id',
         'employee_id',
         'room_id',
+        'status'
     ];
 
     public function items(){

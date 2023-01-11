@@ -33,10 +33,23 @@ class ItemController extends Controller
                             ->orWhere('categories.category','like','%'.$term.'%');
                     }
                 })
-                ->select('items.id','items.title','items.price','statuses.status','sponsors.name','categories.category')
+                ->select('items.id','items.title','items.price','statuses.status','sponsors.name','categories.category','items.item_id')
                 ->orderBy('id','desc')->paginate(5);
+        $countBad = DB::table('items')
+                ->join('statuses','items.status','=','statuses.id')
+                ->where('statuses','like','%Bad%')->count();
+        $countGood = DB::table('items')
+                ->join('statuses','items.status','=','statuses.id')
+                ->where('statuses','like','%Good%')->count();
+        $countMedium = DB::table('items')
+                ->join('statuses','items.status','=','statuses.id')
+                ->where('statuses','like','%Medium%')->count();
+        $countBroken = DB::table('items')
+                ->join('statuses','items.status','=','statuses.id')
+                ->where('statuses','like','%Broken%')->count();
+        // dd($countBad);
 
-        return view('Item.index')->with(compact('items'));
+        return view('Item.index')->with(compact('items'))->with(compact('countBad'))->with(compact('countGood'))->with(compact('countMedium'))->with(compact('countBroken'));
     }
 
     /**
@@ -73,6 +86,7 @@ class ItemController extends Controller
         $item['status'] = $request->status;
         $item['category_id'] = $request->category_id;
         $item['sponsored'] = $request->sponsored;
+        $item['item_id'] = $request->item_id;
         $item->save();
 
         $quantity = Category::find($request->category_id);
@@ -139,7 +153,11 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         //
+       
         $item->fill($request->post())->save();
+
+        $image = ItemImage::where('item_id','=',$item->id);
+        // dd($image);
 
         return redirect()->route('items.index')->with('success','Item Has Been updated successfully');
     }

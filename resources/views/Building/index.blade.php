@@ -52,9 +52,30 @@
                         <a href="#editBuilding{{$building->id}}" data-bs-toggle="modal" class="btn btn-primary">Edit</a> 
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">
-                           Delete
-                        </button>
+                        <a href="#deleteClarify{{$building->id}}" data-bs-toggle="modal" class="btn btn-danger">
+                            Delete
+                        </a> 
+                         {{-- Comfirm Delete Room  --}}
+                        <div class="modal fade" id="deleteClarify{{$building->id}}" tabindex="-1" aria-labelledby="deleteBuildingModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="deleteBuildingModalLabel">Confirm Message</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{ route('buildings.destroy',$building->id) }}" method="Post">
+                                   
+                                    @csrf
+                                    @method('DELETE')
+                                    <div class="p-3">Are you sure you want to delete this buidling?</div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
                     </form>
                     {{-- {{ Edit pop up}} --}}
                     <div class="modal fade" id="editBuilding{{$building->id}}" tabindex="-1" aria-labelledby="editBuildingModalLabel" aria-hidden="true">
