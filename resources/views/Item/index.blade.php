@@ -19,17 +19,35 @@ Item
 </div>
 <div class="my-2 w-100 d-flex justify-content-between">
     <div class="w-50 text-white bg-primary rounded-2 me-2">
-        <i class='bx bxs-folder-open p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
-        <div class="mx-3 my-2">
+        <i class='bx bxs-folder-open p-2 ms-3 mt-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
+        <div class="mx-3 mt-2">
             All Items
             <div>
                 234
             </div>
         </div>
     </div>
+    <div class="w-50 bg-white rounded-2 me-2">
+        <i class='bx bx-color-fill p-2 ms-3 mt-3 rounded-2' style="background-color: rgba(255, 204, 145, 0.16); font-size: 18px;"></i>
+        <div class="mx-3 mt-2 text-danger">
+            Low Stock Items
+            <div class="text-black">
+                234
+            </div>
+        </div>
+    </div>
+    <div class="w-50 bg-white rounded-2 me-2">
+        <i class='bx bx-color-fill p-2 ms-3 mt-3 rounded-2' style="background-color: rgba(255, 204, 145, 0.16); font-size: 18px;"></i>
+        <div class="mx-3 mt-2 text-danger">
+            Low Stock Items
+            <div class="text-black">
+                234
+            </div>
+        </div>
+    </div>
     <div class="w-50 bg-white rounded-2">
-        <i class='bx bx-color-fill p-2 m-3 rounded-2' style="background-color: rgba(255, 204, 145, 0.16); font-size: 18px;"></i>
-        <div class="mx-3 my-2 text-danger">
+        <i class='bx bx-color-fill p-2 ms-3 mt-3 rounded-2' style="background-color: rgba(255, 204, 145, 0.16); font-size: 18px;"></i>
+        <div class="mx-3 mt-2 text-danger">
             Low Stock Items
             <div class="text-black">
                 234
@@ -38,8 +56,8 @@ Item
     </div>
 </div>
 {{-- search bar --}}
-<div class="">
-    <form class="ms-5 w-50" action="{{ route('items.index') }}" method="GET" role="search">
+<div class="d-flex flex-row-reverse my-3">
+    <form class="w-25" action="{{ route('items.index') }}" method="GET" role="search">
         <div class="d-flex justify-content-start">
             <div class="input-group">
                 <input type="text" class="form-control mr-2 w-100 ps-3" name="term" placeholder="Search Item" id="term">
