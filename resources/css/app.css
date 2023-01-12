@@ -49,6 +49,11 @@
     color: #fff;
 }
 
+.sidebar .nav-links li.active {
+    background: #5570F1;
+    color: white;
+}
+
 .sidebar .nav-links li:hover .link_name {
     color: #fff;
 }
@@ -236,5 +241,7 @@
         left: 0;
     }
 }
+
+
 
 
