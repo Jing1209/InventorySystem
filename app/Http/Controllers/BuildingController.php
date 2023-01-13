@@ -23,7 +23,7 @@ class BuildingController extends Controller
                     $query->orWhere('building','LIKE','%'.$term.'%')->get();
                 }
             }]
-        ])->orderBy('id','desc')->paginate(5);
+        ])->orderBy('id','asc')->paginate(10);
         $countBuilding=DB::table('buildings')->count();
         return view('Building.index')->with(compact('buildings'))->with(compact('countBuilding'));
     }

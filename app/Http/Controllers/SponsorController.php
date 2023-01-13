@@ -23,7 +23,7 @@ class SponsorController extends Controller
                     $query->orWhere('name','LIKE','%'.$term.'%')->get();
                 }
             }]
-        ])->orderBy('id','desc')->paginate(5);
+        ])->orderBy('id','asc')->paginate(10);
         $countSponsor=DB::table('sponsors')->count();
         return view('Sponsor.index')->with(compact('sponsors'))->with(compact('countSponsor'));
     }

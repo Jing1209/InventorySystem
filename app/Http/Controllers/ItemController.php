@@ -34,19 +34,19 @@ class ItemController extends Controller
                     }
                 })
                 ->select('items.id','items.title','items.price','statuses.status','sponsors.name','categories.category','items.item_id')
-                ->orderBy('id','desc')->paginate(5);
+                ->orderBy('id','asc')->paginate(10);
         $countBad = DB::table('items')
                 ->join('statuses','items.status','=','statuses.id')
-                ->where('statuses','like','%Bad%')->count();
+                ->where('statuses.status','like','%Bad%')->count();
         $countGood = DB::table('items')
                 ->join('statuses','items.status','=','statuses.id')
-                ->where('statuses','like','%Good%')->count();
+                ->where('statuses.status','like','%Good%')->count();
         $countMedium = DB::table('items')
                 ->join('statuses','items.status','=','statuses.id')
-                ->where('statuses','like','%Medium%')->count();
+                ->where('statuses.status','like','%Medium%')->count();
         $countBroken = DB::table('items')
                 ->join('statuses','items.status','=','statuses.id')
-                ->where('statuses','like','%Broken%')->count();
+                ->where('statuses.status','like','%Broken%')->count();
         // dd($countBad);
 
         return view('Item.index')->with(compact('items'))->with(compact('countBad'))->with(compact('countGood'))->with(compact('countMedium'))->with(compact('countBroken'));
@@ -60,9 +60,9 @@ class ItemController extends Controller
     public function create()
     {
         //
-        $categories = Category::orderBy('id','desc')->paginate(0);
-        $status = Status::orderBy('id','desc')->paginate(0);
-        $sponsor = Sponsor::orderBy('id','desc')->paginate(0);
+        $categories = Category::orderBy('id','desc')->get();
+        $status = Status::orderBy('id','desc')->get();
+        $sponsor = Sponsor::orderBy('id','desc')->get();
         return view('Item.create')->with(compact('categories'))->with(compact('status'))->with(compact('sponsor'));
     }
 
@@ -137,9 +137,9 @@ class ItemController extends Controller
                 ->join('itemimages','items.id','=','itemimages.item_id')
                 ->select('itemimages.url')
                 ->where('itemimages.item_id','=',$item->id)->get();
-        $categories = Category::orderBy('id','desc')->paginate(0);
-        $status = Status::orderBy('id','desc')->paginate(0);
-        $sponsor = Sponsor::orderBy('id','desc')->paginate(0);
+        $categories = Category::orderBy('id','desc')->get();
+        $status = Status::orderBy('id','desc')->get();
+        $sponsor = Sponsor::orderBy('id','desc')->get();
         return view('Item.edit')->with(compact('categories'))->with(compact('status'))->with(compact('sponsor'))->with(compact('item'))->with(compact('items'))->with(compact('image'));
     }
 
