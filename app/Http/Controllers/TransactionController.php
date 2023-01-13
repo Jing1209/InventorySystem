@@ -24,8 +24,9 @@ class TransactionController extends Controller
             ->join('buildings', 'rooms.building_id', '=', 'buildings.id')
             ->select('buildings.building', 'rooms.name', 'rooms.id')
             ->get();
-        $items = Item::orderBy('id', 'desc')->paginate(0);
-        $employees = Employee::orderBy('id', 'desc')->paginate(0);
+  
+        $items = Item::orderBy('id', 'desc')->get();
+        $employees = Employee::orderBy('id', 'desc')->get();
 
         $transactions = DB::table('transactions')
                     ->join('items','transactions.item_id','=','items.id')
@@ -34,6 +35,17 @@ class TransactionController extends Controller
                     ->join('statuses','transactions.status','=','statuses.id')
                     ->select('transactions.id','transactions.created_at','items.title','items.status','employees.firstname','employees.lastname','rooms.building_id','rooms.name','statuses.status')
                     ->paginate(10);
+
+        // $transactions = DB::table('transactions')
+        //             ->join('items','transactions.item_id','=','items.id')
+        //             ->join('employees','transactions.employee_id','=','employees.id')
+        //             ->join('rooms','transactions.room_id','=','rooms.id')
+        //             ->join('statuses','transactions.status','=','statuses.id')
+        //             ->select('transactions.id','transactions.created_at','items.title','items.status','employees.firstname','employees.lastname','statuses.status'
+        //                 ,DB::raw("(select * from buildings where buildings.id = rooms.building_id GROUP BY buildings.id)")
+        //             )
+        //             ->paginate(10);
+        //             dd($transactions);
         $statuses = Status::orderBy('id','desc')->paginate(0);
         $countBorrow = DB::table('transactions')
                     ->join('statuses','transactions.status','=','statuses.id')
@@ -56,9 +68,9 @@ class TransactionController extends Controller
                     ->join('buildings','rooms.building_id','=','buildings.id')
                     ->select('buildings.building','rooms.name','rooms.id')
                     ->get();
-        $items = Item::orderBy('id','desc')->paginate(0);
-        $employees = Employee::orderBy('id','desc')->paginate(0);
-        $status = Status::orderBy('id','desc')->paginate(0);
+        $items = Item::orderBy('id','desc')->get();
+        $employees = Employee::orderBy('id','desc')->get();
+        $status = Status::orderBy('id','desc')->get();
         return view('Transaction.create')->with(compact('rooms'))->with(compact('items'))->with(compact('employees'))->with(compact('status'));
     }
 
@@ -107,7 +119,7 @@ class TransactionController extends Controller
             ->join('buildings', 'rooms.building_id', '=', 'buildings.id')
             ->select('buildings.building', 'rooms.name', 'rooms.id')
             ->get();
-        $items = Item::orderBy('id', 'desc')->paginate(0);
+        $items = Item::orderBy('id', 'desc')->get();
         // dd($items);
         return view('Transaction.edit')->with(compact('transaction'))->with(compact('rooms'))->with(compact('items'));
     }

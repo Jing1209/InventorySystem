@@ -25,9 +25,9 @@ class RoomController extends Controller
                         // ->orWhere('buildings.buidling','like','%'.$term.'%');
                     }
                 })
-                ->orderBy('id','desc')->paginate(5);
+                ->orderBy('id','asc')->paginate(10);
         $countRoom=DB::table('rooms')->count();       
-        $buildings = Building::orderBy('id','desc')->paginate(0);
+        $buildings = Building::orderBy('id','desc')->get();
         return view('Room.index')->with(compact('rooms'))->with(compact('buildings'))->with(compact('countRoom'));
     }
 

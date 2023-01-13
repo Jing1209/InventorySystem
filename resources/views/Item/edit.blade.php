@@ -22,13 +22,14 @@ Item
             <div class="row mb-5">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <div class="form-group mb-3">
+                        <strong>Item ID:</strong>
+                        <input type="text" name="item_id" class="form-control" placeholder="ID" value="{{$item->item_id}}">
+                    </div>
+                    <div class="form-group mb-3">
                         <strong>Item Name:</strong>
                         <input type="text" name="title" class="form-control" placeholder="Item" value="{{$item->title}}">
                     </div>
-                    <div class="form-group mb-3">
-                        <strong>Description:</strong>
-                        <input type="text" name="description" class="form-control" placeholder="Description" value="{{$item->description}}">
-                    </div>
+                    
                     <div class="d-flex row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex flex-column mb-3">
                            
@@ -64,12 +65,11 @@ Item
                                 
                             </select>
                         </div>
-                        <div class="d-flex row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex flex-column mb-3">
-                                <strong>Item ID:</strong>
-                                <input type="text" name="item_id" class="form-control" placeholder="ID" value="{{$item->item_id}}">
-                            </div>
-                        </div>
+                        
+                    </div>
+                    <div class="form-group mb-3">
+                        <strong>Description</strong>
+                        <input type="text" name="description" class="form-control" value="{{$item->description}}"></textarea>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center col-xs-12 col-sm-12 col-md-12 col-lg-6">

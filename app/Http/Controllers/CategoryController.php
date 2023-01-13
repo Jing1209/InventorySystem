@@ -23,7 +23,7 @@ class CategoryController extends Controller
                     $query->orWhere('category','LIKE','%'.$term.'%')->get();
                 }
             }]
-        ])->orderBy('id','desc')->paginate(5);
+        ])->orderBy('id','asc')->paginate(10);
         return view('Category.index', compact('categories'));
     }
 

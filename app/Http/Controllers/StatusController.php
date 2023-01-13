@@ -16,7 +16,7 @@ class StatusController extends Controller
     public function index()
     {
         //
-        $statuses = Status::orderBy('id','desc')->paginate(5);
+        $statuses = Status::orderBy('id','asc')->paginate(10);
         $countStatus=DB::table('statuses')->count();
         return view('Status.index')->with(compact('statuses'))->with(compact('countStatus'));
     }
