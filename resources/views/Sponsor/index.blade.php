@@ -4,7 +4,7 @@
 {{-- Header  --}}
 <div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;background: #e4e9f7;" class="d-flex justify-content-between my-3">
     <div class="w-25 d-flex justify-content-start text-white bg-primary rounded-2 me-2">
-        <i class='bx bx-dollar-circle m-3 d-flex align-items-center p-2 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 20px;"></i>
+        <i class='bx bx-dollar-circle my-4 ms-3 d-flex align-items-center p-2 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 20px;"></i>
         <div class="mx-3 my-3">
             Total Sponsor
             <div>
