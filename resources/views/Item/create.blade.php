@@ -4,7 +4,7 @@ Item
 @endsection
 
 @section('content')
-<div class="container my-5 bg-light">
+<div class="container-lg my-4 rounded bg-light">
     <div class="row">
         <div class=" mt-3 d-flex justify-content-center">
             <h2>Add New Item</h2>
@@ -15,7 +15,7 @@ Item
         {{ session('status') }}
     </div>
     @endif
-    <div class="mt-3">
+    <div class="mt-3 p-4">
         <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row mb-5">
@@ -39,7 +39,6 @@ Item
                                 @foreach ($status as $stat )
                                     <option value={{$stat->id}}>{{$stat->status}}</option>
                                 @endforeach
-                                
                             </select>
                         </div>
                     </div>
@@ -78,8 +77,8 @@ Item
                             <label style="cursor: pointer;" class="btn btn-outline-primary" for="actual-btn">Choose File</label>
                             <span id="file-chosen" class="py-2 ps-2">No file chosen</span>
                         </div>
-                        <div class="mt-2">
-                            <img id="output" width="340" height="210" src="{{ asset('images/user.png') }}" />
+                        <div class="mt-2 border">
+                            <img id="output" width="400" height="300" src="{{ asset('images/default-image.png') }}" />
                         </div>
                         <div class="d-flex justify-content-end mt-3 mb-5">
                             <a class="btn btn-danger" href="{{ route('items.index') }}" enctype="multipart/form-data">

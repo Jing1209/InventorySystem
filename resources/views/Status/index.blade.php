@@ -26,16 +26,16 @@
                 </div>
             </form>
             <div class="me-3">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addnewStatus"><i class="bx bx-plus-circle me-2"></i>Add New</button>
+                <button type="button" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addnewStatus"><i style="font-size: 18px;" class="bx bx-plus me-2"></i>Add New</button>
             </div>
         </div>
     </div>
 </div>
-<div>
+<div class="mt-1 rounded bg-white">
     <table class="table table-striped table-hover">
         <thead>
             <tr class="table-primary">
-                <th scope="col">S.No</th>
+                <th scope="col" style="padding-left: 20px;">S.No</th>
                 <th scope="col">Status</th>
                 <th scope="col" style="width: 200px; text-align: center;">Action</th>
             </tr>
@@ -43,7 +43,7 @@
         <tbody>
             @foreach ($statuses as $status)
             <tr>
-                <td>{{ $status->id }}</td>
+                <td style="padding-left: 20px;">{{ $status->id }}</td>
                 <td>{{ $status->status }}</td>
                 <td style="text-align: center;">
                     <a href="#editStatus{{$status->id}}" data-bs-toggle="modal" class="btn btn-primary">

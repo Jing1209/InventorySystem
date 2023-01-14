@@ -52,6 +52,17 @@
 .sidebar .nav-links li.active {
     background: #5570F1;
     color: white;
+
+}
+
+.sidebar .nav-links li.active i{
+    background: #5570F1;
+    color: white;
+}
+.sidebar .nav-links li.active .link_name{
+    background: #5570F1;
+    color: white;
+
 }
 
 .sidebar .nav-links li:hover .link_name {
