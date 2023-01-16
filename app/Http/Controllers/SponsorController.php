@@ -13,18 +13,23 @@ class SponsorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         //
         $sponsors = Sponsor::where([
-            ['name','!=',Null],
-            [function($query) use ($request){
-                if($term = $request->term){
-                    $query->orWhere('name','LIKE','%'.$term.'%')->get();
+            ['name', '!=', Null],
+            [function ($query) use ($request) {
+                if ($term = $request->term) {
+                    $query->orWhere('name', 'LIKE', '%' . $term . '%')->get();
                 }
             }]
-        ])->orderBy('id','asc')->paginate(10);
-        $countSponsor=DB::table('sponsors')->count();
+        ])->orderBy('id', 'asc')->paginate(10);
+        $countSponsor = DB::table('sponsors')->count();
         return view('Sponsor.index')->with(compact('sponsors'))->with(compact('countSponsor'));
     }
 
@@ -49,7 +54,7 @@ class SponsorController extends Controller
     {
         //
         Sponsor::create($request->post());
-        return redirect()->route('sponsor.index')->with('success','Sponsor has been created successfully.');
+        return redirect()->route('sponsor.index')->with('success', 'Sponsor has been created successfully.');
     }
 
     /**
@@ -72,7 +77,7 @@ class SponsorController extends Controller
     public function edit(Sponsor $sponsor)
     {
         //
-        return view('Sponsor.edit',compact('sponsor'));
+        return view('Sponsor.edit', compact('sponsor'));
     }
 
     /**
@@ -85,8 +90,8 @@ class SponsorController extends Controller
     public function update(Request $request, Sponsor $sponsor)
     {
         //
-        $sponsor->fill($request->post()) -> save();
-        return redirect()->route('sponsor.index')->with('success','Sponsor Has Been updated successfully');
+        $sponsor->fill($request->post())->save();
+        return redirect()->route('sponsor.index')->with('success', 'Sponsor Has Been updated successfully');
     }
 
     /**
@@ -99,6 +104,6 @@ class SponsorController extends Controller
     {
         //
         $sponsor->delete();
-        return redirect()->route('sponsor.index')->with('success','Sponsor Has Been deleted successfully');
+        return redirect()->route('sponsor.index')->with('success', 'Sponsor Has Been deleted successfully');
     }
 }
