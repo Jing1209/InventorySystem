@@ -8,16 +8,16 @@
         </div>
         <div class="text-white text-decoration-none">
             <button type="button" class="btn btn-primary d-flex align-items-center rounded d-flex justify-conten-between" data-bs-toggle="modal" data-bs-target="#addNewTransaction">
-                {{-- <div class="me-2 d-flex align-items-center">
-                        <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
-                    </div> --}}
-                <span>Create Transaction</span>
+                <div class="me-2 d-flex align-items-center">
+                    <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
+                </div>
+                <span>Add New</span>
             </button>
         </div>
     </div>
     <div class="my-2 w-100 d-flex justify-content-between">
-        <div class="w-50 text-white bg-primary rounded-2 me-2">
-            <i class='bx bxs-folder-open p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
+        <div class="w-50 text-white bg-danger rounded-2 me-2">
+            <i class='bx bx-archive-out p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
             <div class="mx-3 my-2">
                 Borrow
                 <div>
@@ -25,8 +25,8 @@
                 </div>
             </div>
         </div>
-        <div class="w-50 bg-white rounded-2">
-            <i class='bx bx-color-fill p-2 m-3 rounded-2' style="background-color: rgba(255, 204, 145, 0.16); font-size: 18px;"></i>
+        <div class="w-50 text-white bg-success rounded-2">
+            <i class='bx bx-archive-in p-2 m-3 rounded-2' style="background-color: rgba(255, 204, 145, 0.16); font-size: 18px;"></i>
             <div class="mx-3 my-2">
                 Return
                 <div>
@@ -46,7 +46,7 @@
         <table class="table table-striped table-hover">
             <thead class="border-bottom">
                 <tr class="table-primary">
-                    <th style="text-align: center;">S.No</th>
+                    <th style="padding-left: 20px;">S.No</th>
                     <th>Item</th>
                     <th>Room</th>
                     <th>Status</th>
@@ -58,7 +58,7 @@
             <tbody>
                 @foreach ($transactions as $transaction)
                 <tr>
-                    <td style="text-align: center;">{{ $transaction->id }}</td>
+                    <td style="padding-left: 20px;">{{ $transaction->id }}</td>
                     <td>{{ $transaction->title }}</td>
                     <td>{{ $transaction->building_id }}-{{ $transaction->name }}</td>
                     <td>{{$transaction->status}}</td>

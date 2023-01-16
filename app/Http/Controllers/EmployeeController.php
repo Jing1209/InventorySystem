@@ -14,20 +14,25 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         //
         $employees = Employee::where([
-            ['lastname','!=',Null],
-            [function($query) use ($request){
-                if($term = $request->term){
-                    $query->orWhere('lastname','LIKE','%'.$term.'%')
-                    ->orWhere('firstname','like','%'.$term.'%')
-                    ->get();
+            ['lastname', '!=', Null],
+            [function ($query) use ($request) {
+                if ($term = $request->term) {
+                    $query->orWhere('lastname', 'LIKE', '%' . $term . '%')
+                        ->orWhere('firstname', 'like', '%' . $term . '%')
+                        ->get();
                 }
             }]
-        ])->orderBy('id','desc')->paginate(10);
-        $count=DB::table('employees')->count();
+        ])->orderBy('id', 'desc')->paginate(10);
+        $count = DB::table('employees')->count();
         return view('Employee.index')->with(compact('employees'))->with(compact('count'));
     }
 
@@ -64,16 +69,16 @@ class EmployeeController extends Controller
 
         $data = new EmployeeImage();
 
-        if($request->file('images')){
-            $file= $request->file('images');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('public/Image'), $filename);
-            $data['url']= $filename;
+        if ($request->file('images')) {
+            $file = $request->file('images');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('public/Image'), $filename);
+            $data['url'] = $filename;
         }
         $data['employee_id'] = $employee->id;
         $data->save();
 
-        return redirect()->route('employees.index')->with('success','Employee created successfully');
+        return redirect()->route('employees.index')->with('success', 'Employee created successfully');
     }
 
     /**
@@ -97,9 +102,9 @@ class EmployeeController extends Controller
     {
         //
         $image = DB::table('employees')
-                ->join('employeeimages','employees.id','=','employeeimages.employee_id')
-                ->select('employeeimages.url')
-                ->where('employeeimages.employee_id','=',$employee->id)->get();
+            ->join('employeeimages', 'employees.id', '=', 'employeeimages.employee_id')
+            ->select('employeeimages.url')
+            ->where('employeeimages.employee_id', '=', $employee->id)->get();
         return view('Employee.edit')->with(compact('employee'))->with(compact('image'));
     }
 
@@ -115,8 +120,7 @@ class EmployeeController extends Controller
         //
         $employee->fill($request->post())->save();
 
-        return redirect()->route('employees.index')->with('success','Employee Has Been updated successfully');
-
+        return redirect()->route('employees.index')->with('success', 'Employee Has Been updated successfully');
     }
 
     /**
@@ -128,8 +132,8 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         //
-        $deleteImage = DB::table('employeeimages')->where('employee_id','=',$employee->id)->delete();
+        $deleteImage = DB::table('employeeimages')->where('employee_id', '=', $employee->id)->delete();
         $employee->delete();
-        return redirect()->route('employees.index')->with('success','Employee Has Been removed successfully');
+        return redirect()->route('employees.index')->with('success', 'Employee Has Been removed successfully');
     }
 }

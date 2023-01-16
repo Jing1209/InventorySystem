@@ -30,12 +30,12 @@
                         </span>
                     </div>
                 </form>
-                <a class="me-5 text-white text-decoration-none" href="{{ route('employees.create') }}">
-                    <div class="bg-primary cursor-pointer px-4 py-1 rounded-3 d-flex justify-conten-between">
+                <a class="me-3 text-white text-decoration-none" href="{{ route('employees.create') }}">
+                    <div class="btn btn-primary d-flex justify-conten-between">
                         <div class="me-2 d-flex align-items-center">
                             <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
                         </div>
-                        <span>Create Employee</span>
+                        <span>Add New</span>
                     </div>
                 </a>
             </div>
@@ -53,7 +53,7 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr class="table-primary">
-                    <th scope="col" style="text-align: center;">S.No</th>
+                    <th scope="col" style="padding-left: 20px;">S.No</th>
                     <th scope="col">Name</th>
                     <th scope="col">Gender</th>
                     <th scope="col">Email</th>
@@ -62,23 +62,24 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($employees as $item)
+                @foreach ($employees as $employee)
                     <tr>
-                        <td scope="row" style="text-align: center;">{{ $item->id }}</td>
-                        <td>{{ $item->firstname }} {{ $item->lastname }}</td>
-                        <td>{{ $item->gender }}</td>
-                        <td>{{ $item->email }}</td>
-                        <td>{{ $item->phone_number }}</td>
+                        <td scope="row" style="padding-left: 20px;">{{ $employee->id }}</td>
+                        <td>{{ $employee->firstname }} {{ $employee->lastname }}</td>
+                        <td>{{ $employee->gender }}</td>
+                        <td>{{ $employee->email }}</td>
+                        <td>{{ $employee->phone_number }}</td>
                         <td style="text-align: center;">
-                            <form action="{{ route('employees.destroy', $item->id) }}" method="Post">
-                                <a class="btn btn-primary" href="{{ route('employees.edit', $item->id) }}">Edit</a>
+                            <form action="{{ route('employees.destroy', $employee->id) }}" method="Post">
+                                <a class="btn btn-warning text-white" href="#viewEmployee{{ $employee->id }}" data-bs-toggle="modal">View</a>
+                                <a class="btn btn-primary" href="{{ route('employees.edit', $employee->id) }}">Edit</a>
                                 @csrf
                                 @method('DELETE')
-                                <a href="#deleteClarify{{ $item->id }}" data-bs-toggle="modal" class="btn btn-danger">
+                                <a href="#deleteClarify{{ $employee->id }}" data-bs-toggle="modal" class="btn btn-danger">
                                     Delete
                                 </a>
                                 {{-- Comfirm Delete Room  --}}
-                                <div class="modal fade" id="deleteClarify{{ $item->id }}" tabindex="-1"
+                                <div class="modal fade" id="deleteClarify{{ $employee->id }}" tabindex="-1"
                                     aria-labelledby="deleteBuildingModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -88,7 +89,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form action="{{ route('employees.destroy', $item->id) }}" method="Post">
+                                            <form action="{{ route('employees.destroy', $employee->id) }}" method="Post">
 
                                                 @csrf
                                                 @method('DELETE')
@@ -103,6 +104,20 @@
                                     </div>
                                 </div>
                             </form>
+                            {{-- View an employee  --}}
+                            <div class="modal fade" id="viewEmployee{{ $employee->id }}" tabindex="-1" aria-labelledby="ViewEmployeeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="viewItemModalLabel">Employee</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{$employee->id}} 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
