@@ -4,18 +4,45 @@ Item
 @endsection
 
 @section('content')
-<div class="d-flex justify-content-between my-3">
-    <div class="d-flex justify-content-center align-items-center">
-        <h5>Item Summary</h5>
+<div class="container text-center">
+    <h2 class="modal-title p-2" id="buildingModalLabel">Item Inventory</h2>
+</div>
+<div class="d-flex justify-content-between mb-3">
+{{-- search bar --}}
+<div class="d-flex col-xs-12 col-sm-12 col-md-12 col-lg-12 bg-white p-3 rounded-2">
+    <div class="col-sm-3 col-md-4 col-lg-3 me-2 w-90">
+        <select class="form-select" aria-label="Default select example" name='term'>
+            <option selected>Status</option>
+            <option value="1">Good</option>
+            <option value="2">Medium</option>
+            <option value="3">Bad</option>
+            <option value="4">Broken</option>
+          </select>
     </div>
-    <a class="text-white text-decoration-none" href="{{ route('items.create') }}">
-        <div class="bg-primary cursor-pointer px-4 py-1 rounded-3 d-flex justify-conten-between">
-            <div class="me-2 d-flex align-items-center">
-                <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
-            </div>
+    <div class="col-sm-3 col-md-4 col-lg-3 me-2">
+        <form action="{{ route('items.index') }}" method="GET" role="search">
+            <div class="d-flex">
+                <div class="input-group">
+                    <input type="text" class="form-control w-100" name="term" placeholder="Search Item" id="term">
+                </div>
+                <span class="input-group-btn ms-2">
+                    <button class="btn btn-primary d-flex align-items-center h-100" type="submit" title="Search Item">
+                        <i style=" font-size: 18px;" class='bx bx-search'></i>
+                    </button>
+                </span>
+                
+            </div>  
+        </form>
+    </div>
+  
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6 d-flex justify-content-end pe-3">
+        <a class="btn btn-primary" href="{{ route('items.create') }}">
+            <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
             <span>Create Item</span>
-        </div>
-    </a>
+        </a>
+    </div>
+</div>
+    
 </div>
 <div class="my-2 w-100 d-flex justify-content-between">
     <div class="w-50 text-white bg-primary rounded-2 me-2">
@@ -55,29 +82,6 @@ Item
         </div>
     </div>
 </div>
-{{-- search bar --}}
-<div class="">
-    <form class="ms-5 w-50" action="{{ route('items.index') }}" method="GET" role="search">
-        <div class="d-flex justify-content-start">
-            <div class="input-group">
-                <input type="text" class="form-control mr-2 w-100 ps-3" name="term" placeholder="Search Item" id="term">
-            </div>
-            <span class="input-group-btn ms-2">
-                <button class="btn btn-primary d-flex align-items-center h-100" type="submit" title="Search Item">
-                    <i style=" font-size: 18px;" class='bx bx-search'></i>
-                </button>
-            </span>
-            <select class="form-select ms-2" aria-label="Default select example" name='term'>
-                <option selected>Status</option>
-                <option value="1">Good</option>
-                <option value="2">Medium</option>
-                <option value="3">Bad</option>
-                <option value="4">Broken</option>
-              </select>
-        </div>
-        
-    </form>
-</div>
 
 <div class="mt-1 rounded bg-white">
     @if ($message = Session::get('success'))
@@ -86,7 +90,7 @@ Item
     </div>
     @endif
 
-    <div>
+    <div class="mt-1 rounded bg-white">
         <table class="table table-striped table-hover">
             <thead class="border-bottom">
                 <tr class="table-primary">

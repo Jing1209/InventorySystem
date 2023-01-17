@@ -37,16 +37,16 @@ class ItemController extends Controller
                 ->orderBy('id','desc')->paginate(5);
         $countBad = DB::table('items')
                 ->join('statuses','items.status','=','statuses.id')
-                ->where('statuses','like','%Bad%')->count();
+                ->where('statuses.status','like','%Bad%')->count();
         $countGood = DB::table('items')
                 ->join('statuses','items.status','=','statuses.id')
-                ->where('statuses','like','%Good%')->count();
+                ->where('statuses.status','like','%Good%')->count();
         $countMedium = DB::table('items')
                 ->join('statuses','items.status','=','statuses.id')
-                ->where('statuses','like','%Medium%')->count();
+                ->where('statuses.status','like','%Medium%')->count();
         $countBroken = DB::table('items')
                 ->join('statuses','items.status','=','statuses.id')
-                ->where('statuses','like','%Broken%')->count();
+                ->where('statuses.status','like','%Broken%')->count();
         // dd($countBad);
 
         return view('Item.index')->with(compact('items'))->with(compact('countBad'))->with(compact('countGood'))->with(compact('countMedium'))->with(compact('countBroken'));

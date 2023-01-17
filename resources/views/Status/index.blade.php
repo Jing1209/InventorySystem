@@ -1,7 +1,10 @@
 @extends('layouts.app')
 @section('title', 'Building')
 @section('content')
-<div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;background: #e4e9f7;" class="d-flex justify-content-between my-3">
+<div class="container text-center">
+    <h2 class="modal-title p-2" id="buildingModalLabel">Status Inventory</h2>
+</div>
+<div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;background: #e4e9f7;" class="d-flex justify-content-between mb-3">
     <div class="w-25 d-flex justify-content-start text-white bg-primary rounded-2 me-2">
         <div class="mx-3 my-3">
             Total Status
@@ -31,7 +34,7 @@
         </div>
     </div>
 </div>
-<div>
+<div class="mt-1 rounded bg-white">
     <table class="table table-striped table-hover">
         <thead>
             <tr class="table-primary">

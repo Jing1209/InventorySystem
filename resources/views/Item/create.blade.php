@@ -21,6 +21,10 @@ Item
             <div class="row mb-5">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <div class="form-group mb-3">
+                        <strong>Item ID:</strong>
+                        <input type="text" name="item_id" class="form-control" placeholder="ID">
+                    </div>
+                    <div class="form-group mb-3">
                         <strong>Item Name:</strong>
                         <input type="text" name="title" class="form-control" placeholder="Item">
                     </div>
@@ -61,12 +65,6 @@ Item
                                 @endforeach
                                 
                             </select>
-                        </div>
-                    </div>
-                    <div class="d-flex row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex flex-column mb-3">
-                            <strong>Item ID:</strong>
-                            <input type="text" name="item_id" class="form-control" placeholder="ID">
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,10 @@
 @extends('layouts.app')
 @section('title', 'Employee')
 @section('content')
-<div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;background: #e4e9f7;" class="d-flex justify-content-between my-3">
+<div class="container text-center">
+    <h2 class="modal-title p-2" id="buildingModalLabel">Employee Inventory</h2>
+</div>
+<div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;background: #e4e9f7;" class="d-flex justify-content-between mb-3">
     <div class="w-25 d-flex justify-content-start text-white bg-primary rounded-2 me-2">
         <div class="text-white"> <i class='bx bxs-group p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i></div>
         <div class="mx-3 my-3">
@@ -98,6 +101,7 @@
             </tr>
             @endforeach
         </tbody>
+    </table>
 </div>
 <div class="d-flex justify-content-center">
     {!! $employees->links() !!}

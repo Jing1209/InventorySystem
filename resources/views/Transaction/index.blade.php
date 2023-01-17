@@ -1,22 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Transaction')
 @section('content')
+<div class="container text-center">
+    <h2 class="modal-title p-2" id="buildingModalLabel">Transaction Inventory</h2>
+</div>
     <div style="position: sticky; top:60px; overflow: hidden; background: #e4e9f7;">
         <div class="d-flex justify-content-between my-3">
-            <div class="d-flex justify-content-center align-items-center">
-                <h5>Transaction Summary</h5>
-            </div>
-            <div class="text-white text-decoration-none" >
-                <button type="button" class="btn btn-primary d-flex align-items-center rounded d-flex justify-conten-between"
-                    data-bs-toggle="modal" data-bs-target="#addNewTransaction">
-                    {{-- <div class="me-2 d-flex align-items-center">
-                        <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
-                    </div> --}}
-                    <span>Create Transaction</span>
-                </button>
-            </div>
-        </div>
-        <div class="my-2 w-100 d-flex justify-content-between">
             <div class="w-50 text-white bg-primary rounded-2 me-2">
                 <i class='bx bxs-folder-open p-2 m-3 rounded-2'
                     style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
@@ -37,6 +26,17 @@
                     </div>
                 </div>
             </div>
+            <div class="text-white text-decoration-none" >
+                <button type="button" class="btn btn-primary d-flex align-items-center rounded d-flex justify-conten-between"
+                    data-bs-toggle="modal" data-bs-target="#addNewTransaction">
+                    <span><i class="bx bx-plus-circle me-2"></i>Add New</span>
+                </button>
+            </div>
+           
+        </div>
+        <div class="my-2 w-100 d-flex justify-content-between">
+            
+            
         </div>
     </div>
     <div class="bg-white rounded">
