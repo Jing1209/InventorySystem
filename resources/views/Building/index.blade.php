@@ -41,15 +41,9 @@
     <table class="table table-striped table-hover">
         <thead class="border-bottom">
             <tr class="table-primary">
-<<<<<<< HEAD
                 <th class="col">S.No</th>
                 <th class="col">Building Title</th>
                 <th class="col" style="width: 200px; text-align: center;">Action</th>
-=======
-                <th scope="col" style="padding-left: 20px;">S.No</th>
-                <th scope="col">Building Title</th>
-                <th scope="col" style="width: 200px; text-align: center;">Action</th>
->>>>>>> c8397d3a18c74a5ce742816f95a29562821e6ef4
             </tr>
         </thead>
         <tbody>

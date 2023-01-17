@@ -6,16 +6,16 @@ Item
 @section('content')
 <div class="container-lg my-4 rounded bg-light">
     <div class="row">
-        <div class=" mt-3 d-flex justify-content-center">
+        <div class=" mt-4 d-flex justify-content-center">
             <h2>Add New Item</h2>
         </div>
     </div>
     @if(session('status'))
-    <div class="alert alert-success mb-1 mt-1">
+    <div class="alert alert-success mb-1">
         {{ session('status') }}
     </div>
     @endif
-    <div class="mt-3 p-4">
+    <div class="p-4">
         <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row mb-5">
@@ -23,13 +23,6 @@ Item
                     <div class="form-group mb-3">
                         <strong>Item ID:</strong>
                         <input type="text" name="item_id" class="form-control" placeholder="ID">
-<<<<<<< HEAD
-                    </div>
-                    <div class="form-group mb-3">
-                        <strong>Item Name:</strong>
-                        <input type="text" name="title" class="form-control" placeholder="Item">
-=======
->>>>>>> c8397d3a18c74a5ce742816f95a29562821e6ef4
                     </div>
                     <div class="form-group mb-3">
                         <strong>Item Name:</strong>
@@ -69,14 +62,11 @@ Item
                             </select>
                         </div>
                     </div>
-<<<<<<< HEAD
-=======
                     
                     <div class="form-group mb-3">
                         <strong>Description:</strong>
                         <input type="text" name="description" class="form-control" placeholder="Description">
                     </div>
->>>>>>> c8397d3a18c74a5ce742816f95a29562821e6ef4
                 </div>
 
                 

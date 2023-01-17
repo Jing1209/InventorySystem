@@ -15,10 +15,10 @@
             </div>
         </div>
     </div>
-    <div class=" w-75 d-flex align-items-center text-white bg-white rounded-2 me-2">
+    <div class=" w-75 d-flex align-items-center text-white bg-white rounded-2 me-2 px-3">
         <div class="d-flex w-100 justify-content-between">
             {{-- search bar --}}
-            <form class="ms-5 w-50" action="{{ route('sponsor.index') }}" method="GET" role="search">
+            <form class="w-50" action="{{ route('sponsor.index') }}" method="GET" role="search">
                 <div class="d-flex justify-content-start">
                     <div class="input-group">
                         <input type="text" class="form-control mr-2 w-100 ps-3" name="term" placeholder="Search Sponsor" id="term">
@@ -30,7 +30,7 @@
                     </span>
                 </div>
             </form>
-            <div class="me-3">
+            <div>
                 <button type="button" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addnewSponsor"><i style="font-size: 18px;" class="bx bx-plus me-2"></i>Add New</button>
             </div>
         </div>

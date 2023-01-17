@@ -19,7 +19,6 @@ Item
             <option value="4">Broken</option>
           </select>
     </div>
-<<<<<<< HEAD
     <div class="col-sm-3 col-md-4 col-lg-3 me-2">
         <form action="{{ route('items.index') }}" method="GET" role="search">
             <div class="d-flex">
@@ -44,16 +43,6 @@ Item
     </div>
 </div>
     
-=======
-    <a class="text-white text-decoration-none" href="{{ route('items.create') }}">
-        <div class="btn btn-primary d-flex justify-conten-between">
-            <div class="me-2 d-flex align-items-center">
-                <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
-            </div>
-            <span>Add New</span>
-        </div>
-    </a>
->>>>>>> c8397d3a18c74a5ce742816f95a29562821e6ef4
 </div>
 <div class="my-2 w-100 d-flex justify-content-between">
     <div class="w-50 bg-success text-white rounded-2 me-2">
@@ -93,31 +82,6 @@ Item
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-=======
-{{-- search bar --}}
-<div class="d-flex flex-row-reverse my-3 bg-white p-2 rounded">
-    <select style="width: 200px;" class="form-select ms-2" aria-label="selectStatus" name='term'>
-        <option selected>Status</option>
-        <option value="1">Good</option>
-        <option value="2">Medium</option>
-        <option value="3">Bad</option>
-        <option value="4">Broken</option>
-    </select>
-    <form class="w-25" action="{{ route('items.index') }}" method="GET" role="search">
-        <div class="d-flex justify-content-start">
-            <div class="input-group">
-                <input type="text" class="form-control mr-2 w-100 ps-3" name="term" placeholder="Search Item" id="term">
-            </div>
-            <span class="input-group-btn ms-2">
-                <button class="btn btn-primary d-flex align-items-center h-100" type="submit" title="Search Item">
-                    <i style=" font-size: 18px;" class='bx bx-search'></i>
-                </button>
-            </span>
-        </div>
-    </form>
-</div>
->>>>>>> c8397d3a18c74a5ce742816f95a29562821e6ef4
 
 <div class="mt-1 rounded bg-white">
     @if ($message = Session::get('success'))
@@ -152,8 +116,8 @@ Item
                     <td>{{ $item->name }}</td>
                     <td style="text-align: center;">
                         <form action="{{ route('items.destroy',$item->id) }}" method="Post">
-                            <a class="btn btn-warning text-white" href="#viewItem{{ $item->id }}" data-bs-toggle="modal">View</a>
-                            <a class="btn btn-primary" href="{{ route('items.edit',$item->id) }}">Edit</a>
+                            <a class="btn btn-warning text-white mb-2" href="#viewItem{{ $item->id }}" data-bs-toggle="modal">View</a>
+                            <a class="btn btn-primary mb-2" href="{{ route('items.edit',$item->id) }}">Edit</a>
                             @csrf
                             @method('DELETE')
                             <a href="#deleteClarify{{$item->id}}" data-bs-toggle="modal" class="btn btn-danger">
@@ -183,15 +147,29 @@ Item
                         </form>
                         {{-- View an item  --}}
                         <div class="modal fade" id="viewItem{{ $item->id }}" tabindex="-1" aria-labelledby="ViewEmployeeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="viewItemModalLabel">Item Inventory</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-dialog bg-white">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="viewItemModalLabel">Item <b>{{$item->title}}</b> Description</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="d-flex px-3">
+                                    <div class="w-100 text-start text-primary">
+                                        <p class=""><b>ID: </b></p>
+                                        <p><b>Name: </b></p>
+                                        <p><b>Price: </b></p>
+                                        <p><b>Status: </b></p>
+                                        <p><b>Sponsor: </b></p>
+                                        <p><b>Description: </b></p>
                                     </div>
-                                    <div class="modal-body">
-                                        {{$item->id}} 
+                                    <div class="w-100 text-start">
+                                        <p>{{$item->id}}</p>
+                                        <p>{{$item->title}}</p>
+                                        <p>{{$item->price}}</p>
+                                        <p>{{$item->status}}</p>
+                                        <p>{{$item->name}}</p>
+                                        <p>{{$item->description}}</p>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>

@@ -14,9 +14,9 @@
         </div>
     </div>
     <div class=" w-75 d-flex align-items-center text-white bg-white rounded-2 me-2">
-        <div class="d-flex w-100 justify-content-between">
+        <div class="d-flex w-100 justify-content-between px-3">
             {{-- search bar --}}
-            <form class="ms-5 w-50" action="{{ route('rooms.index') }}" method="GET" role="search">
+            <form class="w-50" action="{{ route('rooms.index') }}" method="GET" role="search">
                 <div class="d-flex justify-content-start">
                     <div class="input-group">
                         <input type="text" class="form-control mr-2 w-100 ps-3" name="term" placeholder="Search Room" id="term">
@@ -28,7 +28,7 @@
                     </span>
                 </div>
             </form>
-            <div class="me-3">
+            <div>
                 <button type="button" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addnewRoom"><i style="font-size: 18px;" class="bx bx-plus me-2"></i>Add New</button>
             </div>
         </div>
@@ -54,6 +54,7 @@
                     <td>{{ $room->name }}</td>
                     <td>{{ $room->building }}</td>  
                     <td style="text-align: center;">
+                        <a class="btn btn-warning text-white" href="#viewRoom{{ $room->id }}" data-bs-toggle="modal">View</a>
                         <a href="#editRoom{{$room->id}}" data-bs-toggle="modal" class="btn btn-primary">
                             Edit
                          </a> 
@@ -79,6 +80,31 @@
                                     </div>
                                 </form>
                             </div>
+                            </div>
+                        </div>
+                        {{-- View a room  --}}
+                        <div class="modal fade" id="viewRoom{{ $room->id }}" tabindex="-1" aria-labelledby="ViewRoomModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="viewRoomModalLabel">Room <b>{{$room->name}}</b></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="d-flex px-3">
+                                        <div class="w-100 text-start text-primary">
+                                            <p><b>ID: </b></p>
+                                            <p><b>Room Title: </b></p>
+                                            <p><b>Belone to: </b></p>
+                                        </div>
+                                        <div class="w-100 text-start">
+                                            <p>{{$room->id}}</p>
+                                            <p>{{$room->name}}</p>
+                                            <p>{{$room->building }}</p>
+                                           
+                                        </div>
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         {{-- {{ Edit Room pop up}} --}}
