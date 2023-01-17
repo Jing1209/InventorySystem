@@ -29,7 +29,7 @@
                 </div>
             </form>
             <div class="me-3">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addnewRoom"><i class="bx bx-plus-circle me-2"></i>Add New</button>
+                <button type="button" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addnewRoom"><i style="font-size: 18px;" class="bx bx-plus me-2"></i>Add New</button>
             </div>
         </div>
     </div>
@@ -38,9 +38,9 @@
 {{-- Table of Room  --}}
 <div class="mt-1 rounded bg-white">
     <table class="table table-striped table-hover">
-        <thead>
+        <thead class="border-bottom">
             <tr class="table-primary">
-                <th scope="col">S.No</th>
+                <th scope="col" style="padding-left: 20px;">S.No</th>
                 <th scope="col">Room title</th>
                 <th scope="col">Building Title</th>
                 <th scope="col" style="width: 200px; text-align: center;">Action</th>
@@ -50,7 +50,7 @@
             @foreach ($rooms as $room)
                 
                 <tr>
-                    <td>{{ $room->id }}</td>
+                    <td style="padding-left: 20px;">{{ $room->id }}</td>
                     <td>{{ $room->name }}</td>
                     <td>{{ $room->building }}</td>  
                     <td style="text-align: center;">

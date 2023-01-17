@@ -13,18 +13,22 @@ class BuildingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         // $buildings = Building::orderBy('id','desc')->paginate(5);
         $buildings = Building::where([
-            ['building','!=',Null],
-            [function($query) use ($request){
-                if($term = $request->term){
-                    $query->orWhere('building','LIKE','%'.$term.'%')->get();
+            ['building', '!=', Null],
+            [function ($query) use ($request) {
+                if ($term = $request->term) {
+                    $query->orWhere('building', 'LIKE', '%' . $term . '%')->get();
                 }
             }]
-        ])->orderBy('id','desc')->paginate(5);
-        $countBuilding=DB::table('buildings')->count();
+        ])->orderBy('id', 'asc')->paginate(10);
+        $countBuilding = DB::table('buildings')->count();
         return view('Building.index')->with(compact('buildings'))->with(compact('countBuilding'));
     }
 
@@ -47,11 +51,10 @@ class BuildingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'building'=> 'required|unique:buildings|max:255',
+            'building' => 'required|unique:buildings|max:255',
         ]);
         Building::create($request->post());
-        return redirect()->route('buildings.index')->with('success','Building has been created successfully.');
-        
+        return redirect()->route('buildings.index')->with('success', 'Building has been created successfully.');
     }
 
     /**
@@ -62,7 +65,6 @@ class BuildingController extends Controller
      */
     public function show(Building $building)
     {
-      
     }
 
     /**
@@ -73,7 +75,7 @@ class BuildingController extends Controller
      */
     public function edit(Building $building)
     {
-        return view('Building.edit',compact('building'));
+        return view('Building.edit', compact('building'));
     }
 
     /**
@@ -88,9 +90,9 @@ class BuildingController extends Controller
         $request->validate([
             'building' => 'required',
         ]);
-        
-        $building->fill($request->post()) -> save();
-        return redirect()->route('buildings.index')->with('success','Building Has Been updated successfully');
+
+        $building->fill($request->post())->save();
+        return redirect()->route('buildings.index')->with('success', 'Building Has Been updated successfully');
     }
 
     /**
@@ -102,6 +104,6 @@ class BuildingController extends Controller
     public function destroy(Building $building)
     {
         $building->delete();
-        return redirect()->route('buildings.index')->with('success','Building Has Been removed successfully');
+        return redirect()->route('buildings.index')->with('success', 'Building Has Been removed successfully');
     }
 }

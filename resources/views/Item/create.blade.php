@@ -4,7 +4,7 @@ Item
 @endsection
 
 @section('content')
-<div class="container my-5 bg-light">
+<div class="container-lg my-4 rounded bg-light">
     <div class="row">
         <div class=" mt-3 d-flex justify-content-center">
             <h2>Add New Item</h2>
@@ -15,7 +15,7 @@ Item
         {{ session('status') }}
     </div>
     @endif
-    <div class="mt-3">
+    <div class="mt-3 p-4">
         <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row mb-5">
@@ -23,14 +23,17 @@ Item
                     <div class="form-group mb-3">
                         <strong>Item ID:</strong>
                         <input type="text" name="item_id" class="form-control" placeholder="ID">
+<<<<<<< HEAD
                     </div>
                     <div class="form-group mb-3">
                         <strong>Item Name:</strong>
                         <input type="text" name="title" class="form-control" placeholder="Item">
+=======
+>>>>>>> c8397d3a18c74a5ce742816f95a29562821e6ef4
                     </div>
                     <div class="form-group mb-3">
-                        <strong>Description:</strong>
-                        <input type="text" name="description" class="form-control" placeholder="Description">
+                        <strong>Item Name:</strong>
+                        <input type="text" name="title" class="form-control" placeholder="Item">
                     </div>
                     <div class="d-flex row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex flex-column mb-3">
@@ -43,7 +46,6 @@ Item
                                 @foreach ($status as $stat )
                                     <option value={{$stat->id}}>{{$stat->status}}</option>
                                 @endforeach
-                                
                             </select>
                         </div>
                     </div>
@@ -67,6 +69,14 @@ Item
                             </select>
                         </div>
                     </div>
+<<<<<<< HEAD
+=======
+                    
+                    <div class="form-group mb-3">
+                        <strong>Description:</strong>
+                        <input type="text" name="description" class="form-control" placeholder="Description">
+                    </div>
+>>>>>>> c8397d3a18c74a5ce742816f95a29562821e6ef4
                 </div>
 
                 
@@ -77,8 +87,8 @@ Item
                             <label style="cursor: pointer;" class="btn btn-outline-primary" for="actual-btn">Choose File</label>
                             <span id="file-chosen" class="py-2 ps-2">No file chosen</span>
                         </div>
-                        <div class="mt-2">
-                            <img id="output" width="340" height="210" src="{{ asset('images/user.png') }}" />
+                        <div class="mt-2 border">
+                            <img id="output" width="400" height="300" src="{{ asset('images/default-image.png') }}" />
                         </div>
                         <div class="d-flex justify-content-end mt-3 mb-5">
                             <a class="btn btn-danger" href="{{ route('items.index') }}" enctype="multipart/form-data">

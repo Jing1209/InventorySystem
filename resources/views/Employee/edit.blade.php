@@ -5,17 +5,6 @@ Employee
 
 @section('content')
 <div style="height: 80vh;" class="m-3 mb-5 bg-white rounded-3">
-    <!-- <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-left">
-                    <h2>Edit Company</h2>
-                </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('employees.index') }}" enctype="multipart/form-data">
-                        Back</a>
-                </div>
-            </div>
-        </div> -->
     <form action="{{ route('employees.update',$employee->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')

@@ -13,17 +13,22 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         //
         $categories = Category::where([
-            ['category','!=',Null],
-            [function($query) use ($request){
-                if($term = $request->term){
-                    $query->orWhere('category','LIKE','%'.$term.'%')->get();
+            ['category', '!=', Null],
+            [function ($query) use ($request) {
+                if ($term = $request->term) {
+                    $query->orWhere('category', 'LIKE', '%' . $term . '%')->get();
                 }
             }]
-        ])->orderBy('id','desc')->paginate(5);
+        ])->orderBy('id', 'asc')->paginate(10);
         return view('Category.index', compact('categories'));
     }
 
@@ -50,12 +55,12 @@ class CategoryController extends Controller
         $request->validate([
             'category' => 'required',
             // 'quantity' => 'required',
-           
+
         ]);
-        
+
         Category::create($request->post());
 
-        return redirect()->route('categories.index')->with('success','Category has been created successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category has been created successfully.');
     }
 
     /**
@@ -78,7 +83,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         //
-        return view('Category.edit',compact('category'));
+        return view('Category.edit', compact('category'));
     }
 
     /**
@@ -92,11 +97,11 @@ class CategoryController extends Controller
     {
         //
         $request->validate([
-            'category'=>'required'
+            'category' => 'required'
         ]);
         $category->fill($request->post())->save();
 
-        return redirect()->route('categories.index')->with('success','Category Has Been updated successfully');
+        return redirect()->route('categories.index')->with('success', 'Category Has Been updated successfully');
     }
 
     /**
@@ -109,7 +114,6 @@ class CategoryController extends Controller
     {
         //
         $category->delete();
-        return redirect()->route('categories.index')->with('success','Category Has Been removed successfully');
-        
+        return redirect()->route('categories.index')->with('success', 'Category Has Been removed successfully');
     }
 }

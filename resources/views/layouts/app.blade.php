@@ -32,7 +32,7 @@
             <img style="width: 2.2rem; margin: none;" src="https://itc.edu.kh/wp-content/uploads/2021/02/logoitc.png" alt="">
         </div>
         <ul class="nav-links ">
-            <li>
+            <li class="{{ (request()->is('dashboard')) ? 'active' : '' }}">
                 <a href="/dashboard">
                     <i class='bx bxs-dashboard'></i>
                     <span class="link_name">Dashboard</span>
@@ -41,7 +41,7 @@
                     <li><a class="link_name" href="/dashboard">Dashboard</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ (request()->is('categories')) ? 'active' : '' }}">
                 <a href="/categories">
                     <i class='bx bx-category'></i>
                     <span class="link_name">Categories</span>
@@ -50,7 +50,7 @@
                     <li><a class="link_name" href="/categories">Category</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ request()->routeIs('items.*') ? 'active' : ''}}">
                 <a href="/items">
                     <i class='bx bxs-folder-minus'></i>
                     <span class="link_name">Items</span>
@@ -59,7 +59,7 @@
                     <li><a class="link_name" href="/items">Items</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ (request()->is('transactions')) ? 'active' : '' }}">
                 <a href="/transactions">
                     <i class='bx bx-transfer'></i>
                     <span class="link_name">Transactions</span>
@@ -68,7 +68,7 @@
                     <li><a class="link_name" href="/transactions">Transactions</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ (request()->is('buildings')) ? 'active' : '' }}">
                 <a href="/buildings">
                     <i class='bx bx-building'></i>
                     <span class="link_name">Buildings</span>
@@ -77,7 +77,7 @@
                     <li><a class="link_name" href="/buildings">Buildings</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ (request()->is('rooms')) ? 'active' : '' }}">
                 <a href="/rooms">
                     <i class='bx bx-building-house'></i>
                     <span class="link_name">Rooms</span>
@@ -86,7 +86,7 @@
                     <li><a class="link_name" href="/buildings">Rooms</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ request()->routeIs('employees.*') ? 'active' : ''}}">
                 <a href="/employees">
                     <i class='bx bx-user-plus'></i>
                     <span class="link_name">Employee</span>
@@ -95,7 +95,7 @@
                     <li><a class="link_name" href="/employees">Employee</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ (request()->is('sponsor')) ? 'active' : '' }}">
                 <a href="/sponsor">
                     <i class='bx bxs-user-account'></i>
                     <span class="link_name">Sponsor</span>
@@ -104,7 +104,7 @@
                     <li><a class="link_name" href="/sponsor">Sponsor</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ (request()->is('status')) ? 'active' : '' }}">
                 <a href="/status">
                     <i class='bx bxs-star-half'></i>
                     <span class="link_name">Status</span>
@@ -113,7 +113,7 @@
                     <li><a class="link_name" href="/status">Status</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ (request()->is('setting')) ? 'active' : '' }}">
                 <a href="/setting">
                     <i class='bx bx-cog'></i>
                     <span class="link_name">Setting</span>
@@ -159,7 +159,6 @@
                             <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
                         </li>
                         @endif
-
                         @if (Route::has('register'))
                         <li class="nav-item">
                             <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> -->
@@ -167,23 +166,9 @@
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="/profile">
+                            <a id="navbarDropdown" class="nav-link " href="/setting">
                                 {{ Auth::user()->name }}
                             </a>
-<!-- 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('login') }}">
-                                    {{ __('Profile') }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div> -->
                         </li>
                         @endguest
                     </ul>

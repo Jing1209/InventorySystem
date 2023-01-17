@@ -30,7 +30,7 @@
                 </div>
             </form>
             <div class="me-3">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addnewBuilding"><i class="bx bx-plus-circle me-2"></i>Add New</button>
+                <button type="button" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addnewBuilding"><i class="bx bx-plus me-2" style="font-size: 18px;"></i>Add New</button>
             </div>
         </div>
     </div>
@@ -41,74 +41,79 @@
     <table class="table table-striped table-hover">
         <thead class="border-bottom">
             <tr class="table-primary">
+<<<<<<< HEAD
                 <th class="col">S.No</th>
                 <th class="col">Building Title</th>
                 <th class="col" style="width: 200px; text-align: center;">Action</th>
+=======
+                <th scope="col" style="padding-left: 20px;">S.No</th>
+                <th scope="col">Building Title</th>
+                <th scope="col" style="width: 200px; text-align: center;">Action</th>
+>>>>>>> c8397d3a18c74a5ce742816f95a29562821e6ef4
             </tr>
         </thead>
         <tbody>
             @foreach ($buildings as $building)
             <tr>
-                <td>{{ $building->id }}</td>
+                <td scope="col" style="padding-left: 20px;">{{ $building->id }}</td>
                 <td>{{ $building->building }}</td>
                 <td>
                     <form action="{{ route('buildings.destroy',$building->id) }}" method="Post">
-                        <a href="#editBuilding{{$building->id}}" data-bs-toggle="modal" class="btn btn-primary">Edit</a> 
+                        <a href="#editBuilding{{$building->id}}" data-bs-toggle="modal" class="btn btn-primary">Edit</a>
                         @csrf
                         @method('DELETE')
                         <a href="#deleteClarify{{$building->id}}" data-bs-toggle="modal" class="btn btn-danger">
                             Delete
-                        </a> 
-                         {{-- Comfirm Delete Room  --}}
+                        </a>
+                        {{-- Comfirm Delete Room  --}}
                         <div class="modal fade" id="deleteClarify{{$building->id}}" tabindex="-1" aria-labelledby="deleteBuildingModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="deleteBuildingModalLabel">Confirm Message</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <form action="{{ route('buildings.destroy',$building->id) }}" method="Post">
-                                   
-                                    @csrf
-                                    @method('DELETE')
-                                    <div class="p-3">Are you sure you want to delete this buidling?</div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteBuildingModalLabel">Confirm Message</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                </form>
-                            </div>
+                                    <form action="{{ route('buildings.destroy',$building->id) }}" method="Post">
+
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="p-3">Are you sure you want to delete this buidling?</div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </form>
                     {{-- {{ Edit pop up}} --}}
                     <div class="modal fade" id="editBuilding{{$building->id}}" tabindex="-1" aria-labelledby="editBuildingModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editBuildingModalLabel">Edit Buildnig Inventory</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form action="{{ route('buildings.update',$building->id) }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <div class="row p-3">
-                                <div class="mb-3">
-                                    <label class="form-label">Building Title</label>
-                                    <input type="text" name="building" value="{{ $building->building }}" class="form-control"
-                                        placeholder="Building Title">
-                                    @error('building')
-                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                    @enderror
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editBuildingModalLabel">Edit Buildnig Inventory</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
+                                <form action="{{ route('buildings.update',$building->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row p-3">
+                                        <div class="mb-3">
+                                            <label class="form-label">Building Title</label>
+                                            <input type="text" name="building" value="{{ $building->building }}" class="form-control" placeholder="Building Title">
+                                            @error('building')
+                                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bx bx-log-out-circle"></i> Cancel</button>
+                                        <button type="submit" class="btn btn-primary ml-3"><i class="bx bx-save"></i>Save</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bx bx-log-out-circle"></i> Cancel</button>
-                                <button type="submit" class="btn btn-primary ml-3"><i class="bx bx-save"></i>Save</button>
-                            </div>
-                        </form>
-                    </div>
-                    </div>
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -124,29 +129,29 @@
 {{-- Addnew Building pop up --}}
 <div class="modal fade" id="addnewBuilding" tabindex="-1" aria-labelledby="buildingModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="buildingModalLabel">Add New Building</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ route('buildings.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="mb-3">
-                    <label class="form-label">Building Title</label>
-                    <input type="text" class="form-control" name="building">
-                    @error('building')
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="buildingModalLabel">Add New Building</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('buildings.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Building Title</label>
+                        <input type="text" class="form-control" name="building">
+                        @error('building')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror   
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bx bx-log-out-circle"></i> Cancel</button>
-                    <button type="submit" class="btn btn-primary"><i class="bx bx-save"></i> Save</button>
-                </div>
-                 
-            </form>
+                        @enderror
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bx bx-log-out-circle"></i> Cancel</button>
+                        <button type="submit" class="btn btn-primary"><i class="bx bx-save"></i> Save</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 @endsection

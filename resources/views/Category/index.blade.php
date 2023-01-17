@@ -1,13 +1,12 @@
 @extends('layouts.app')
-@section('title')
-@endsection
+@section('title', 'Category')
 @section('content')
 <div class="container text-center">
     <h2 class="modal-title p-2" id="buildingModalLabel">Category Inventory</h2>
 </div>
 <div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;background: #e4e9f7;" class="d-flex justify-content-between mb-3">
     <div class="w-25 d-flex justify-content-start text-white bg-primary rounded-2 me-2">
-        <a class="text-white " href="{{ url('dashboard') }}"> <i class='bx bx-home-alt p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i></a>
+        <div class="text-white "> <i class='bx bxs-briefcase p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i></div>
         <div class="mx-3 my-3">
             All Category
             <div>
@@ -30,7 +29,7 @@
                     </span>
                 </div>
             </form>
-            <button type="button" class="btn btn-primary me-5" data-bs-toggle="modal" data-bs-target="#addnewCategory"><i class="bx bx-plus-circle me-2"></i>Add New</button>
+            <button type="button" class="btn btn-primary me-3 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addnewCategory"><i style="font-size: 18px;" class="bx bx-plus me-2"></i>Add New</button>
         </div>
     </div>
 </div>
@@ -47,7 +46,7 @@
         <table class="table table-striped table-hover">
             <thead class="border-bottom">
                 <tr class="table-primary">
-                    <th class="col" style="text-align: center;">S.No</th>
+                    <th class="col" style="padding-left: 20px;">S.No</th>
                     <th class="col">Category Name</th>
                     <th class="col">Quantity</th>
                     <th class="col" style="width: 200px;">Action</th>
@@ -56,7 +55,7 @@
             <tbody>
                 @foreach ($categories as $category)
                 <tr>
-                    <td style="text-align: center;">{{ $category->id }}</td>
+                    <td style="padding-left: 20px;">{{ $category->id }}</td>
                     <td>{{ $category->category }}</td>
                     <td>{{ $category->quantity }}</td>
                     <td style="text-align: center;">

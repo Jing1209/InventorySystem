@@ -13,10 +13,15 @@ class StatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         //
-        $statuses = Status::orderBy('id','desc')->paginate(5);
+        $statuses = Status::orderBy('id','asc')->paginate(10);
         $countStatus=DB::table('statuses')->count();
         return view('Status.index')->with(compact('statuses'))->with(compact('countStatus'));
     }
