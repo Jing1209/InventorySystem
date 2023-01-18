@@ -1,8 +1,40 @@
 @extends('layouts.app')
 @section('title', 'Transaction')
 @section('content')
-<div style="position: sticky; top:60px; overflow: hidden; background: #e4e9f7;">
-    <div class="d-flex justify-content-between my-3">
+<div class="container text-center">
+    <h2 class="modal-title p-2" id="buildingModalLabel">Transaction Inventory</h2>
+</div>
+<div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;" class="d-flex justify-content-between mb-3 p-2 bg-white rounded-2">
+    <div class="w-100 d-flex justify-content-start text-white bg-primary rounded-2 me-2">
+        <i class='bx bx-archive-out p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
+        <div class="mx-3 my-3">
+            Borrow
+            <div>
+                {{$countBorrow}}
+            </div>
+        </div>
+    </div>
+    <div class="w-100 d-flex align-items-center text-white bg-success rounded-2 me-2">
+        <i class='bx bx-archive-in p-2 m-3 rounded-2' style="background-color: rgba(255, 204, 145, 0.16); font-size: 18px;"></i>
+        <div class="mx-3 my-2">
+            Return
+            <div>
+                {{$countReturn}}
+            </div>
+        </div>
+       
+    </div>
+  
+    <div class="w-100 d-flex align-items-center justify-content-end text-white rounded-2">
+        <a class="btn btn-primary" href="{{ route('items.create') }}">
+            <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
+            <span>Create Item</span>
+        </a>
+    </div>
+</div>
+
+{{-- <div style="position: sticky; top:60px; overflow: hidden; background: #e4e9f7;">
+    <div class="d-flex justify-content-between mb-3">
         <div class="d-flex justify-content-center align-items-center">
             <h5>Transaction Summary</h5>
         </div>
@@ -33,9 +65,11 @@
                     {{$countReturn}}
                 </div>
             </div>
+           
         </div>
+
     </div>
-</div>
+</div> --}}
 <div class="bg-white rounded">
     <div class="mt-2">
         @if ($message = Session::get('success'))
@@ -66,6 +100,7 @@
                     <td>{{ $transaction->created_at }}</td>
                     <td style="text-align: center;">
                         <form action="{{ route('transactions.destroy', $transaction->id) }}" method="Post">
+                            <a class="btn btn-warning text-white" href="#viewTransaction{{ $transaction->id }}" data-bs-toggle="modal">View</a>
                             <a class="btn btn-primary" href="#editTransaction{{ $transaction->id }}" data-bs-toggle="modal">Edit</a>
                             @csrf
                             @method('DELETE')
@@ -94,6 +129,36 @@
                                 </div>
                             </div>
                         </form>
+                          {{-- View an Transaction  --}}
+                          <div class="modal fade" id="viewTransaction{{ $transaction->id }}" tabindex="-1" aria-labelledby="ViewTransactionModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="viewTransactionModalLabel">Transaction for <b>{{$transaction->title}} Item</b></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="d-flex px-3">
+                                        <div class="w-100 text-start text-primary">
+                                            <p><b>ID: </b></p>
+                                            <p><b>Item title: </b></p>
+                                            <p><b>Room: </b></p>
+                                            <p><b>Status: </b></p>
+                                            <p><b>Borrowed by: </b></p>
+                                            <p><b>Borrowed At: </b></p>
+                                        </div>
+                                        <div class="w-100 text-start">
+                                            <p>{{$transaction->id}}</p>
+                                            <p>{{ $transaction->title }}</p>
+                                            <p>{{ $transaction->building_id }}-{{ $transaction->name }}</p>
+                                            <p>{{ $transaction->status }}</p>
+                                            <p>{{ $transaction->firstname }} {{ $transaction->lastname }}</p>
+                                            <p>{{ $transaction->created_at }}</p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {{-- {{ Edit pop up}} --}}
                         <div class="modal fade" id="editTransaction{{ $transaction->id }}" tabindex="-1" aria-labelledby="editTransactionModalLabel" aria-hidden="true">
                             <div class="modal-dialog">

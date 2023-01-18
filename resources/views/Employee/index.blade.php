@@ -1,12 +1,15 @@
 @extends('layouts.app')
 @section('title', 'Employee')
 @section('content')
+<div class="container text-center">
+    <h2 class="modal-title p-2" id="buildingModalLabel">Employee Inventory</h2>
+</div>
     <div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;background: #e4e9f7;"
-        class="d-flex justify-content-between my-3">
+        class="d-flex justify-content-between mb-3">
         <div class="w-25 d-flex justify-content-start text-white bg-primary rounded-2 me-2">
             <div class="text-white"> <i class='bx bxs-group p-2 m-3 rounded-2'
                     style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i></div>
-            <div class="mx-3 my-3">
+            <div class="m-3">
                 All Employees
                 <div>
                     {{ $count }}
@@ -14,9 +17,9 @@
             </div>
         </div>
         <div class=" w-75 d-flex align-items-center text-white bg-white rounded-2 me-2">
-            <div class="d-flex w-100 justify-content-between">
+            <div class="d-flex w-100 justify-content-between px-3">
                 {{-- search bar --}}
-                <form class="ms-5 w-50" action="{{ route('employees.index') }}" method="GET" role="search">
+                <form class="w-50" action="{{ route('employees.index') }}" method="GET" role="search">
                     <div class="d-flex justify-content-start">
                         <div class="input-group">
                             <input type="text" class="form-control mr-2 w-100 ps-3" name="term"
@@ -30,7 +33,7 @@
                         </span>
                     </div>
                 </form>
-                <a class="me-3 text-white text-decoration-none" href="{{ route('employees.create') }}">
+                <a class="text-white text-decoration-none" href="{{ route('employees.create') }}">
                     <div class="btn btn-primary d-flex justify-conten-between">
                         <div class="me-2 d-flex align-items-center">
                             <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
@@ -106,26 +109,44 @@
                             </form>
                             {{-- View an employee  --}}
                             <div class="modal fade" id="viewEmployee{{ $employee->id }}" tabindex="-1" aria-labelledby="ViewEmployeeModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="viewItemModalLabel">Employee</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            {{$employee->id}} 
+                                        <div class="d-flex px-3">
+                                            <div class="w-100 text-start text-primary">
+                                                <p><b>ID: </b></p>
+                                                <p><b>Name: </b></p>
+                                                <p><b>Gender: </b></p>
+                                                <p><b>Email: </b></p>
+                                                <p><b>Phone Number: </b></p>
+                                                <p><b>Created At: </b></p>
+                                            </div>
+                                            <div class="w-100 text-start">
+                                                <p>{{$employee->id}}</p>
+                                                <p>{{$employee->firstname}} {{$employee->lastname}}</p>
+                                                <p>{{$employee->gender}}</p>
+                                                <p>{{$employee->email}}</p>
+                                                <p>{{$employee->phone_number}}</p>
+                                                <p>{{$employee->created_at}}</p>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    <div class="d-flex justify-content-center">
-        {!! $employees->links() !!}
-    </div>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+<div class="d-flex justify-content-center">
+    {!! $employees->links() !!}
+</div>
 @endsection

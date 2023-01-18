@@ -39,7 +39,7 @@ class ItemController extends Controller
                         ->orWhere('categories.category', 'like', '%' . $term . '%');
                 }
             })
-            ->select('items.id', 'items.title', 'items.price', 'statuses.status', 'sponsors.name', 'categories.category', 'items.item_id')
+            ->select('items.id', 'items.title', 'items.price', 'statuses.status', 'sponsors.name', 'categories.category', 'items.description', 'items.item_id')
             ->orderBy('id', 'asc')->paginate(10);
         $countBad = DB::table('items')
             ->join('statuses', 'items.status', '=', 'statuses.id')
