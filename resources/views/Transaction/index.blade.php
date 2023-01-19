@@ -4,8 +4,8 @@
 <div class="container text-center">
     <h2 class="modal-title p-2" id="buildingModalLabel">Transaction Inventory</h2>
 </div>
-<div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;" class="d-flex justify-content-between mb-3 p-2 bg-white rounded-2">
-    <div class="w-100 d-flex justify-content-start text-white bg-primary rounded-2 me-2">
+<div style="position: sticky ;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;" class="d-flex justify-content-between mb-3 p-2 bg-white rounded-2">
+    <div class="w-100 d-flex align-items-center justify-content-start text-white bg-primary rounded-2 me-2">
         <i class='bx bx-archive-out p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
         <div class="mx-3 my-3">
             Borrow
@@ -22,17 +22,19 @@
                 {{$countReturn}}
             </div>
         </div>
-       
+
     </div>
-  
-    <div class="w-100 d-flex align-items-center justify-content-end text-white rounded-2">
-        <a class="btn btn-primary" href="{{ route('items.create') }}">
-            <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
-            <span>Create Item</span>
-        </a>
+
+    <div class="w-100 me-2 d-flex align-items-center justify-content-end text-white rounded-2">
+        <button type="button" class="btn btn-primary d-flex align-items-center rounded d-flex justify-conten-between" data-bs-toggle="modal" data-bs-target="#addNewTransaction">
+            <div class="d-flex align-items-center me-2">
+                <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
+            </div>
+            <span>Add New</span>
+        </button>
     </div>
 </div>
-
+<!-- 
 {{-- <div style="position: sticky; top:60px; overflow: hidden; background: #e4e9f7;">
     <div class="d-flex justify-content-between mb-3">
         <div class="d-flex justify-content-center align-items-center">
@@ -54,22 +56,21 @@
                 Borrow
                 <div>
                     {{$countBorrow}}
-                </div>
-            </div>
+</div>
+</div>
+</div>
+<div class="w-50 text-white bg-success rounded-2">
+    <i class='bx bx-archive-in p-2 m-3 rounded-2' style="background-color: rgba(255, 204, 145, 0.16); font-size: 18px;"></i>
+    <div class="mx-3 my-2">
+        Return
+        <div>
+            {{$countReturn}}
         </div>
-        <div class="w-50 text-white bg-success rounded-2">
-            <i class='bx bx-archive-in p-2 m-3 rounded-2' style="background-color: rgba(255, 204, 145, 0.16); font-size: 18px;"></i>
-            <div class="mx-3 my-2">
-                Return
-                <div>
-                    {{$countReturn}}
-                </div>
-            </div>
-           
-        </div>
-
     </div>
-</div> --}}
+
+</div>
+</div>
+</div> --}} -->
 <div class="bg-white rounded">
     <div class="mt-2">
         @if ($message = Session::get('success'))
@@ -129,8 +130,8 @@
                                 </div>
                             </div>
                         </form>
-                          {{-- View an Transaction  --}}
-                          <div class="modal fade" id="viewTransaction{{ $transaction->id }}" tabindex="-1" aria-labelledby="ViewTransactionModalLabel" aria-hidden="true">
+                        {{-- View an Transaction  --}}
+                        <div class="modal fade" id="viewTransaction{{ $transaction->id }}" tabindex="-1" aria-labelledby="ViewTransactionModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -154,7 +155,7 @@
                                             <p>{{ $transaction->firstname }} {{ $transaction->lastname }}</p>
                                             <p>{{ $transaction->created_at }}</p>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -168,6 +169,7 @@
                                         </h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
+
                                     <div class="modal-body">
                                         <form action="{{ route('transactions.update', $transaction->id) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
@@ -176,8 +178,8 @@
                                                 <div class="mb-1 d-flex flex-column">
                                                     <label class="col-form-label d-flex">Item:</label>
                                                     <select name="item_id" class="p-2 rounded-2">
-                                                        @foreach ($items as $cate)
-                                                        <option value={{ $cate->id }}>{{ $cate->title }}</option>
+                                                        @foreach ($items as $item)
+                                                        <option value={{ $item->id }} {{ $transaction->title == $item->title ? 'selected' : '' }}>{{ $item->title }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -186,7 +188,7 @@
                                                     <label class="col-form-label d-flex">Room: </label>
                                                     <select name="room_id" class="p-2 rounded-2">
                                                         @foreach ($rooms as $cate)
-                                                        <option value={{ $cate->id }}>{{ $cate->building }}-{{ $cate->name }}
+                                                        <option value={{ $cate->id }} {{ $transaction->building_id == $cate->id ? 'selected' : '' }}>{{ $cate->building }}-{{ $cate->name }}
                                                         </option>
                                                         @endforeach
                                                     </select>
@@ -195,7 +197,8 @@
                                                     <label class="col-form-label d-flex text-right">User:</label>
                                                     <select name="employee_id" class="p-2 rounded-2">
                                                         @foreach ($employees as $employee)
-                                                        <option value="{{ $employee->id }}">{{ $employee->firstname }}
+                                                        <option value="{{ $employee->id }}" {{$transaction->employee_id == $employee->id ? 'selected' : ''}}>
+                                                            {{ $employee->firstname }}
                                                             {{ $employee->lastname }}
                                                         </option>
                                                         @endforeach
@@ -205,7 +208,7 @@
                                                     <label class="col-form-label d-flex text-right">Status:</label>
                                                     <select name="status" class="p-2 rounded-2">
                                                         @foreach ($statuses as $stat)
-                                                        <option value="{{ $stat->id }}">{{ $stat->status }}
+                                                        <option value="{{ $stat->id }}" {{ $transaction->status ==  $stat->status ? 'selected': ''}}>{{ $stat->status }}
                                                         </option>
                                                         @endforeach
                                                     </select>

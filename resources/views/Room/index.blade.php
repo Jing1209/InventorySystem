@@ -125,10 +125,10 @@
                                                 <input type="text" name="name" value="{{ $room->name }}" class="form-control" placeholder="Room title">
                                             </div>
                                             <div class="mb-3 d-flex flex-column">
-                                                <label class="form-label">Building Title</label>
+                                                <label class="form-label">Building Title</label> 
                                                 <select name="building_id" class="p-2 rounded-2">
                                                     @foreach ($buildings as $build )
-                                                    <option value={{$build->id}}>{{$build->building}}</option>
+                                                    <option value={{$build->id}} {{$room->building_id == $build->id ? 'selected' : ''}} >{{$build->building}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

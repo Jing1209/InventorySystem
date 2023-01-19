@@ -39,7 +39,7 @@ class TransactionController extends Controller
             ->join('employees', 'transactions.employee_id', '=', 'employees.id')
             ->join('rooms', 'transactions.room_id', '=', 'rooms.id')
             ->join('statuses', 'transactions.status', '=', 'statuses.id')
-            ->select('transactions.id', 'transactions.created_at', 'items.title', 'items.status', 'employees.firstname', 'employees.lastname', 'rooms.building_id', 'rooms.name', 'statuses.status')
+            ->select('transactions.id', 'transactions.created_at', 'items.title', 'items.status', 'employees.firstname','transactions.employee_id', 'employees.lastname', 'rooms.building_id', 'rooms.name', 'statuses.status')
             ->paginate(10);
 
         // $transactions = DB::table('transactions')

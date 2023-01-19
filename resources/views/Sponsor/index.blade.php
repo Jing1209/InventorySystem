@@ -112,11 +112,8 @@
             @endforeach
         </tbody>
     </table>
-<<<<<<< HEAD
 </div>
     
-=======
->>>>>>> c8397d3a18c74a5ce742816f95a29562821e6ef4
 </div>
 <div class="d-flex justify-content-center">
     {!! $sponsors->links() !!}
