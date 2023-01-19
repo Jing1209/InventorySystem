@@ -29,6 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
+    public const HOME = '/dashboard';
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
@@ -36,9 +37,10 @@ class RegisterController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     /**
