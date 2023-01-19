@@ -61,7 +61,7 @@
                     <th scope="col">Gender</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone Number</th>
-                    <th scope="col" style="width: 200px; text-align: center;">Action</th>
+                    <th scope="col" style="width: 200px; text-align: center;">Action</th>  
                 </tr>
             </thead>
             <tbody>
@@ -71,7 +71,7 @@
                         <td>{{ $employee->firstname }} {{ $employee->lastname }}</td>
                         <td>{{ $employee->gender }}</td>
                         <td>{{ $employee->email }}</td>
-                        <td>{{ $employee->phone_number }}</td>
+                        <td>{{ $employee->phone_number }}</td> 
                         <td style="text-align: center;">
                             <form action="{{ route('employees.destroy', $employee->id) }}" method="Post">
                                 <a class="btn btn-warning text-white" href="#viewEmployee{{ $employee->id }}" data-bs-toggle="modal">View</a>
@@ -131,8 +131,10 @@
                                                 <p>{{$employee->email}}</p>
                                                 <p>{{$employee->phone_number}}</p>
                                                 <p>{{$employee->created_at}}</p>
-                                            </div>
-                                            
+                                            </div> 
+                                            <div class="w-100 d-flex align-items-center text-start">
+                                                 <img id="output" width="300" height="200" src="{{ asset('images/user.png') }}" />
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
