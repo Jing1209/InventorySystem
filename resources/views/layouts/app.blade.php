@@ -113,7 +113,7 @@
                     <li><a class="link_name" href="/status">Status</a></li>
                 </ul>
             </li>
-            <li class="{{ (request()->is('setting')) ? 'active' : '' }}">
+            <li class="{{ request()->routeIs('setting.*') ? 'active' : ''}}">
                 <a href="/setting">
                     <i class='bx bx-cog'></i>
                     <span class="link_name">Setting</span>

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\User;    
+use Illuminate\Support\Facades\Hash;
 class SettingController extends Controller
 {
     /**
@@ -17,8 +18,10 @@ class SettingController extends Controller
     }
 
     public function index()
-    {
-        return view('setting');
+    {  
+        $user = auth()->user();
+        $users = User::all()->except($user->id);
+        return view('setting')->with(\compact('user'))->with(\compact('users'));
     }
 
     /**
@@ -28,7 +31,7 @@ class SettingController extends Controller
      */
     public function create()
     {
-        //
+        return \view('change-password');
     }
 
     /**
@@ -39,7 +42,25 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                # Validation
+                $request->validate([
+                    'old_password' => 'required',
+                    'new_password' => 'required|confirmed',
+                ]);
+        
+        
+                #Match The Old Password
+                if(!Hash::check($request->old_password, auth()->user()->password)){
+                    return back()->with("error", "Old Password Doesn't match!");
+                }
+        
+        
+                #Update the new Password
+                User::whereId(auth()->user()->id)->update([
+                    'password' => Hash::make($request->new_password)
+                ]);
+        
+                return back()->with("status", "Password changed successfully!");
     }
 
     /**

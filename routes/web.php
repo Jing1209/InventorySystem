@@ -26,5 +26,5 @@ Route::resource('setting',App\Http\Controllers\SettingController::class);
 Route::resource('employees',App\Http\Controllers\EmployeeController::class);
 Route::resource('status',App\Http\Controllers\StatusController::class);
 Route::resource('sponsor',App\Http\Controllers\SponsorController::class);
-
+Auth::routes(['register' => false]);
 
