@@ -15,7 +15,8 @@ class Transaction extends Model
         'item_id',
         'employee_id',
         'room_id',
-        'status'
+        'status',
+        'buidling_id'
     ];
 
     public function items(){
@@ -31,6 +32,9 @@ class Transaction extends Model
     }
     public function statuses(){
         return $this->hasMany(Status::class);
+    }
+    public function buildings(){
+        return $this->belongsTo(Buidling::class);
     }
 
 }

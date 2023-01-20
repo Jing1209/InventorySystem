@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,6 @@ Route::resource('setting',App\Http\Controllers\SettingController::class);
 Route::resource('employees',App\Http\Controllers\EmployeeController::class);
 Route::resource('status',App\Http\Controllers\StatusController::class);
 Route::resource('sponsor',App\Http\Controllers\SponsorController::class);
-
+Route::get('generate-pdf-item', [App\Http\Controllers\ItemController::class,'createPDF'])->name('download');
+Route::get('generate-pdf-transaction', [App\Http\Controllers\TransactionController::class,'createPDF'])->name('download-pdf');
 

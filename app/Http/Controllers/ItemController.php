@@ -9,7 +9,7 @@ use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ItemImage;
-use PDF;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class ItemController extends Controller
 {
@@ -125,6 +125,7 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         //
+        
     }
 
     /**
@@ -184,4 +185,56 @@ class ItemController extends Controller
         $item->delete();
         return redirect()->route('items.index')->with('success', 'Item Has Been removed successfully');
     }
+
+    public function createPDF(){
+        // dd('hello');
+        $data = DB::table('items')->select('title')->distinct()->get();
+        // dd($data[0]->title);
+        $countBad = DB::table('items')
+            ->join('statuses', 'items.status', '=', 'statuses.id')
+            // ->where('items.title','like',$data[0]->title)
+            ->where(function($query) use ($data){
+                    foreach($data as $data1){
+                        $query->where('items.title','like',$data1->title,'or');
+                    }
+            })
+            ->where('statuses.status', 'like', '%Bad%')->get();
+            // dd($countBad);
+
+        $countGood = DB::table('items')
+            ->join('statuses', 'items.status', '=', 'statuses.id')
+            // ->where('items.title','like',$data[0]->title)
+            ->where(function($query) use ($data){
+                foreach($data as $data1){
+                    $query->where('items.title','like',$data1->title,'or');
+                }
+        })
+            ->where('statuses.status', 'like', '%Good%')->get();
+            dd($countGood);
+
+        $countMedium = DB::table('items')
+            ->join('statuses', 'items.status', '=', 'statuses.id')
+            // ->where('items.title','like',$data[0]->title)
+            ->where(function($query) use ($data){
+                foreach($data as $data1){
+                    $query->where('items.title','like',$data1->title,'or');
+                }
+        })
+            ->where('statuses.status', 'like', '%Medium%')->get();
+
+        $countBroken = DB::table('items')
+            ->join('statuses', 'items.status', '=', 'statuses.id')
+            // ->where('items.title','like',$data[0]->title)
+            ->where(function($query) use ($data){
+                foreach($data as $data1){
+                    $query->where('items.title','like',$data1->title,'or');
+                }
+        })
+            ->where('statuses.status', 'like', '%Broken%')->get();
+
+
+        return view('Item.itemPDF')->with(compact('data'))->with(compact('countBad'))->with(compact('countGood'))->with(compact('countBroken'))
+        ->with(compact('countMedium'));    
+    }
+   
 }

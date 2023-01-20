@@ -212,13 +212,13 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
-    'providers' => [
+    // 'providers' => [
        
-        Barryvdh\DomPDF\ServiceProvider::class,
-    ],
-    'aliases' => [
+    //     Barryvdh\DomPDF\ServiceProvider::class,
+    // ],
+    // 'aliases' => [
         
-        'PDF' => Barryvdh\DomPDF\Facade::class,
-    ],
+    //     'PDF' => Barryvdh\DomPDF\Facade::class,
+    // ],
 
 ];

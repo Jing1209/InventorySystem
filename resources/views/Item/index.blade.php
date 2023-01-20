@@ -8,6 +8,14 @@ Item
     <div class="d-flex justify-content-center align-items-center">
         <h5>Item Summary</h5>
     </div>
+    <a class="text-white text-decoration-none" href="{{ route('download')}}">
+        <div class="btn btn-primary d-flex justify-conten-between">
+            <div class="me-2 d-flex align-items-center">
+                <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
+            </div>
+            <span>Export</span>
+        </div>
+    </a>
     <a class="text-white text-decoration-none" href="{{ route('items.create') }}">
         <div class="btn btn-primary d-flex justify-conten-between">
             <div class="me-2 d-flex align-items-center">
@@ -16,6 +24,7 @@ Item
             <span>Add New</span>
         </div>
     </a>
+
 </div>
 <div class="my-2 w-100 d-flex justify-content-between">
     <div class="w-50 bg-success text-white rounded-2 me-2">

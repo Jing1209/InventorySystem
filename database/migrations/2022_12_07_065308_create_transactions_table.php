@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('item_id')->references('id')->on('items');
             // $table->string('room_id');
             $table->foreignId('room_id')->references('id')->on('rooms');
+            $table->foreignId('building_id')->references('id')->on('buildings');
             // $table->string('user_id');
             $table->foreignId('employee_id')->references('id')->on('employees');
             $table->foreignId('status')->references('id')->on('statuses');
