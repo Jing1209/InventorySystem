@@ -133,7 +133,7 @@
                                                 <p>{{$employee->created_at}}</p>
                                             </div> 
                                             <div class="w-100 d-flex align-items-center text-start">
-                                                 <img id="output" width="300" height="200" src="{{ asset('images/user.png') }}" />
+                                                 <img id="output" width="300" height="200" src="{{ url('public/Image/'.$employee->url) }}" />
                                             </div> 
                                         </div>
                                     </div>

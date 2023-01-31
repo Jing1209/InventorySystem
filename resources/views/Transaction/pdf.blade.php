@@ -1,114 +1,44 @@
-<table>
+<table >
     <tr>
-        <td>a</td>
-        <td>b</td>
-        <td>v</td>
-        <td>d</td>
-        <td>e</td>
-        <td></td>
-        <td></td>
-        <td>j</td>
-        <td>k</td>
-        <td>l</td>
-        <td>t</td>
-        <td>y</td>
+        <td>Class of Asset</td>
+        <td>Asset Identify No</td>
+        <td>Description/Specification (Include Serial/Model No,Country of Origin)</td>
+        <td>Purchase Date</td>
+        <td>Voucher Ref.</td>
+        <td>Quantity</td>
+        <td>Unit Price</td>
+        <td>Amount</td>
+        <td>User</td>
+        <td>Location and Condition</td>
+        <td>Remark</td>
     </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>f</td>
-        <td>r</td>
-        <td>h</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>m</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>as</td>
-        <td>qweqweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>wq</td>
-        <td>qweqweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>asd</td>
-        <td>qweqweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>sd</td>
-        <td>qweqweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>zxc</td>
-        <td>qweqweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-        <td>qweqwe</td>
-    </tr>
+    @foreach ($transactions as $transaction)
+        <tr>
+            <td>1</td>
+            <td>as</td>
+            <td>{{$transaction->title}}
+                <p>{{$transaction->item_id}}</p>
+            </td>
+            <td>{{$transaction->created_at}}</td>
+            <td>qweqwe</td>
+            <td>qweqwe</td>
+            <td>{{$transaction->price}}</td>
+            <td>{{$transaction->price}}</td>
+            <td>{{$transaction->firstname}} {{$transaction->lastname}} <p>{{$transaction->building}}-{{$transaction->name}}</p></td>
+            <td>{{$transaction->status}}</td>
+            <td>qweqwe</td>
+         </tr>
+    @endforeach
+   
+    
+        
+    
 </table>
+{{-- {{$newdate}} --}}
+<style>
+    table,td{
+        border:1px solid black;
+        border-collapse: collapse;
+        
+    }
+</style>
