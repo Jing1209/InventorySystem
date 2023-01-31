@@ -33,15 +33,19 @@ class ItemController extends Controller
             ->join('categories', 'items.category_id', '=', 'categories.id')
             ->join('statuses', 'items.status', '=', 'statuses.id')
             ->join('sponsors', 'items.sponsored', '=', 'sponsors.id')
-            // ->join('itemimages','itemimages.item_id','=','item.id')
+            ->join('itemimages','itemimages.item_id','=','items.id')
             ->where(function ($query) use ($request) {
                 if ($term = $request->term) {
                     $query->orWhere('items.title', 'like', '%' . $term . '%')
                         ->orWhere('categories.category', 'like', '%' . $term . '%');
                 }
             })
-            ->select('items.id', 'items.title', 'items.price', 'statuses.status', 'sponsors.name', 'categories.category', 'items.item_id')
+            ->select('items.id', 'items.title', 'items.price', 'statuses.status', 'sponsors.name', 'categories.category', 'items.description', 'items.item_id','itemimages.url')
             ->orderBy('id', 'asc')->paginate(10);
+        // $image = DB::table('items')
+        //     ->join('itemimages', 'items.id', '=', 'itemimages.item_id')
+        //     ->select('itemimages.url')
+        //     ->where('itemimages.item_id', '=', $item->id)->get();
         $countBad = DB::table('items')
             ->join('statuses', 'items.status', '=', 'statuses.id')
             ->where('statuses.status', 'like', '%Bad%')->count();

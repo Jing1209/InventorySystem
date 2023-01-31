@@ -6,16 +6,16 @@ Item
 @section('content')
 <div class="container-lg my-4 rounded bg-light">
     <div class="row">
-        <div class=" mt-3 d-flex justify-content-center">
+        <div class=" mt-4 d-flex justify-content-center">
             <h2>Add New Item</h2>
         </div>
     </div>
     @if(session('status'))
-    <div class="alert alert-success mb-1 mt-1">
+    <div class="alert alert-success mb-1">
         {{ session('status') }}
     </div>
     @endif
-    <div class="mt-3 p-4">
+    <div class="p-4">
         <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row mb-5">

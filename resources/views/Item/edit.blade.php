@@ -37,22 +37,21 @@ Item
                             <input type="text" name="price" class="form-control" placeholder="Price" value="{{$item->price}}">
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex flex-column mb-3">
-                            <strong>Status:</strong>
+                            <strong>Status: </strong>
                             <select name="status" class="p-2 rounded-2">
                                 @foreach ($status as $stat )
-                                <option value={{$stat->id}}>{{$stat->status}}</option>
+                                        <option value={{$stat->id}} {{$item->status==$stat->id ? 'selected' : ''}} >{{$stat->status}}</option>
                                 @endforeach
-
                             </select>
                         </div>
                     </div>
 
                     <div class="d-flex row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex flex-column mb-3">
-                            <strong>Category:</strong>
+                            <strong>Category: </strong>
                             <select name="category_id" class="p-2 rounded-2">
                                 @foreach ($categories as $cate )
-                                <option value={{$cate->id}}>{{$cate->category}}</option>
+                                    <option value={{$cate->id}} {{ $item->category_id == $cate->id ? 'selected' : ''}}>{{$cate->category}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -60,12 +59,10 @@ Item
                             <strong>Sponsor by:</strong>
                             <select name="sponsored" class="p-2 rounded-2">
                                 @foreach ($sponsor as $spon )
-                                <option class="" value={{$spon->id}}>{{$spon->name}}</option>
+                                     <option value={{$spon->id}} {{$item->sponsored == $spon->id ? 'selected' : ''}}>{{$spon->name}}</option>
                                 @endforeach
-
                             </select>
                         </div>
-
                     </div>
                     <div class="form-group mb-3">
                         <strong>Description</strong>

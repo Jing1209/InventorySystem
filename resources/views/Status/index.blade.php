@@ -1,7 +1,10 @@
 @extends('layouts.app')
 @section('title', 'Building')
 @section('content')
-<div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;background: #e4e9f7;" class="d-flex justify-content-between my-3">
+<div class="container text-center">
+    <h2 class="modal-title p-2" id="buildingModalLabel">Status Inventory</h2>
+</div>
+<div style="position: sticky;padding: 10px 0px 0 0px; top: 60px; overflow: hidden;background: #e4e9f7;" class="d-flex justify-content-between mb-3">
     <div class="w-25 d-flex justify-content-start text-white bg-primary rounded-2 me-2">
         <i class='bx bxs-hourglass-top my-4 ms-3 d-flex align-items-center p-2 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
         <div class="mx-3 my-3">
@@ -11,10 +14,10 @@
             </div>
         </div>
     </div>
-    <div class=" w-75 d-flex align-items-center text-white bg-white rounded-2 me-2">
+    <div class=" w-75 d-flex align-items-center text-white bg-white rounded-2 me-2 px-3">
         <div class="d-flex w-100 justify-content-between">
             {{-- search bar --}}
-            <form class="ms-5 w-50" action="{{ route('status.index') }}" method="GET" role="search">
+            <form class="w-50" action="{{ route('status.index') }}" method="GET" role="search">
                 <div class="d-flex justify-content-start">
                     <div class="input-group">
                         <input type="text" class="form-control mr-2 w-100 ps-3" name="term" placeholder="Search Status" id="term">
@@ -26,7 +29,7 @@
                     </span>
                 </div>
             </form>
-            <div class="me-3">
+            <div>
                 <button type="button" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addnewStatus"><i style="font-size: 18px;" class="bx bx-plus me-2"></i>Add New</button>
             </div>
         </div>
