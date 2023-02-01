@@ -36,10 +36,10 @@ Item
         </div>
 
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6 d-flex justify-content-end pe-3">
-            <a class="text-white text-decoration-none" href="{{ route('download')}}">
-                <div class="btn btn-primary d-flex justify-conten-between">
+            <a class="text-white text-decoration-none me-2" href="{{ route('download')}}">
+                <div class="btn btn-info d-flex justify-conten-between text-white">
                     <div class="me-2 d-flex align-items-center">
-                        <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
+                        <i style="font-size: 18px;" class='bx bx-export'></i>
                     </div>
                     <span>Export</span>
                 </div>
