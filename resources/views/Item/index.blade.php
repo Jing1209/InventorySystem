@@ -36,6 +36,14 @@ Item
         </div>
 
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6 d-flex justify-content-end pe-3">
+            <a class="text-white text-decoration-none" href="{{ route('download')}}">
+                <div class="btn btn-primary d-flex justify-conten-between">
+                    <div class="me-2 d-flex align-items-center">
+                        <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
+                    </div>
+                    <span>Export</span>
+                </div>
+            </a>
             <a class="btn btn-primary d-flex justify-conten-between" href="{{ route('items.create') }}">
                 <div class="me-2 d-flex align-items-center">
                     <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
@@ -118,7 +126,7 @@ Item
                     <td>{{ $item->name }}</td>
                     <td style="text-align: center;">
                         <form action="{{ route('items.destroy',$item->id) }}" method="Post">
-                            <a class="btn btn-warning text-white" href="#viewItem{{ $item->id }}" data-bs-toggle="modal">View</a>
+                            <a class="btn btn-warning text-white" href="#viewItem{{$item->id}}" data-bs-toggle="modal">View</a>
                             <a class="btn btn-primary" href="{{ route('items.edit',$item->id) }}">Edit</a>
                             @csrf
                             @method('DELETE')
@@ -148,7 +156,7 @@ Item
                             </div>
                         </form>
                         {{-- View an item  --}}
-                        <div class="modal fade" id="viewItem{{ $item->id }}" tabindex="-1" aria-labelledby="ViewEmployeeModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="viewItem{{$item->id}}" tabindex="-1" aria-labelledby="ViewEmployeeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -173,7 +181,7 @@ Item
                                             <p>{{$item->description}}</p>
                                         </div>
                                         <div class="w-100 d-flex align-items-center text-start">
-                                            <img id="output" width="300" height="200" src="{{ asset('images/user.png') }}" />
+                                            <img id="output" width="300" height="200" src="{{ url('public/Image/'.$item->url)}}" />
                                         </div>
                                     </div>
                                 </div>

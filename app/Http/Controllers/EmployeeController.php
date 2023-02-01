@@ -31,7 +31,11 @@ class EmployeeController extends Controller
                         ->get();
                 }
             }]
-        ])->orderBy('id', 'desc')->paginate(10);
+        ])
+        ->join('employeeimages', 'employees.id', '=', 'employeeimages.employee_id')
+        ->select('employees.id','employees.firstname','employees.lastname','employees.email','employees.phone_number','employees.gender','employees.created_at','employeeimages.url')
+        ->orderBy('id', 'desc')->paginate(10);
+        
         $count = DB::table('employees')->count();
         return view('Employee.index')->with(compact('employees'))->with(compact('count'));
     }

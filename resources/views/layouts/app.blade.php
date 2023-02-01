@@ -29,10 +29,11 @@
 <body>
     <div class="sidebar close">
         <div class="mt-2 pt-1 d-flex justify-content-center align-item-center">
-            <img style="width: 2.2rem; margin: none;" src="https://itc.edu.kh/wp-content/uploads/2021/02/logoitc.png" alt="">
+            <img style="width: 2.2rem; margin: none;" src="https://itc.edu.kh/wp-content/uploads/2021/02/logoitc.png"
+                alt="">
         </div>
         <ul class="nav-links ">
-            <li class="{{ (request()->is('dashboard')) ? 'active' : '' }}">
+            <li class="{{ request()->is('dashboard') ? 'active' : '' }}">
                 <a href="/dashboard">
                     <i class='bx bxs-dashboard'></i>
                     <span class="link_name">Dashboard</span>
@@ -41,7 +42,7 @@
                     <li><a class="link_name" href="/dashboard">Dashboard</a></li>
                 </ul>
             </li>
-            <li class="{{ (request()->is('categories')) ? 'active' : '' }}">
+            <li class="{{ request()->is('categories') ? 'active' : '' }}">
                 <a href="/categories">
                     <i class='bx bx-category'></i>
                     <span class="link_name">Categories</span>
@@ -50,7 +51,7 @@
                     <li><a class="link_name" href="/categories">Category</a></li>
                 </ul>
             </li>
-            <li class="{{ request()->routeIs('items.*') ? 'active' : ''}}">
+            <li class="{{ request()->routeIs('items.*') ? 'active' : '' }}">
                 <a href="/items">
                     <i class='bx bxs-folder-minus'></i>
                     <span class="link_name">Items</span>
@@ -59,7 +60,7 @@
                     <li><a class="link_name" href="/items">Items</a></li>
                 </ul>
             </li>
-            <li class="{{ (request()->is('transactions')) ? 'active' : '' }}">
+            <li class="{{ request()->is('transactions') ? 'active' : '' }}">
                 <a href="/transactions">
                     <i class='bx bx-transfer'></i>
                     <span class="link_name">Transactions</span>
@@ -68,7 +69,7 @@
                     <li><a class="link_name" href="/transactions">Transactions</a></li>
                 </ul>
             </li>
-            <li class="{{ (request()->is('buildings')) ? 'active' : '' }}">
+            <li class="{{ request()->is('buildings') ? 'active' : '' }}">
                 <a href="/buildings">
                     <i class='bx bx-building'></i>
                     <span class="link_name">Buildings</span>
@@ -77,7 +78,7 @@
                     <li><a class="link_name" href="/buildings">Buildings</a></li>
                 </ul>
             </li>
-            <li class="{{ (request()->is('rooms')) ? 'active' : '' }}">
+            <li class="{{ request()->is('rooms') ? 'active' : '' }}">
                 <a href="/rooms">
                     <i class='bx bx-building-house'></i>
                     <span class="link_name">Rooms</span>
@@ -86,7 +87,7 @@
                     <li><a class="link_name" href="/buildings">Rooms</a></li>
                 </ul>
             </li>
-            <li class="{{ request()->routeIs('employees.*') ? 'active' : ''}}">
+            <li class="{{ request()->routeIs('employees.*') ? 'active' : '' }}">
                 <a href="/employees">
                     <i class='bx bx-user-plus'></i>
                     <span class="link_name">Employee</span>
@@ -95,7 +96,7 @@
                     <li><a class="link_name" href="/employees">Employee</a></li>
                 </ul>
             </li>
-            <li class="{{ (request()->is('sponsor')) ? 'active' : '' }}">
+            <li class="{{ request()->is('sponsor') ? 'active' : '' }}">
                 <a href="/sponsor">
                     <i class='bx bxs-user-account'></i>
                     <span class="link_name">Sponsor</span>
@@ -104,7 +105,7 @@
                     <li><a class="link_name" href="/sponsor">Sponsor</a></li>
                 </ul>
             </li>
-            <li class="{{ (request()->is('status')) ? 'active' : '' }}">
+            <li class="{{ request()->is('status') ? 'active' : '' }}">
                 <a href="/status">
                     <i class='bx bxs-star-half'></i>
                     <span class="link_name">Status</span>
@@ -113,7 +114,7 @@
                     <li><a class="link_name" href="/status">Status</a></li>
                 </ul>
             </li>
-            <li class="{{ request()->routeIs('setting.*') ? 'active' : ''}}">
+            <li class="{{ request()->routeIs('setting.*') ? 'active' : '' }}">
                 <a href="/setting">
                     <i class='bx bx-cog'></i>
                     <span class="link_name">Setting</span>
@@ -124,14 +125,20 @@
             </li>
             <li style="position: absolute; bottom:0% ; margin-bottom: 10px; width: calc(100% - 1px);">
                 <div>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                      document.getElementById('logout-form').submit();">
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                                      document.getElementById('frm-logout').submit();">
                         <i style="font-size: 20px;" class="bx bx-log-out"></i>
                         <span class="link_name">Logout</span>
                     </a>
                     <ul class="sub-menu blank">
-                        <li><a class="link_name" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                      document.getElementById('logout-form').submit();">Logout</a></li>
+                        <li><a class="link_name" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                      document.getElementById('frm-logout').submit();">Logout</a>
+                        </li>
+                        <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </ul>
                 </div>
             </li>
@@ -154,22 +161,22 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                        @if (Route::has('login'))
-                        <li class="nav-item">
-                            <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
-                        </li>
-                        @endif
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> -->
-                        </li>
-                        @endif
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
+                                </li>
+                            @endif
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> -->
+                                </li>
+                            @endif
                         @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link " href="/setting">
-                                {{ Auth::user()->name }}
-                            </a>
-                        </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link " href="/setting">
+                                    {{ Auth::user()->name }}
+                                </a>
+                            </li>
                         @endguest
                     </ul>
                 </div>

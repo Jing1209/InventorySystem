@@ -24,7 +24,14 @@
         </div>
 
     </div>
-
+    <a class="text-white text-decoration-none" href="{{ route('download-pdf')}}">
+        <div class="btn btn-primary d-flex justify-conten-between">
+            <div class="me-2 d-flex align-items-center">
+                <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
+            </div>
+            <span>Export</span>
+        </div>
+    </a>
     <div class="w-100 me-2 d-flex align-items-center justify-content-end text-white rounded-2">
         <button type="button" class="btn btn-primary d-flex align-items-center rounded d-flex justify-conten-between" data-bs-toggle="modal" data-bs-target="#addNewTransaction">
             <div class="d-flex align-items-center me-2">
@@ -41,6 +48,14 @@
             <h5>Transaction Summary</h5>
         </div>
         <div class="text-white text-decoration-none">
+            <a class="text-white text-decoration-none" href="{{ route('download-pdf')}}">
+                <div class="btn btn-primary d-flex justify-conten-between">
+                    <div class="me-2 d-flex align-items-center">
+                        <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
+                    </div>
+                    <span>Export</span>
+                </div>
+            </a>
             <button type="button" class="btn btn-primary d-flex align-items-center rounded d-flex justify-conten-between" data-bs-toggle="modal" data-bs-target="#addNewTransaction">
                 <div class="me-2 d-flex align-items-center">
                     <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
@@ -95,7 +110,7 @@
                 <tr>
                     <td style="padding-left: 20px;">{{ $transaction->id }}</td>
                     <td>{{ $transaction->title }}</td>
-                    <td>{{ $transaction->building_id }}-{{ $transaction->name }}</td>
+                    <td>{{ $transaction->building }}-{{ $transaction->name }}</td>
                     <td>{{$transaction->status}}</td>
                     <td>{{ $transaction->firstname }} {{ $transaction->lastname }}</td>
                     <td>{{ $transaction->created_at }}</td>
@@ -150,7 +165,7 @@
                                         <div class="w-100 text-start">
                                             <p>{{$transaction->id}}</p>
                                             <p>{{ $transaction->title }}</p>
-                                            <p>{{ $transaction->building_id }}-{{ $transaction->name }}</p>
+                                            <p>{{ $transaction->building }}-{{ $transaction->name }}</p>
                                             <p>{{ $transaction->status }}</p>
                                             <p>{{ $transaction->firstname }} {{ $transaction->lastname }}</p>
                                             <p>{{ $transaction->created_at }}</p>
@@ -197,7 +212,7 @@
                                                     <label class="col-form-label d-flex text-right">User:</label>
                                                     <select name="employee_id" class="p-2 rounded-2">
                                                         @foreach ($employees as $employee)
-                                                        <option value="{{ $employee->id }}" {{$transaction->employee_id == $employee->id ? 'selected' : ''}}>
+                                                        <option value={{ $employee->id }} {{$transaction->employee_id == $employee->id ? 'selected' : ''}}>
                                                             {{ $employee->firstname }}
                                                             {{ $employee->lastname }}
                                                         </option>
@@ -259,7 +274,16 @@
                             <label class="col-form-label d-flex">Room: </label>
                             <select name="room_id" class="p-2 rounded-2">
                                 @foreach ($rooms as $cate)
-                                <option value={{ $cate->id }}>{{ $cate->building }}-{{ $cate->name }}
+                                <option value={{ $cate->id }}>{{ $cate->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-1 d-flex flex-column">
+                            <label class="col-form-label d-flex">Room: </label>
+                            <select name="building_id" class="p-2 rounded-2">
+                                @foreach ($buildings as $cate)
+                                <option value={{ $cate->id }}>{{ $cate->building }}
                                 </option>
                                 @endforeach
                             </select>

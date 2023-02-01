@@ -37,6 +37,7 @@ class DashboardController extends Controller
         // dd($users);
         
        
+        
               
         return view('dashboard')->with(compact('labels','data'));
     }

@@ -9,6 +9,7 @@ use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ItemImage;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class ItemController extends Controller
 {
@@ -32,15 +33,19 @@ class ItemController extends Controller
             ->join('categories', 'items.category_id', '=', 'categories.id')
             ->join('statuses', 'items.status', '=', 'statuses.id')
             ->join('sponsors', 'items.sponsored', '=', 'sponsors.id')
-            // ->join('itemimages','itemimages.item_id','=','item.id')
+            ->join('itemimages','itemimages.item_id','=','items.id')
             ->where(function ($query) use ($request) {
                 if ($term = $request->term) {
                     $query->orWhere('items.title', 'like', '%' . $term . '%')
                         ->orWhere('categories.category', 'like', '%' . $term . '%');
                 }
             })
-            ->select('items.id', 'items.title', 'items.price', 'statuses.status', 'sponsors.name', 'categories.category', 'items.description', 'items.item_id')
+            ->select('items.id', 'items.title', 'items.price', 'statuses.status', 'sponsors.name', 'categories.category', 'items.description', 'items.item_id','itemimages.url')
             ->orderBy('id', 'asc')->paginate(10);
+        // $image = DB::table('items')
+        //     ->join('itemimages', 'items.id', '=', 'itemimages.item_id')
+        //     ->select('itemimages.url')
+        //     ->where('itemimages.item_id', '=', $item->id)->get();
         $countBad = DB::table('items')
             ->join('statuses', 'items.status', '=', 'statuses.id')
             ->where('statuses.status', 'like', '%Bad%')->count();
@@ -124,6 +129,7 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         //
+        
     }
 
     /**
@@ -183,4 +189,56 @@ class ItemController extends Controller
         $item->delete();
         return redirect()->route('items.index')->with('success', 'Item Has Been removed successfully');
     }
+
+    public function createPDF(){
+        // dd('hello');
+        $data = DB::table('items')->select('title')->distinct()->get();
+        // dd($data[0]->title);
+        $countBad = DB::table('items')
+            ->join('statuses', 'items.status', '=', 'statuses.id')
+            // ->where('items.title','like',$data[0]->title)
+            ->where(function($query) use ($data){
+                    foreach($data as $data1){
+                        $query->where('items.title','like',$data1->title,'or');
+                    }
+            })
+            ->where('statuses.status', 'like', '%Bad%')->get();
+            // dd($countBad);
+
+        $countGood = DB::table('items')
+            ->join('statuses', 'items.status', '=', 'statuses.id')
+            // ->where('items.title','like',$data[0]->title)
+            ->where(function($query) use ($data){
+                foreach($data as $data1){
+                    $query->where('items.title','like',$data1->title,'or');
+                }
+        })
+            ->where('statuses.status', 'like', '%Good%')->get();
+            dd($countGood);
+
+        $countMedium = DB::table('items')
+            ->join('statuses', 'items.status', '=', 'statuses.id')
+            // ->where('items.title','like',$data[0]->title)
+            ->where(function($query) use ($data){
+                foreach($data as $data1){
+                    $query->where('items.title','like',$data1->title,'or');
+                }
+        })
+            ->where('statuses.status', 'like', '%Medium%')->get();
+
+        $countBroken = DB::table('items')
+            ->join('statuses', 'items.status', '=', 'statuses.id')
+            // ->where('items.title','like',$data[0]->title)
+            ->where(function($query) use ($data){
+                foreach($data as $data1){
+                    $query->where('items.title','like',$data1->title,'or');
+                }
+        })
+            ->where('statuses.status', 'like', '%Broken%')->get();
+
+
+        return view('Item.itemPDF')->with(compact('data'))->with(compact('countBad'))->with(compact('countGood'))->with(compact('countBroken'))
+        ->with(compact('countMedium'));    
+    }
+   
 }
