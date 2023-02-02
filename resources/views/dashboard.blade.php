@@ -2,23 +2,19 @@
 @section('title', 'Dashboard')
 @section('content')
 <div class="container">
-
     <div class="d-flex flex-row-reverse my-3">
         <div class="container p-5 bg-light text-white">
-            <canvas id="myChart" height="50px" width="100px"></canvas>        </div>
+            <canvas id="myChart" height="50px" width="100px"></canvas>       
+         </div>
         <div class="container p-5 bg-light text-white me-3">
-            <canvas id='myChart1' height="100px"></canvas>        </div>
+            <canvas id='myChart1' height="100px"></canvas>        
+        </div>
     </div>
-   
-        
-    
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
 <script type="text/javascript">
-  
       var labels =  {{ Js::from($labels) }};
       var users =  {{ Js::from($data) }};
       const label = [
@@ -37,8 +33,6 @@
             'May',
             'June',
         ];
-      
-    
       const data = {
         labels: labels,
         datasets: [{
@@ -79,7 +73,5 @@
         document.getElementById('myChart1'),
         config1
       );
-  
-
 </script>
 @endsection
