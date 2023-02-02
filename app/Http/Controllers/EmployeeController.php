@@ -61,6 +61,8 @@ class EmployeeController extends Controller
     {
         //
         // Employee::create($request->post()); 
+        $request->validate(['email'=>'unique',
+    'phone_number'=>'unique']);
         $employee = new Employee();
         $employee['firstname'] = $request->firstname;
         $employee['lastname'] = $request->lastname;
@@ -122,6 +124,8 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         //
+        $request->validate(['email'=>'unique',
+        'phone_number'=>'unique']);
         $employee->fill($request->post())->save();
 
         return redirect()->route('employees.index')->with('success', 'Employee Has Been updated successfully');

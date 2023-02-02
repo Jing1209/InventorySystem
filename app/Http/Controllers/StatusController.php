@@ -46,6 +46,7 @@ class StatusController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate(['status'=>'unique']);
         Status::create($request->post());
         return redirect()->route('status.index')->with('success','Status has been created successfully.');
     }
@@ -83,6 +84,7 @@ class StatusController extends Controller
     public function update(Request $request, Status $status)
     {
         //
+        $request->validate(['status'=>'unique']);
         $status->fill($request->post()) -> save();
         return redirect()->route('status.index')->with('success','Status Has Been updated successfully');
 
