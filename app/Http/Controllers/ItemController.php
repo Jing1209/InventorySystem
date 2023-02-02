@@ -91,6 +91,8 @@ class ItemController extends Controller
 
         // ]);
         // Item::create($request->post());
+        $request->validate(['id'=>'unique']);
+        
         $item = new Item();
         $item['title'] = $request->title;
         $item['description'] = $request->description;
@@ -214,7 +216,7 @@ class ItemController extends Controller
                 }
         })
             ->where('statuses.status', 'like', '%Good%')->get();
-            dd($countGood);
+            // dd($countGood);
 
         $countMedium = DB::table('items')
             ->join('statuses', 'items.status', '=', 'statuses.id')

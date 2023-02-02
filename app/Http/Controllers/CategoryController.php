@@ -53,7 +53,7 @@ class CategoryController extends Controller
     {
         //
         $request->validate([
-            'category' => 'required',
+            'category' => 'required|unique',
             // 'quantity' => 'required',
 
         ]);
@@ -97,7 +97,7 @@ class CategoryController extends Controller
     {
         //
         $request->validate([
-            'category' => 'required'
+            'category' => 'required|unique'
         ]);
         $category->fill($request->post())->save();
 

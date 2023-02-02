@@ -88,7 +88,7 @@ class BuildingController extends Controller
     public function update(Request $request, Building $building)
     {
         $request->validate([
-            'building' => 'required',
+            'building' => 'required|unique',
         ]);
 
         $building->fill($request->post())->save();
