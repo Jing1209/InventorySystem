@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Employee::factory(20)->create();
         \App\Models\Sponsor::factory(10)->create();
         // \App\Models\Category::factory(5)->create();
+        $this->call(UserSeeder::class);
     }
 }

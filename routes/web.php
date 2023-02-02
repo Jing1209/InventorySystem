@@ -22,12 +22,10 @@ Route::resource('items',App\Http\Controllers\ItemController::class);
 Route::resource('transactions',App\Http\Controllers\TransactionController::class);
 Route::resource('buildings', App\Http\Controllers\BuildingController::class);
 Route::resource('rooms', App\Http\Controllers\RoomController::class);
-Route::resource('inventory',App\Http\Controllers\InventoryController::class);
 Route::resource('setting',App\Http\Controllers\SettingController::class);
 Route::resource('employees',App\Http\Controllers\EmployeeController::class);
 Route::resource('status',App\Http\Controllers\StatusController::class);
 Route::resource('sponsor',App\Http\Controllers\SponsorController::class);
-Auth::routes(['register' => false]);
 Route::get('generate-pdf-item', [App\Http\Controllers\ItemController::class,'createPDF'])->name('download');
 Route::get('generate-pdf-transaction', [App\Http\Controllers\TransactionController::class,'createPDF'])->name('download-pdf');
 

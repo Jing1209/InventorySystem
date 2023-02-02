@@ -24,15 +24,15 @@
         </div>
 
     </div>
-    <a class="text-white text-decoration-none" href="{{ route('download-pdf')}}">
-        <div class="btn btn-primary d-flex justify-conten-between">
-            <div class="me-2 d-flex align-items-center">
-                <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
-            </div>
-            <span>Export</span>
-        </div>
-    </a>
     <div class="w-100 me-2 d-flex align-items-center justify-content-end text-white rounded-2">
+        <a class="text-white text-decoration-none" href="{{ route('download-pdf')}}">
+            <div class="btn btn-info d-flex justify-conten-between text-white me-2">
+                <div class="me-2 d-flex align-items-center">
+                    <i style="font-size: 18px;" class='bx bx-export '></i>
+                </div>
+                <span>Export</span>
+            </div>
+        </a>
         <button type="button" class="btn btn-primary d-flex align-items-center rounded d-flex justify-conten-between" data-bs-toggle="modal" data-bs-target="#addNewTransaction">
             <div class="d-flex align-items-center me-2">
                 <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
@@ -41,51 +41,6 @@
         </button>
     </div>
 </div>
-<!-- 
-{{-- <div style="position: sticky; top:60px; overflow: hidden; background: #e4e9f7;">
-    <div class="d-flex justify-content-between mb-3">
-        <div class="d-flex justify-content-center align-items-center">
-            <h5>Transaction Summary</h5>
-        </div>
-        <div class="text-white text-decoration-none">
-            <a class="text-white text-decoration-none" href="{{ route('download-pdf')}}">
-                <div class="btn btn-primary d-flex justify-conten-between">
-                    <div class="me-2 d-flex align-items-center">
-                        <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
-                    </div>
-                    <span>Export</span>
-                </div>
-            </a>
-            <button type="button" class="btn btn-primary d-flex align-items-center rounded d-flex justify-conten-between" data-bs-toggle="modal" data-bs-target="#addNewTransaction">
-                <div class="me-2 d-flex align-items-center">
-                    <i style="font-size: 18px;" class='bx bx-plus text-white'></i>
-                </div>
-                <span>Add New</span>
-            </button>
-        </div>
-    </div>
-    <div class="my-2 w-100 d-flex justify-content-between">
-        <div class="w-50 text-white bg-danger rounded-2 me-2">
-            <i class='bx bx-archive-out p-2 m-3 rounded-2' style="background-color: rgba(255, 255, 255, 0.16); font-size: 18px;"></i>
-            <div class="mx-3 my-2">
-                Borrow
-                <div>
-                    {{$countBorrow}}
-</div>
-</div>
-</div>
-<div class="w-50 text-white bg-success rounded-2">
-    <i class='bx bx-archive-in p-2 m-3 rounded-2' style="background-color: rgba(255, 204, 145, 0.16); font-size: 18px;"></i>
-    <div class="mx-3 my-2">
-        Return
-        <div>
-            {{$countReturn}}
-        </div>
-    </div>
-
-</div>
-</div>
-</div> --}} -->
 <div class="bg-white rounded">
     <div class="mt-2">
         @if ($message = Session::get('success'))
