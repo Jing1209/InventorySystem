@@ -235,7 +235,7 @@
                             </select>
                         </div>
                         <div class="mb-1 d-flex flex-column">
-                            <label class="col-form-label d-flex">Room: </label>
+                            <label class="col-form-label d-flex">Building: </label>
                             <select name="building_id" class="p-2 rounded-2">
                                 @foreach ($buildings as $cate)
                                 <option value={{ $cate->id }}>{{ $cate->building }}
