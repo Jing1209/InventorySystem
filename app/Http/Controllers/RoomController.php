@@ -55,7 +55,7 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name'=>'unique']);
+        $request->validate(['name'=>'unique:rooms']);
         Room::create($request->post());
         return redirect()->route('rooms.index')->with('success', 'Room has been created successfully.');
     }
@@ -92,7 +92,7 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        $request->validate(['name'=>'unique']);
+        $request->validate(['name'=>'unique:rooms']);
         $room->fill($request->post())->save();
         return redirect()->route('rooms.index')->with('success', 'Room Has Been updated successfully');
     }

@@ -53,7 +53,7 @@ class SponsorController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate(['name'=>'unique']);
+        $request->validate(['name'=>'unique:sponsors']);
         Sponsor::create($request->post());
         return redirect()->route('sponsor.index')->with('success', 'Sponsor has been created successfully.');
     }

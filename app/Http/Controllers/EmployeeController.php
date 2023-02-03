@@ -61,8 +61,8 @@ class EmployeeController extends Controller
     {
         //
         // Employee::create($request->post()); 
-        $request->validate(['email'=>'unique',
-    'phone_number'=>'unique']);
+        $request->validate(['email'=>'unique:employees',
+    'phone_number'=>'unique:employees']);
         $employee = new Employee();
         $employee['firstname'] = $request->firstname;
         $employee['lastname'] = $request->lastname;

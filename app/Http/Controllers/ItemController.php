@@ -91,7 +91,7 @@ class ItemController extends Controller
 
         // ]);
         // Item::create($request->post());
-        $request->validate(['id'=>'unique']);
+        $request->validate(['id'=>'unique:items']);
         
         $item = new Item();
         $item['title'] = $request->title;

@@ -46,7 +46,7 @@ class StatusController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate(['status'=>'unique']);
+        $request->validate(['status'=>'unique:statuses']);
         Status::create($request->post());
         return redirect()->route('status.index')->with('success','Status has been created successfully.');
     }
